@@ -6,10 +6,12 @@ import java.util.stream.Collectors;
 import org.wuerthner.ambitus.attribute.AmbitusAttributeBuilder;
 import org.wuerthner.ambitus.attribute.TimeSignatureAttribute;
 import org.wuerthner.ambitus.type.NamedRange;
+import org.wuerthner.cwn.api.CwnEvent;
 import org.wuerthner.cwn.api.TimeSignature;
 import org.wuerthner.cwn.position.PositionTools;
 import org.wuerthner.cwn.timesignature.SimpleTimeSignature;
 import org.wuerthner.sport.api.Attribute;
+import org.wuerthner.sport.api.ModelElementFactory;
 import org.wuerthner.sport.api.Operation;
 import org.wuerthner.sport.attribute.*;
 import org.wuerthner.sport.core.AbstractModelElement;
@@ -257,7 +259,7 @@ public class Arrangement extends AbstractModelElement {
 			Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.tempo, tempo);
 			Operation o2 = new SetAttributeValueOperation<>(tempoEvent, TempoEvent.tempo, tempo);
 			Operation o3 = new SetAttributeValueOperation<>(tempoEvent, TempoEvent.label, MidiTrack.getTempoLabel(tempo));
-			Transaction transaction = new Transaction("Tempo="+tempo, o1, o2);
+			Transaction transaction = new Transaction("Tempo="+tempo, o1, o2, o3);
 			track.performTransaction(transaction, history);
 		}
 	}
@@ -283,28 +285,32 @@ public class Arrangement extends AbstractModelElement {
 			TimeSignatureEvent tsEvent = track.findFirstEvent(TimeSignatureEvent.class).get();
 			KeyEvent keyEvent = track.findFirstEvent(KeyEvent.class).get();
 			ClefEvent clefEvent = track.findFirstEvent(ClefEvent.class).get();
-			TempoEvent tempoEvent = track.findFirstEvent(TempoEvent.class).get();
+			Optional<TempoEvent> tempoEventOptional = track.findFirstEvent(TempoEvent.class);
 			TimeSignature ts = new SimpleTimeSignature(metric);
-			Operation o01 = new SetAttributeValueOperation<>(track, MidiTrack.mute, mute);
-			Operation o02 = new SetAttributeValueOperation<>(track, MidiTrack.name, name);
-			Operation o03 = new SetAttributeValueOperation<>(track, MidiTrack.timeSignature, ts);
-			Operation o04 = new SetAttributeValueOperation<>(tsEvent, TimeSignatureEvent.timeSignature, ts);
-			Operation o05 = new SetAttributeValueOperation<>(track, MidiTrack.key, key);
-			Operation o06 = new SetAttributeValueOperation<>(keyEvent, KeyEvent.key, key-7);
-			Operation o07 = new SetAttributeValueOperation<>(track, MidiTrack.clef, clef);
-			Operation o08 = new SetAttributeValueOperation<>(clefEvent, ClefEvent.clef, clef);
-			Operation o09 = new SetAttributeValueOperation<>(track, MidiTrack.tempo, tempo);
-			Operation o10 = new SetAttributeValueOperation<>(tempoEvent, TempoEvent.tempo, tempo);
-			Operation o11 = new SetAttributeValueOperation<>(tempoEvent, TempoEvent.label, MidiTrack.getTempoLabel(tempo));
-			Operation o12 = new SetAttributeValueOperation<>(track, MidiTrack.instrument, instrument);
-			Operation o13 = new SetAttributeValueOperation<>(track, MidiTrack.channel, channel);
-			Transaction transaction = new Transaction("Change track properties", o01, o02, o03, o04, o05, o06, o07, o08, o09, o10, o11, o12, o13);
+			List<Operation> opList = new ArrayList<>();
+			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.mute, mute));
+			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.name, name));
+			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.timeSignature, ts));
+			Operation opTimeSignature = new SetAttributeValueOperation<>(tsEvent, TimeSignatureEvent.timeSignature, ts);
+			opList.add(opTimeSignature);
+			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.key, key));
+			opList.add(new SetAttributeValueOperation<>(keyEvent, KeyEvent.key, key-7));
+			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.clef, clef));
+			opList.add(new SetAttributeValueOperation<>(clefEvent, ClefEvent.clef, clef));
+			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.tempo, tempo));
+			if (tempoEventOptional.isPresent()) {
+				opList.add(new SetAttributeValueOperation<>(tempoEventOptional.get(), TempoEvent.tempo, tempo));
+				opList.add(new SetAttributeValueOperation<>(tempoEventOptional.get(), TempoEvent.label, MidiTrack.getTempoLabel(tempo)));
+			}
+			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.instrument, instrument));
+			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.channel, channel));
+			Transaction transaction = new Transaction("Change track properties", opList);
 			track.performTransaction(transaction, history);
-			TimeSignature newValue = ((SetAttributeValueOperation<TimeSignature>) o03).getNewValue();
-			TimeSignature oldValue = ((SetAttributeValueOperation<TimeSignature>) o03).getOldValue();
+			TimeSignature newValue = ((SetAttributeValueOperation<TimeSignature>) opTimeSignature).getNewValue();
+			TimeSignature oldValue = ((SetAttributeValueOperation<TimeSignature>) opTimeSignature).getOldValue();
 			if (!newValue.toString().equals(oldValue.toString())) {
 				// when time signature changes, all key/clef/ts changes are removed
-				List<Operation> opList = new ArrayList<>();
+				opList = new ArrayList<>();
 				opList.addAll(getAllEventsButFirst(track, TimeSignatureEvent.class));
 				opList.addAll(getAllEventsButFirst(track, KeyEvent.class));
 				opList.addAll(getAllEventsButFirst(track, ClefEvent.class));
@@ -380,6 +386,178 @@ public class Arrangement extends AbstractModelElement {
 	public void addEvent(MidiTrack track, Event event) {
 		track.performAddChildOperation(event, history);
 	}
+
+	public void init(String title, String subtitle, String composer) {
+		this.performTransientSetAttributeValueOperation(Arrangement.name, title);
+		this.performTransientSetAttributeValueOperation(Arrangement.subtitle, subtitle);
+		this.performTransientSetAttributeValueOperation(Arrangement.composer, composer);
+	}
+//	public void setNotePitch(NoteEvent noteEvent, int pitch) {
+//		noteEvent.performSetAttributeValueOperation(NoteEvent.pitch, pitch+1, history);
+//	}
+
+	public void changeSelectionPitch(List<CwnEvent> eventList, int pitchChange) {
+		List<Operation> opList = new ArrayList<>();
+		for (CwnEvent event: eventList) {
+			if (event instanceof NoteEvent) {
+				NoteEvent noteEvent = (NoteEvent) event;
+				if (pitchChange != 0) {
+					// PITCH
+					Integer pitch = noteEvent.getAttributeValue(NoteEvent.pitch);
+					Operation op = new SetAttributeValueOperation<>(noteEvent, NoteEvent.pitch, pitch + pitchChange);
+					opList.add(op);
+				}
+			}
+		}
+		if (opList.size()>0) {
+			Transaction transaction = new Transaction("Change selection: pitch", opList);
+			this.performTransaction(transaction, history);
+		}
+	}
+
+	public void changeSelectionPosition(List<CwnEvent> eventList, int positionChange) {
+		List<Operation> opList = new ArrayList<>();
+		for (CwnEvent event: eventList) {
+			if (event instanceof Event) {
+				Event theEvent = (Event) event;
+				if (positionChange != 0) {
+					// POSITION
+					int unit = (int) (getAttributeValue(pulsePerQuarter) * 4.0 / Math.pow(2, getAttributeValue(Arrangement.resolution)));
+					long change = unit * positionChange;
+					Long position = theEvent.getAttributeValue(Event.position);
+					Operation op = new SetAttributeValueOperation<>(theEvent, NoteEvent.position, position + change);
+					opList.add(op);
+				}
+			}
+		}
+		if (opList.size()>0) {
+			Transaction transaction = new Transaction("Change selection: position", opList);
+			this.performTransaction(transaction, history);
+		}
+	}
+
+	public void changeSelectionDuration(List<CwnEvent> eventList, int durationChange, int dots) {
+		List<Operation> opList = new ArrayList<>();
+		for (CwnEvent event: eventList) {
+			if (event instanceof NoteEvent) {
+				NoteEvent noteEvent = (NoteEvent) event;
+				// DURATION
+				Long duration = noteEvent.getAttributeValue(NoteEvent.duration);
+				int durationDiff = 0;
+				if (durationChange!=0) {
+					int unit = (int) (getAttributeValue(pulsePerQuarter) * 4.0 / Math.pow(2, getAttributeValue(Arrangement.resolution)));
+					durationDiff = unit * durationChange;
+				}
+				float dotFactor = 1.0f;
+				if (dots > 0) {
+					// dotChange = 1: (1 + ((2^1 -1) / 2^1 )) = 1.5
+					// dotChange = 2: (1 + ((2^2 -1) / 2^2 )) = 1.75
+					// dotChange = 3: (1 + ((3^1 -1) / 3^1 )) = 1.875
+					dotFactor = (float) (1 + ((Math.pow(2, dots) - 1) / Math.pow(2, dots)));
+				}
+				Operation op = new SetAttributeValueOperation<>(noteEvent, NoteEvent.duration, (long) ((duration + durationDiff) * dotFactor));
+				opList.add(op);
+			}
+		}
+		if (opList.size()>0) {
+			Transaction transaction = new Transaction("Change selection: duration", opList);
+			this.performTransaction(transaction, history);
+		}
+	}
+
+	public void changeSelectionEnharmonicShift(List<CwnEvent> eventList, int value) {
+		List<Operation> opList = new ArrayList<>();
+		for (CwnEvent event: eventList) {
+			if (event instanceof NoteEvent) {
+				NoteEvent noteEvent = (NoteEvent) event;
+				if (value>=-2 && value<=2) {
+					// ENHARMONIC SHIFT
+					Operation op = new SetAttributeValueOperation<>(noteEvent, NoteEvent.shift, value);
+					opList.add(op);
+				}
+			}
+		}
+		if (opList.size()>0) {
+			Transaction transaction = new Transaction("Change selection: enharmonic shift", opList);
+			this.performTransaction(transaction, history);
+		}
+	}
+
+	public void changeSelectionVoice(List<CwnEvent> eventList, int value) {
+		List<Operation> opList = new ArrayList<>();
+		for (CwnEvent event: eventList) {
+			if (event instanceof NoteEvent) {
+				NoteEvent noteEvent = (NoteEvent) event;
+				if (value>=0 && value<=4) {
+					// VOICE
+					Operation op = new SetAttributeValueOperation<>(noteEvent, NoteEvent.voice, value);
+					opList.add(op);
+				}
+			}
+		}
+		if (opList.size()>0) {
+			Transaction transaction = new Transaction("Change selection: voice", opList);
+			this.performTransaction(transaction, history);
+		}
+	}
+
+//	public void setSelectionProperties(List<CwnEvent> eventList, int pitchChange, int positionChange, int durationChange, int dotChange,
+//									   int enhChange, int voiceChange) {
+//		List<Operation> opList = new ArrayList<>();
+//		for (CwnEvent event: eventList) {
+//			if (event instanceof NoteEvent) {
+//				NoteEvent noteEvent = (NoteEvent) event;
+//				if (pitchChange!=0) {
+//					// PITCH
+//					Integer pitch = noteEvent.getAttributeValue(NoteEvent.pitch);
+//					Operation op = new SetAttributeValueOperation<>(noteEvent, NoteEvent.pitch, pitch + pitchChange);
+//					opList.add(op);
+//				}
+//				if (durationChange!=0 || dotChange>0) {
+//					// DURATION
+//					Long duration = noteEvent.getAttributeValue(NoteEvent.duration);
+//					int durationDiff = 0;
+//					if (durationChange!=0) {
+//						int unit = (int) (getAttributeValue(pulsePerQuarter) * 4.0 / Math.pow(2, getAttributeValue(Arrangement.resolution)));
+//						durationDiff = unit * durationChange;
+//					}
+//					float dotFactor = 1.0f;
+//					if (dotChange > 0) {
+//						// dotChange = 1: (1 + ((2^1 -1) / 2^1 )) = 1.5
+//						// dotChange = 2: (1 + ((2^2 -1) / 2^2 )) = 1.75
+//						// dotChange = 3: (1 + ((3^1 -1) / 3^1 )) = 1.875
+//						dotFactor = (float) (1 + ((Math.pow(2, dotChange) - 1) / Math.pow(2, dotChange)));
+//					}
+//					Operation op = new SetAttributeValueOperation<>(noteEvent, NoteEvent.duration, (long) ((duration + durationDiff) * dotFactor));
+//					opList.add(op);
+//				}
+//				if (enhChange > -3) {
+//					// ENHARMONIC SHIFT
+//					Integer enh = noteEvent.getAttributeValue(NoteEvent.shift);
+//					enh = Math.min(2, Math.max(-2, enh + enhChange));
+//					Operation op = new SetAttributeValueOperation<>(noteEvent, NoteEvent.shift, enh);
+//					opList.add(op);
+//				}
+//				if (voiceChange>=0) {
+//					// VOICE
+//					Integer voice = voiceChange;
+//					Operation op = new SetAttributeValueOperation<>(noteEvent, NoteEvent.voice, voice);
+//					opList.add(op);
+//				}
+//			}
+//			if (event instanceof Event) {
+//				Event theEvent = (Event) event;
+//				if (positionChange!=0) {
+//					// POSITION
+//					Long position = theEvent.getAttributeValue(Event.position);
+//					Operation op = new SetAttributeValueOperation<>(theEvent, NoteEvent.position, position + positionChange);
+//					opList.add(op);
+//				}
+//			}
+//		}
+//		Transaction transaction = new Transaction("Change Selection", opList);
+//		this.performTransaction(transaction, history);
+//	}
 
 	public String getTrackBarMetric(String trackId, long barPosition) {
 		String result = "";

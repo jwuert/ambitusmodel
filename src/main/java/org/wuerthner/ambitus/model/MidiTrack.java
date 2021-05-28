@@ -129,7 +129,7 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 	}
 
 	public String getId() {
-		return getAttributeValue(name) + " channel: " + getAttributeValue(channel);
+		return getAttributeValue(channel) + " : " + getAttributeValue(name);
 	}
 
 	@Override
@@ -410,7 +410,8 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		if (firstEventAtPosition.isPresent()) {
 			result = firstEventAtPosition.get().getTempo();
 		} else {
-			result = findEventBefore(position, TempoEvent.class).get().getTempo();
+			Optional<TempoEvent> tempoEvent = findEventBefore(position, TempoEvent.class);
+			result = tempoEvent.isPresent() ? tempoEvent.get().getTempo() : 0;
 		}
 		return result;
 	}
