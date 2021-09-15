@@ -53,7 +53,7 @@ public class NoteEvent extends AbstractModelElement implements CwnNoteEvent, Eve
 	public final static IntegerAttribute voice = new AttributeBuilder("voice")
 			.defaultValue(0)
 			.buildIntegerAttribute();
-	public final static ListAttribute<org.wuerthner.ambitus.model.Accent> accentList = new AttributeBuilder("accents")
+	public final static ListAttribute<Accent> accentList = new AttributeBuilder("accents")
 			.defaultValue(new ArrayList<Accent>())
 			.buildListAttribute(Accent.class);
 	

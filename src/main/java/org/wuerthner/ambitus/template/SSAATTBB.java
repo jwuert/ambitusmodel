@@ -5,6 +5,7 @@ import org.wuerthner.cwn.api.TimeSignature;
 import org.wuerthner.sport.api.ModelElementFactory;
 
 public class SSAATTBB implements Template {
+    public static final String NAME = "SSAATTBB";
     public static final String SOPRAN1 = "Sopran1";
     public static final String SOPRAN2 = "Sopran2";
     public static final String ALT1 = "Alt1";

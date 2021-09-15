@@ -5,6 +5,7 @@ import org.wuerthner.cwn.api.TimeSignature;
 import org.wuerthner.sport.api.ModelElementFactory;
 
 public class ViolinSATB implements Template {
+    public static final String NAME = "Violin + SATB";
     public static final String VIOLIN = "Violin";
     public static final String SOPRAN = "Sopran";
     public static final String ALT = "Alt";

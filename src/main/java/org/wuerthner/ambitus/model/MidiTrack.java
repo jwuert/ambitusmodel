@@ -18,6 +18,7 @@ import org.wuerthner.cwn.api.Trias;
 import org.wuerthner.cwn.api.exception.TimeSignatureException;
 import org.wuerthner.cwn.position.PositionTools;
 import org.wuerthner.cwn.score.Location;
+import org.wuerthner.cwn.timesignature.SimpleTimeSignature;
 import org.wuerthner.sport.api.ModelElement;
 import org.wuerthner.sport.attribute.*;
 import org.wuerthner.sport.core.AbstractModelElement;
@@ -28,7 +29,9 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 	public final static Integer DEFAULT_VOLUME = 80;
 	public final static Integer DEFAULT_CHANNEL = 0;
 	public final static Integer DEFAULT_CLEF = 0;
+	public final static Integer DEFAULT_KEY = 7;
 	public final static Integer DEFAULT_INSTRUMENT = 0;
+	public static final TimeSignature DEFAULT_SIGNATURE = new SimpleTimeSignature("4/4");
 	public final static String[] MIDI_INSTRUMENTS = new String[] { "Acoustic Grand Piano", "Bright Acoustic Piano", "Electric grand Piano", "Honky Tonk Piano", "Eiectric Piano 1", "Electric Piano 2", "Harpsichord",
 			"Clavinet", "Celesra", "Glockenspiel", "Music Box", "Vibraphone", "Marimba", "Xylophone", "Tubular bells", "Dulcimer", "Drawbar Organ", "Percussive Organ", "Rock Organ", "Church Organ", "Reed Organ",
 			"Accordion", "Harmonica", "Tango Accordion", "Nylon Accustic Guitar", "Steel Acoustic Guitar", "Jazz Electric Guitar", "Clean Electric Guitar", "Muted Electric Guitar", "Overdrive Guitar", "Distorted Guitar",
@@ -79,11 +82,11 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 			.defaultValue(TempoEvent.DEFAULT_TEMPO)
 			.buildIntegerAttribute();
 	public final static SelectableIntegerAttribute key = new AttributeBuilder("key")
-			.values(Arrangement.KEYS)
-			.defaultValue(Arrangement.DEFAULT_KEY)
+			.values(KEYS)
+			.defaultValue(DEFAULT_KEY)
 			.buildSelectableIntegerAttribute();
 	public final static TimeSignatureAttribute timeSignature = new AmbitusAttributeBuilder("timeSignature")
-			.defaultValue(Arrangement.DEFAULT_SIGNATURE)
+			.defaultValue(DEFAULT_SIGNATURE)
 			.buildTimeSignatureAttribute();
 	public final static BooleanAttribute mute = new AttributeBuilder("mute")
 			.defaultValue(false)
@@ -115,7 +118,6 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 			String key = entry.getKey();
 			List<Integer> pair = entry.getValue();
 			if (pair.get(0) <= tempo && tempo <= pair.get(1)) {
-				System.out.println("????? " + pair.get(0) + " <= " + tempo + " <= " + pair.get(1));
 				result = key;
 				break;
 			}
@@ -281,7 +283,7 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		 */
 		return findEventAfter(element, NoteEvent.TYPE);
 	}
-	
+
 	public <T extends Event> T findEventAfter(ModelElement element, String type) {
 		ModelElement right = null;
 		ModelElement left = null;
@@ -300,7 +302,30 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		}
 		return (T) right;
 	}
-	
+
+	public <T extends Event> T findEventAfter(T element, Class<T> clasz) {
+		ModelElement right = null;
+		ModelElement left = null;
+		List<T> children = getChildrenByClass(clasz);
+		if (!children.isEmpty()) {
+			for (ModelElement cursor : children) {
+//				right = cursor;
+//				if (left != null && left.getId() == element.getId()) {
+//					break;
+//				}
+//				left = cursor;
+				if (element.getPosition() < ((Event)cursor).getPosition()) {
+					return (T) cursor;
+				}
+			}
+			return children.get(0);
+//			if (right.getId() == left.getId()) {
+//				right = children.get(0);
+//			}
+		}
+		return (T) right;
+	}
+
 	public NoteEvent findNoteFromPosition(long position) {
 		// NoteEvent note = null;
 		// List<ModelElement> children = getChildren(NoteEvent.class);
@@ -338,6 +363,11 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 				.map(ev -> (T)ev)
 				.findFirst();
 		return first;
+	}
+
+	public <T extends Event> T findFirstEventAtPositionOrNull(long position, Class<T> clasz) {
+		Optional<T> event = findFirstEventAtPosition(position, clasz);
+		return event.isPresent() ? event.get() : null;
 	}
 
 	public <T extends Event> Optional<T> findEventBefore(long position, Class<T> clasz) {
@@ -389,6 +419,19 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 			result = firstEventAtPosition.get().getKey();
 		} else {
 			result = findEventBefore(position, KeyEvent.class).get().getKey();
+		}
+		return result;
+	}
+
+	public int getBarBar(long position) {
+		int result = 0;
+		Optional<BarEvent> firstEventAtPosition = findFirstEventAtPosition(position, BarEvent.class);
+		if (firstEventAtPosition.isPresent()) {
+			result = firstEventAtPosition.get().getTypeIndex();
+		} else {
+			Optional<BarEvent> event = findEventBefore(position, BarEvent.class);
+			if (event.isPresent())
+				result = event.get().getTypeIndex();
 		}
 		return result;
 	}

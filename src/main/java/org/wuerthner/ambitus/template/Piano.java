@@ -5,6 +5,7 @@ import org.wuerthner.cwn.api.TimeSignature;
 import org.wuerthner.sport.api.ModelElementFactory;
 
 public class Piano implements Template {
+    public static final String NAME = "Piano";
     public static final String RIGHT = "Right";
     public static final String LEFT = "Left";
 

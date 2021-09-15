@@ -1,6 +1,7 @@
 package org.wuerthner.ambitus.model;
 
 import org.junit.jupiter.api.Test;
+import org.wuerthner.sport.api.ModelElement;
 import org.wuerthner.sport.core.Model;
 
 public class TrackTest {
@@ -27,5 +28,15 @@ public class TrackTest {
         track.performTransientAddChildOperation(note3);
 
         System.out.println(Model.makeString(arrangement));
+    }
+
+    @Test
+    public void testNoteCopy() {
+        AmbitusFactory factory = new AmbitusFactory();
+        ModelElement element = factory.createElement(NoteEvent.TYPE);
+        System.out.println(Model.makeString(element));
+        ModelElement copy = factory.copyTree(element);
+        System.out.println(Model.makeString(copy));
+
     }
 }

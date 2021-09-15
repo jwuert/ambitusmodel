@@ -1,0 +1,3575 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+    <ElementDef ID="0" TYPE="org.wuerthner.score.model.Arrangement">
+        <ElementRef ID="1"/>
+        <ElementRef ID="66"/>
+        <ElementRef ID="134"/>
+        <ElementRef ID="200"/>
+        <Attribute Key="name" Value="Innsbruck"/>
+        <Attribute Key="composer" Value="Isaac"/>
+        <Attribute Key="autoBeamPrint" Value="false"/>
+        <Attribute Key="ppqn" Value="960"/>
+        <Attribute Key="key" Value="6"/>
+        <Attribute Key="timeSignature" Value="4/4"/>
+        <Attribute Key="stretchFactor" Value="1"/>
+        <Attribute Key="groupLevel" Value="1"/>
+        <Attribute Key="tupletPresentation" Value="0"/>
+        <Attribute Key="grid" Value="3"/>
+        <Attribute Key="resolution" Value="4"/>
+        <Attribute Key="ranges" Value="[]"/>
+        <Attribute Key="path" Value="/home/wuerthne/Tritonus/innsbruck.amb"/>
+        <Attribute Key="flagAllowDottedRests" Value="true"/>
+        <Attribute Key="durationBiDotted" Value="false"/>
+        <Attribute Key="durationTuplet2" Value="false"/>
+        <Attribute Key="durationTuplet3" Value="false"/>
+        <Attribute Key="durationTuplet4" Value="false"/>
+        <Attribute Key="durationTuplet5" Value="false"/>
+        <Attribute Key="durationTuplet6" Value="false"/>
+    </ElementDef>
+    <ElementDef ID="1" TYPE="org.wuerthner.score.model.MidiTrack">
+        <ElementRef ID="2"/>
+        <ElementRef ID="3"/>
+        <ElementRef ID="4"/>
+        <ElementRef ID="5"/>
+        <ElementRef ID="6"/>
+        <ElementRef ID="7"/>
+        <ElementRef ID="8"/>
+        <ElementRef ID="9"/>
+        <ElementRef ID="10"/>
+        <ElementRef ID="11"/>
+        <ElementRef ID="12"/>
+        <ElementRef ID="13"/>
+        <ElementRef ID="14"/>
+        <ElementRef ID="15"/>
+        <ElementRef ID="16"/>
+        <ElementRef ID="17"/>
+        <ElementRef ID="18"/>
+        <ElementRef ID="19"/>
+        <ElementRef ID="20"/>
+        <ElementRef ID="21"/>
+        <ElementRef ID="22"/>
+        <ElementRef ID="23"/>
+        <ElementRef ID="24"/>
+        <ElementRef ID="25"/>
+        <ElementRef ID="26"/>
+        <ElementRef ID="27"/>
+        <ElementRef ID="28"/>
+        <ElementRef ID="29"/>
+        <ElementRef ID="30"/>
+        <ElementRef ID="31"/>
+        <ElementRef ID="32"/>
+        <ElementRef ID="33"/>
+        <ElementRef ID="34"/>
+        <ElementRef ID="35"/>
+        <ElementRef ID="36"/>
+        <ElementRef ID="37"/>
+        <ElementRef ID="38"/>
+        <ElementRef ID="39"/>
+        <ElementRef ID="40"/>
+        <ElementRef ID="41"/>
+        <ElementRef ID="42"/>
+        <ElementRef ID="43"/>
+        <ElementRef ID="44"/>
+        <ElementRef ID="45"/>
+        <ElementRef ID="46"/>
+        <ElementRef ID="47"/>
+        <ElementRef ID="48"/>
+        <ElementRef ID="49"/>
+        <ElementRef ID="50"/>
+        <ElementRef ID="51"/>
+        <ElementRef ID="52"/>
+        <ElementRef ID="53"/>
+        <ElementRef ID="54"/>
+        <ElementRef ID="55"/>
+        <ElementRef ID="56"/>
+        <ElementRef ID="57"/>
+        <ElementRef ID="58"/>
+        <ElementRef ID="59"/>
+        <ElementRef ID="60"/>
+        <ElementRef ID="61"/>
+        <ElementRef ID="62"/>
+        <ElementRef ID="63"/>
+        <ElementRef ID="64"/>
+        <ElementRef ID="65"/>
+        <Attribute Key="name" Value="Sopran"/>
+        <Attribute Key="channel" Value="0"/>
+        <Attribute Key="volume" Value="80"/>
+        <Attribute Key="instrument" Value="0"/>
+        <Attribute Key="clef" Value="0"/>
+        <Attribute Key="key" Value="6"/>
+        <Attribute Key="timeSignature" Value="4/4"/>
+    </ElementDef>
+    <ElementDef ID="2" TYPE="org.wuerthner.score.model.TimeSignatureEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="timeSignature" Value="4/4"/>
+    </ElementDef>
+    <ElementDef ID="3" TYPE="org.wuerthner.score.model.KeyEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="key" Value="-1"/>
+    </ElementDef>
+    <ElementDef ID="4" TYPE="org.wuerthner.score.model.ClefEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="clef" Value="0"/>
+    </ElementDef>
+    <ElementDef ID="5" TYPE="org.wuerthner.score.model.TempoEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="tempo" Value="100"/>
+        <Attribute Key="label" Value="t=100"/>
+    </ElementDef>
+    <ElementDef ID="6" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="1920"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Inns"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="7" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="3840"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="bruck, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="8" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="4800"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="9" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="5760"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="69"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="muss "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="10" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="7680"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="72"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="dich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="11" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="9600"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="70"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="las"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="12" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="11520"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="69"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="13" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="14400"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="69"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="14" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="15360"/>
+        <Attribute Key="duration" Value="1440"/>
+        <Attribute Key="pitch" Value="72"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="fahr "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="15" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="16800"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="70"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="da"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="16" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="17280"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="hin "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="17" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="19200"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="69"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="mein "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="18" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="21120"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Stras"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="19" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="23040"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="20" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="25920"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="21" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="26880"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="frem"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="22" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="27840"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="de "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="23" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="28800"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="land "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="24" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="29760"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="da "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="25" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="30720"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="hin. "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="26" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="33600"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Mein "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="27" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="34560"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Freud "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="28" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="35520"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ist "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="29" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="36480"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="69"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="mir "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="30" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="38400"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="72"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ge"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="31" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="40320"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="70"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="nom"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="32" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="42240"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="69"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="33" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="45120"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="69"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="die "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="34" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="46080"/>
+        <Attribute Key="duration" Value="1440"/>
+        <Attribute Key="pitch" Value="72"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="35" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="47520"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="70"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="nit "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="36" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="48000"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="weiss "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="37" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="49920"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="69"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="be"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="38" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="51840"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="kom"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="39" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="53760"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="40" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="56640"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="wo "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="41" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="57600"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="42" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="58560"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="43" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="59520"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="69"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="E"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="44" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="61440"/>
+        <Attribute Key="duration" Value="1440"/>
+        <Attribute Key="pitch" Value="70"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="45" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="62880"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="69"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="46" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="63360"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="47" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="63840"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="48" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="64320"/>
+        <Attribute Key="duration" Value="1440"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="49" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="65760"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="50" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="66240"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="51" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="68160"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="52" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="69120"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="bin, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="53" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="72000"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="wo "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="54" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="72960"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="55" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="73920"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="56" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="74880"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="69"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="E"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="57" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="76800"/>
+        <Attribute Key="duration" Value="1440"/>
+        <Attribute Key="pitch" Value="70"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="58" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="78240"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="69"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="59" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="78720"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="60" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="79200"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="61" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="79680"/>
+        <Attribute Key="duration" Value="1440"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="62" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="81120"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="63" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="81600"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="64" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="83520"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="65" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="84480"/>
+        <Attribute Key="duration" Value="3600"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="bin. "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="66" TYPE="org.wuerthner.score.model.MidiTrack">
+        <ElementRef ID="67"/>
+        <ElementRef ID="68"/>
+        <ElementRef ID="69"/>
+        <ElementRef ID="70"/>
+        <ElementRef ID="71"/>
+        <ElementRef ID="72"/>
+        <ElementRef ID="73"/>
+        <ElementRef ID="74"/>
+        <ElementRef ID="75"/>
+        <ElementRef ID="76"/>
+        <ElementRef ID="77"/>
+        <ElementRef ID="78"/>
+        <ElementRef ID="79"/>
+        <ElementRef ID="80"/>
+        <ElementRef ID="81"/>
+        <ElementRef ID="82"/>
+        <ElementRef ID="83"/>
+        <ElementRef ID="84"/>
+        <ElementRef ID="85"/>
+        <ElementRef ID="86"/>
+        <ElementRef ID="87"/>
+        <ElementRef ID="88"/>
+        <ElementRef ID="89"/>
+        <ElementRef ID="90"/>
+        <ElementRef ID="91"/>
+        <ElementRef ID="92"/>
+        <ElementRef ID="93"/>
+        <ElementRef ID="94"/>
+        <ElementRef ID="95"/>
+        <ElementRef ID="96"/>
+        <ElementRef ID="97"/>
+        <ElementRef ID="98"/>
+        <ElementRef ID="99"/>
+        <ElementRef ID="100"/>
+        <ElementRef ID="101"/>
+        <ElementRef ID="102"/>
+        <ElementRef ID="103"/>
+        <ElementRef ID="104"/>
+        <ElementRef ID="105"/>
+        <ElementRef ID="106"/>
+        <ElementRef ID="107"/>
+        <ElementRef ID="108"/>
+        <ElementRef ID="109"/>
+        <ElementRef ID="110"/>
+        <ElementRef ID="111"/>
+        <ElementRef ID="112"/>
+        <ElementRef ID="113"/>
+        <ElementRef ID="114"/>
+        <ElementRef ID="115"/>
+        <ElementRef ID="116"/>
+        <ElementRef ID="117"/>
+        <ElementRef ID="118"/>
+        <ElementRef ID="119"/>
+        <ElementRef ID="120"/>
+        <ElementRef ID="121"/>
+        <ElementRef ID="122"/>
+        <ElementRef ID="123"/>
+        <ElementRef ID="124"/>
+        <ElementRef ID="125"/>
+        <ElementRef ID="126"/>
+        <ElementRef ID="127"/>
+        <ElementRef ID="128"/>
+        <ElementRef ID="129"/>
+        <ElementRef ID="130"/>
+        <ElementRef ID="131"/>
+        <ElementRef ID="132"/>
+        <ElementRef ID="133"/>
+        <Attribute Key="name" Value="Alt"/>
+        <Attribute Key="channel" Value="1"/>
+        <Attribute Key="volume" Value="80"/>
+        <Attribute Key="instrument" Value="0"/>
+        <Attribute Key="clef" Value="0"/>
+        <Attribute Key="key" Value="6"/>
+        <Attribute Key="timeSignature" Value="4/4"/>
+    </ElementDef>
+    <ElementDef ID="67" TYPE="org.wuerthner.score.model.TimeSignatureEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="timeSignature" Value="4/4"/>
+    </ElementDef>
+    <ElementDef ID="68" TYPE="org.wuerthner.score.model.KeyEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="key" Value="-1"/>
+    </ElementDef>
+    <ElementDef ID="69" TYPE="org.wuerthner.score.model.ClefEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="clef" Value="0"/>
+    </ElementDef>
+    <ElementDef ID="70" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="duration" Value="3840"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Inns"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="71" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="3840"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="bruck, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="72" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="4800"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="73" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="5760"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="muss "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="74" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="7680"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="dich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="75" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="8640"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="las"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="76" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="10560"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="77" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="11520"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="78" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="14400"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="79" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="15360"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="fahr "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="80" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="16320"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="da"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="81" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="17280"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="hin "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="82" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="19200"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="mein "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="83" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="20160"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Stras"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="84" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="22080"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="85" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="22560"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="86" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="23040"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="87" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="25920"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="88" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="26880"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="frem"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="89" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="27840"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="de "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="90" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="28800"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="land "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="91" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="29760"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="da "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="92" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="30720"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="hin. "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="93" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="33600"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Mein "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="94" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="34560"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Freud "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="95" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="35520"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ist "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="96" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="36480"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="mir "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="97" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="38400"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ge"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="98" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="39360"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="nom"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="99" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="41280"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="100" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="42240"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="101" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="45120"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="die "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="102" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="46080"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="103" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="47040"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="nit "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="104" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="48000"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="weiss "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="105" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="49920"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="be"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="106" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="50880"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="kom"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="107" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="52800"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="108" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="53280"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="109" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="53760"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="110" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="56640"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="wo "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="111" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="57600"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="112" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="58560"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="113" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="59520"/>
+        <Attribute Key="duration" Value="3360"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="E"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="114" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="62880"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="115" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="63360"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="116" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="63840"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="117" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="64320"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="118" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="65280"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="119" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="66240"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="120" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="67200"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="121" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="69120"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="bin, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="122" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="72000"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="67"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="wo "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="123" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="72960"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="124" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="73920"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="125" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="74880"/>
+        <Attribute Key="duration" Value="3360"/>
+        <Attribute Key="pitch" Value="65"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="E"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="126" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="78240"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="64"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="127" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="78720"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="128" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="79200"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="129" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="79680"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="130" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="80640"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="131" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="81600"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="132" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="82560"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="133" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="84480"/>
+        <Attribute Key="duration" Value="3600"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="bin. "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="134" TYPE="org.wuerthner.score.model.MidiTrack">
+        <ElementRef ID="135"/>
+        <ElementRef ID="136"/>
+        <ElementRef ID="137"/>
+        <ElementRef ID="138"/>
+        <ElementRef ID="139"/>
+        <ElementRef ID="140"/>
+        <ElementRef ID="141"/>
+        <ElementRef ID="142"/>
+        <ElementRef ID="143"/>
+        <ElementRef ID="144"/>
+        <ElementRef ID="145"/>
+        <ElementRef ID="146"/>
+        <ElementRef ID="147"/>
+        <ElementRef ID="148"/>
+        <ElementRef ID="149"/>
+        <ElementRef ID="150"/>
+        <ElementRef ID="151"/>
+        <ElementRef ID="152"/>
+        <ElementRef ID="153"/>
+        <ElementRef ID="154"/>
+        <ElementRef ID="155"/>
+        <ElementRef ID="156"/>
+        <ElementRef ID="157"/>
+        <ElementRef ID="158"/>
+        <ElementRef ID="159"/>
+        <ElementRef ID="160"/>
+        <ElementRef ID="161"/>
+        <ElementRef ID="162"/>
+        <ElementRef ID="163"/>
+        <ElementRef ID="164"/>
+        <ElementRef ID="165"/>
+        <ElementRef ID="166"/>
+        <ElementRef ID="167"/>
+        <ElementRef ID="168"/>
+        <ElementRef ID="169"/>
+        <ElementRef ID="170"/>
+        <ElementRef ID="171"/>
+        <ElementRef ID="172"/>
+        <ElementRef ID="173"/>
+        <ElementRef ID="174"/>
+        <ElementRef ID="175"/>
+        <ElementRef ID="176"/>
+        <ElementRef ID="177"/>
+        <ElementRef ID="178"/>
+        <ElementRef ID="179"/>
+        <ElementRef ID="180"/>
+        <ElementRef ID="181"/>
+        <ElementRef ID="182"/>
+        <ElementRef ID="183"/>
+        <ElementRef ID="184"/>
+        <ElementRef ID="185"/>
+        <ElementRef ID="186"/>
+        <ElementRef ID="187"/>
+        <ElementRef ID="188"/>
+        <ElementRef ID="189"/>
+        <ElementRef ID="190"/>
+        <ElementRef ID="191"/>
+        <ElementRef ID="192"/>
+        <ElementRef ID="193"/>
+        <ElementRef ID="194"/>
+        <ElementRef ID="195"/>
+        <ElementRef ID="196"/>
+        <ElementRef ID="197"/>
+        <ElementRef ID="198"/>
+        <ElementRef ID="199"/>
+        <Attribute Key="name" Value="Tenor"/>
+        <Attribute Key="channel" Value="2"/>
+        <Attribute Key="volume" Value="80"/>
+        <Attribute Key="instrument" Value="0"/>
+        <Attribute Key="clef" Value="4"/>
+        <Attribute Key="key" Value="6"/>
+        <Attribute Key="timeSignature" Value="4/4"/>
+    </ElementDef>
+    <ElementDef ID="135" TYPE="org.wuerthner.score.model.TimeSignatureEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="timeSignature" Value="4/4"/>
+    </ElementDef>
+    <ElementDef ID="136" TYPE="org.wuerthner.score.model.KeyEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="key" Value="-1"/>
+    </ElementDef>
+    <ElementDef ID="137" TYPE="org.wuerthner.score.model.ClefEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="clef" Value="4"/>
+    </ElementDef>
+    <ElementDef ID="138" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="1920"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Inns"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="139" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="3840"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="bruck, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="140" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="4800"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="141" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="5760"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="muss "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="142" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="7680"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="dich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="143" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="9600"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="las"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="144" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="11520"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="145" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="14400"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="146" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="15360"/>
+        <Attribute Key="duration" Value="1440"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="fahr "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="147" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="16800"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="da"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="148" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="17280"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="63"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="hin "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="149" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="19200"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="mein "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="150" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="20160"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Stras"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="151" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="22080"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="152" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="23040"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="153" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="25920"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="154" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="26880"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="frem"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="155" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="27840"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="de "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="156" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="28800"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="land "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="157" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="29760"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="da "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="158" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="30720"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="hin. "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="159" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="33600"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Mein "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="160" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="34560"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Freud "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="161" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="35520"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ist "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="162" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="36480"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="mir "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="163" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="38400"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ge"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="164" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="40320"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="nom"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="165" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="42240"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="166" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="45120"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="die "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="167" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="46080"/>
+        <Attribute Key="duration" Value="1440"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="168" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="47520"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="nit "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="169" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="48000"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="63"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="-1"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="weiss "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="170" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="49920"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="be"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="171" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="50880"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="kom"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="172" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="52800"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="59"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="173" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="53760"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="174" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="56640"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="wo "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="175" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="57600"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="176" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="58560"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="177" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="59520"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="E"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="178" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="61440"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="179" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="62400"/>
+        <Attribute Key="duration" Value="1440"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="180" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="63840"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="181" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="64320"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="182" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="64800"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="183" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="65280"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="52"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="184" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="66240"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="185" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="67200"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="186" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="69120"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="bin, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="187" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="72000"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="wo "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="188" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="72960"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="189" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="73920"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="190" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="74880"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="60"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="E"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="191" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="76800"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="62"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="192" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="77760"/>
+        <Attribute Key="duration" Value="1440"/>
+        <Attribute Key="pitch" Value="58"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="193" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="79200"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="194" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="79680"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="195" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="80160"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="196" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="80640"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="52"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="197" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="81600"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="198" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="82560"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="199" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="84480"/>
+        <Attribute Key="duration" Value="3600"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="bin. "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="200" TYPE="org.wuerthner.score.model.MidiTrack">
+        <ElementRef ID="201"/>
+        <ElementRef ID="202"/>
+        <ElementRef ID="203"/>
+        <ElementRef ID="204"/>
+        <ElementRef ID="205"/>
+        <ElementRef ID="206"/>
+        <ElementRef ID="207"/>
+        <ElementRef ID="208"/>
+        <ElementRef ID="209"/>
+        <ElementRef ID="210"/>
+        <ElementRef ID="211"/>
+        <ElementRef ID="212"/>
+        <ElementRef ID="213"/>
+        <ElementRef ID="214"/>
+        <ElementRef ID="215"/>
+        <ElementRef ID="216"/>
+        <ElementRef ID="217"/>
+        <ElementRef ID="218"/>
+        <ElementRef ID="219"/>
+        <ElementRef ID="220"/>
+        <ElementRef ID="221"/>
+        <ElementRef ID="222"/>
+        <ElementRef ID="223"/>
+        <ElementRef ID="224"/>
+        <ElementRef ID="225"/>
+        <ElementRef ID="226"/>
+        <ElementRef ID="227"/>
+        <ElementRef ID="228"/>
+        <ElementRef ID="229"/>
+        <ElementRef ID="230"/>
+        <ElementRef ID="231"/>
+        <ElementRef ID="232"/>
+        <ElementRef ID="233"/>
+        <ElementRef ID="234"/>
+        <ElementRef ID="235"/>
+        <ElementRef ID="236"/>
+        <ElementRef ID="237"/>
+        <ElementRef ID="238"/>
+        <ElementRef ID="239"/>
+        <ElementRef ID="240"/>
+        <ElementRef ID="241"/>
+        <ElementRef ID="242"/>
+        <ElementRef ID="243"/>
+        <ElementRef ID="244"/>
+        <ElementRef ID="245"/>
+        <ElementRef ID="246"/>
+        <ElementRef ID="247"/>
+        <ElementRef ID="248"/>
+        <ElementRef ID="249"/>
+        <ElementRef ID="250"/>
+        <ElementRef ID="251"/>
+        <ElementRef ID="252"/>
+        <ElementRef ID="253"/>
+        <ElementRef ID="254"/>
+        <ElementRef ID="255"/>
+        <ElementRef ID="256"/>
+        <ElementRef ID="257"/>
+        <ElementRef ID="258"/>
+        <ElementRef ID="259"/>
+        <ElementRef ID="260"/>
+        <ElementRef ID="261"/>
+        <ElementRef ID="262"/>
+        <ElementRef ID="263"/>
+        <Attribute Key="name" Value="Bass"/>
+        <Attribute Key="channel" Value="3"/>
+        <Attribute Key="volume" Value="80"/>
+        <Attribute Key="instrument" Value="0"/>
+        <Attribute Key="clef" Value="1"/>
+        <Attribute Key="key" Value="6"/>
+        <Attribute Key="timeSignature" Value="4/4"/>
+    </ElementDef>
+    <ElementDef ID="201" TYPE="org.wuerthner.score.model.TimeSignatureEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="timeSignature" Value="4/4"/>
+    </ElementDef>
+    <ElementDef ID="202" TYPE="org.wuerthner.score.model.KeyEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="key" Value="-1"/>
+    </ElementDef>
+    <ElementDef ID="203" TYPE="org.wuerthner.score.model.ClefEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="clef" Value="1"/>
+    </ElementDef>
+    <ElementDef ID="204" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="0"/>
+        <Attribute Key="duration" Value="3840"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Inns"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="205" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="3840"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="50"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="bruck, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="206" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="4800"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="207" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="5760"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="muss "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="208" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="6720"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="dich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="209" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="7680"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="las"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="210" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="8640"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="211" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="9120"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="212" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="9600"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="213" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="11520"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="214" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="14400"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="215" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="15360"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="fahr "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="216" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="16320"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="da"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="217" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="17280"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="51"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="hin "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="218" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="19200"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="mein "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="219" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="21120"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="50"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Stras"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="220" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="23040"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="48"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="sen "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="221" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="25920"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="50"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="222" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="26880"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="43"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="frem"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="223" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="27840"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="50"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="de "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="224" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="28800"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="52"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="land "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="225" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="29760"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="50"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="da "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="226" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="30720"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="43"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="hin. "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="227" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="33600"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Mein "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="228" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="34560"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="50"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="Freud "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="229" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="35520"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ist "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="230" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="36480"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="mir "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="231" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="37440"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ge"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="232" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="38400"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="57"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="nom"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="233" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="39360"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="234" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="39840"/>
+        <Attribute Key="duration" Value="480"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="235" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="40320"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="236" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="42240"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="237" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="45120"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="die "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="238" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="46080"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="239" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="47040"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="nit "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="240" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="48000"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="51"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="weiss "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="241" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="49920"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="be"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="242" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="51840"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="50"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="kom"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="243" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="53760"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="48"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="men, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="244" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="56640"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="48"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="wo "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="245" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="57600"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="50"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="246" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="58560"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="247" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="59520"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="E"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="248" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="61440"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="46"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="249" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="64320"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="46"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="250" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="65280"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="48"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="E"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="251" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="66240"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="50"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="252" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="67200"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="48"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="253" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="69120"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="41"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="bin, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="254" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="72000"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="48"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="wo "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="255" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="72960"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="50"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="ich "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="256" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="73920"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="55"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="257" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="74880"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="53"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="E"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="258" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="76800"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="46"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend, "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="259" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="79680"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="46"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="im "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="260" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="80640"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="48"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="E"/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="261" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="81600"/>
+        <Attribute Key="duration" Value="960"/>
+        <Attribute Key="pitch" Value="50"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="262" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="82560"/>
+        <Attribute Key="duration" Value="1920"/>
+        <Attribute Key="pitch" Value="48"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="lend "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+    <ElementDef ID="263" TYPE="org.wuerthner.score.model.NoteEvent">
+        <Attribute Key="position" Value="84480"/>
+        <Attribute Key="duration" Value="3600"/>
+        <Attribute Key="pitch" Value="41"/>
+        <Attribute Key="velocity" Value="110"/>
+        <Attribute Key="shift" Value="0"/>
+        <Attribute Key="tuplet" Value="0"/>
+        <Attribute Key="lyrics" Value="bin. "/>
+        <Attribute Key="stemDirection" Value="0"/>
+        <Attribute Key="isUngrouped" Value="false"/>
+        <Attribute Key="voice" Value="0"/>
+        <Attribute Key="accents" Value="[]"/>
+    </ElementDef>
+</root>

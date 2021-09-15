@@ -5,21 +5,17 @@ import java.util.stream.Collectors;
 
 import org.wuerthner.ambitus.attribute.AmbitusAttributeBuilder;
 import org.wuerthner.ambitus.attribute.TimeSignatureAttribute;
+import org.wuerthner.ambitus.tool.AbstractSelection;
 import org.wuerthner.ambitus.type.NamedRange;
-import org.wuerthner.cwn.api.CwnEvent;
-import org.wuerthner.cwn.api.TimeSignature;
+import org.wuerthner.cwn.api.*;
 import org.wuerthner.cwn.position.PositionTools;
 import org.wuerthner.cwn.timesignature.SimpleTimeSignature;
-import org.wuerthner.sport.api.Attribute;
-import org.wuerthner.sport.api.ModelElementFactory;
-import org.wuerthner.sport.api.Operation;
+import org.wuerthner.sport.api.*;
 import org.wuerthner.sport.attribute.*;
 import org.wuerthner.sport.core.AbstractModelElement;
+import org.wuerthner.sport.core.ModelClipboard;
 import org.wuerthner.sport.core.ModelHistory;
-import org.wuerthner.sport.operation.AddChildOperation;
-import org.wuerthner.sport.operation.RemoveChildOperation;
-import org.wuerthner.sport.operation.SetAttributeValueOperation;
-import org.wuerthner.sport.operation.Transaction;
+import org.wuerthner.sport.operation.*;
 
 
 public class Arrangement extends AbstractModelElement {
@@ -27,7 +23,8 @@ public class Arrangement extends AbstractModelElement {
 
 	public static final String DEFAULT_NAME = "Untitled";
 	public static final int DEFAULT_PPQ = 960;
-	public static final String[] KEYS = new String[] { "Ces", "Ges", "Des", "As", "Es", "B", "F", "C", "G", "D", "A", "E", "H", "Fis", "Cis" };
+	public static final String[] KEYS = MidiTrack.KEYS;
+	public static final String[] CLEFS = MidiTrack.CLEFS;
 	public static final String[] GRIDS = new String[] { "1", "1/2", "1/4", "1/8", "1/16", "1/32", "1/64" };
 	public static final String[] LEVELS = new String[] { "-", "1st level", "2nd level", "3rd level", "4th level", "5th level" };
 	public static final String[] TUPLET_PRESENTATION = new String[] { "Short", "Full" };
@@ -52,14 +49,17 @@ public class Arrangement extends AbstractModelElement {
 	public static final Integer DEFAULT_TUPLET_PRESENTATION = 0;
 	public static final Integer DEFAULT_STRETCH_FACTOR_INDEX = 1;
 	public static final List<NamedRange> DEFAULT_RANGE_LIST = new ArrayList<>();
+	public static AbstractSelection selection = null;
 	
 	public final static StringAttribute name = new AttributeBuilder("name")
 			.defaultValue(DEFAULT_NAME)
 			.required()
 			.buildStringAttribute();
 	public final static StringAttribute composer = new AttributeBuilder("composer")
+			.defaultValue("")
 			.buildStringAttribute();
 	public final static StringAttribute subtitle = new AttributeBuilder("subtitle")
+			.defaultValue("")
 			.buildStringAttribute();
 	public final static BooleanAttribute autoBeamPrint = new AttributeBuilder("autoBeamPrint")
 			.defaultValue(true)
@@ -75,7 +75,6 @@ public class Arrangement extends AbstractModelElement {
 	public final static TimeSignatureAttribute timeSignature = new AmbitusAttributeBuilder("timeSignature")
 			.defaultValue(DEFAULT_SIGNATURE)
 			.buildTimeSignatureAttribute();
-
 	public final static BooleanAttribute flagAllowDottedRests = new AttributeBuilder("flagAllowDottedRests")
 			.defaultValue(true)
 			.buildBooleanAttribute();
@@ -83,7 +82,6 @@ public class Arrangement extends AbstractModelElement {
 	public final static BooleanAttribute durationBiDotted = new AttributeBuilder("durationBiDotted")
 			.defaultValue(false)
 			.buildBooleanAttribute();
-
 	public final static BooleanAttribute durationTuplet2 = new AttributeBuilder("durationTuplet2")
 			.defaultValue(false)
 			.buildBooleanAttribute();
@@ -99,7 +97,6 @@ public class Arrangement extends AbstractModelElement {
 	public final static BooleanAttribute durationTuplet6 = new AttributeBuilder("durationTuplet6")
 			.defaultValue(false)
 			.buildBooleanAttribute();
-
 	public final static SelectableIntegerAttribute groupLevel = new AttributeBuilder("groupLevel")
 			.defaultValue(DEFAULT_GROUP_LEVEL)
 			.values(LEVELS)
@@ -127,78 +124,74 @@ public class Arrangement extends AbstractModelElement {
 			.defaultValue(null)
 			.buildStringAttribute();
 
+	public final static IntegerAttribute offset = new AttributeBuilder("offset")
+			.defaultValue(DEFAULT_BAR_OFFSET)
+			.buildIntegerAttribute();
+
 	private final ModelHistory history = new ModelHistory();
+	private final Clipboard clipboard = new ModelClipboard<Event>();
 
 	public Arrangement() {
-		super(TYPE, Arrays.asList(MidiTrack.TYPE), Arrays.asList(name, subtitle, composer, autoBeamPrint, pulsePerQuarter, key, timeSignature, stretchFactor, groupLevel,
-								tupletPresentation, grid, resolution, rangeList, path, flagAllowDottedRests, durationBiDotted, durationTuplet2, durationTuplet3, durationTuplet4, durationTuplet5, durationTuplet6 ));
+		super(TYPE, Arrays.asList(MidiTrack.TYPE), Arrays.asList(name, subtitle, composer, autoBeamPrint, pulsePerQuarter,
+				key, timeSignature, stretchFactor, groupLevel, tupletPresentation, grid, resolution, rangeList, path,
+				flagAllowDottedRests, durationBiDotted, durationTuplet2, durationTuplet3, durationTuplet4, durationTuplet5, durationTuplet6,
+				offset));
 	}
 
 	public String getId() {
 		return this.getAttributeValue(name);
 	}
 
-	// private final Propagator<?, ?>[] propagators = new Propagator[] { new ArrangementTimeSignaturePropagator(this, timeSignature), new ArrangementKeyPropagator(this, key) };
-	
-//	public enum FunctionSelector {
-//		DISPLAY(0, 0), NOTE(1, 128), ACCENT(1000, 1999), SYMBOL(2000, 2999), LYRICS(3000, 3000);
-//		public static FunctionSelector[] functions = new FunctionSelector[] { DISPLAY, NOTE, ACCENT, SYMBOL, LYRICS };
-//		public final int lowerBound;
-//		public final int upperBound;
-//
-//		private FunctionSelector(int lowerBound, int upperBound) {
-//			this.lowerBound = lowerBound;
-//			this.upperBound = upperBound;
-//		}
-//	}
-	
-//	@Override
-//	public void init(GenericHandlerFactory handlerFactory) {
-//		handler = handlerFactory
-//				.createHandler(
-//						this, null, Arrays.asList(MidiTrack.class), new AbstractAttribute<?>[] { name, subtitle, composer, autoBeamPrint, pulsePerQuarter, key, timeSignature, stretchFactor, groupLevel,
-//								tupletPresentation, grid, resolution, rangeList, path, flagAllowDottedRests, durationBiDotted, durationTuplet2, durationTuplet3, durationTuplet4, durationTuplet5, durationTuplet6 },
-//						propagators);
-//	}
-//
-//	@Override
-//	public String getName() {
-//		return getAttributeValue(name);
-//	}
-//
-//	@Override
-//	public GenericHandler getHandler() {
-//		return handler;
-//	}
-//
-//	public String getComposer() {
-//		String value = getAttributeValue(composer);
-//		return value == null ? "" : value;
-//	}
-//
-//	public String getSubtitle() {
-//		String value = getAttributeValue(subtitle);
-//		return value == null ? "" : value;
-//	}
-//
-//	public int getNumberOfActiveMidiTracks() {
-//		return getChildren(MidiTrack.class).size();
-//	}
-//
-//	public List<GenericHandler> getActiveMidiTrackHandlerList() {
-//		// TODO: filter or remove "Active"
-//		return getChildren(MidiTrack.class).stream().map(e -> e.getHandler()).collect(Collectors.toList());
-//	}
-//
+	public int getNumberOfActiveMidiTracks() {
+		return getChildrenByClass(MidiTrack.class).size();
+	}
+
 	public List<MidiTrack> getActiveMidiTrackList() {
 		return getChildrenByClass(MidiTrack.class).stream().map(e -> MidiTrack.class.cast(e)).filter(tr -> tr.isActive()).collect(Collectors.toList());
+	}
+	//
+	// Selection
+	//
+	public AbstractSelection getSelection() {
+		return selection;
+	}
+
+	public void setSelection(AbstractSelection selection) {
+		this.selection = selection;
+	}
+
+	public Clipboard getClipboard() { return clipboard; }
+
+	public boolean hasUndo() {
+		return history.hasUndo();
+	}
+
+	public boolean hasRedo() {
+		return history.hasRedo();
+	}
+
+	public void clearHistory() {
+		history.clear();
+	}
+
+	public History getHistory() {
+		return history;
 	}
 
 	//
 	// MIDI TRACK
 	//
+	public MidiTrack getSelectedMidiTrack() {
+		int selectedStaff = selection.getSelectedStaff();
+		int no = getNumberOfActiveMidiTracks();
+		if (selectedStaff < 0 || selectedStaff >= no) {
+			return null;
+		}
+		return getActiveMidiTrackList().get(selectedStaff);
+	}
+
 	public Optional<MidiTrack> getMidiTrack(String id) {
-		return getChildrenByClass(MidiTrack.class).stream().filter(t -> t.getId().equals(id)).findAny();
+		return getChildrenByClass(MidiTrack.class).stream().peek(System.out::println).filter(t -> t.getId().equals(id)).findAny();
 	}
 
 	public void setTrackMute(String id, boolean mute) {
@@ -207,6 +200,10 @@ public class Arrangement extends AbstractModelElement {
 			track.get().performSetAttributeValueOperation(MidiTrack.mute, mute, history);
 		}
 	}
+
+	public void setTrackMute(MidiTrack track, boolean mute) {
+		track.performSetAttributeValueOperation(MidiTrack.mute, mute, history);
+	}
 	public void setTrackName(String id, String name) {
 		Optional<MidiTrack> track  = getMidiTrack(id);
 		if (track.isPresent()) {
@@ -214,41 +211,57 @@ public class Arrangement extends AbstractModelElement {
 		}
 	}
 
+	public void setTrackName(MidiTrack track, String name) {
+		track.performSetAttributeValueOperation(MidiTrack.name, name, history);
+	}
+
 	public void setTrackMetric(String id, String metric) {
 		Optional<MidiTrack> trackOptional  = getMidiTrack(id);
 		if (trackOptional.isPresent()) {
 			MidiTrack track = trackOptional.get();
-			TimeSignatureEvent tsEvent = track.findFirstEvent(TimeSignatureEvent.class).get();
-			TimeSignature ts = new SimpleTimeSignature(metric);
-			Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.timeSignature, ts);
-			Operation o2 = new SetAttributeValueOperation<>(tsEvent, TimeSignatureEvent.timeSignature, ts);
-			Transaction transaction = new Transaction("TimeSignature="+metric, o1, o2);
-			track.performTransaction(transaction, history);
+			setTrackMetric(track, metric);
 		}
+	}
+
+	public void setTrackMetric(MidiTrack track, String metric) {
+		TimeSignatureEvent tsEvent = track.findFirstEvent(TimeSignatureEvent.class).get();
+		TimeSignature ts = new SimpleTimeSignature(metric);
+		Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.timeSignature, ts);
+		Operation o2 = new SetAttributeValueOperation<>(tsEvent, TimeSignatureEvent.timeSignature, ts);
+		Transaction transaction = new Transaction("TimeSignature="+metric, o1, o2);
+		track.performTransaction(transaction, history);
 	}
 
 	public void setTrackKey(String id, int key) {
 		Optional<MidiTrack> trackOptional  = getMidiTrack(id);
 		if (trackOptional.isPresent()) {
 			MidiTrack track = trackOptional.get();
-			KeyEvent keyEvent = track.findFirstEvent(KeyEvent.class).get();
-			Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.key, key);
-			Operation o2 = new SetAttributeValueOperation<>(keyEvent, KeyEvent.key, key-7);
-			Transaction transaction = new Transaction("Key="+key, o1, o2);
-			track.performTransaction(transaction, history);
+			setTrackKey(track, key);
 		}
+	}
+
+	public void setTrackKey(MidiTrack track, int key) {
+		KeyEvent keyEvent = track.findFirstEvent(KeyEvent.class).get();
+		Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.key, key);
+		Operation o2 = new SetAttributeValueOperation<>(keyEvent, KeyEvent.key, key-7);
+		Transaction transaction = new Transaction("Key="+key, o1, o2);
+		track.performTransaction(transaction, history);
 	}
 
 	public void setTrackClef(String id, int clef) {
 		Optional<MidiTrack> trackOptional  = getMidiTrack(id);
 		if (trackOptional.isPresent()) {
 			MidiTrack track = trackOptional.get();
-			ClefEvent clefEvent = track.findFirstEvent(ClefEvent.class).get();
-			Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.clef, clef);
-			Operation o2 = new SetAttributeValueOperation<>(clefEvent, ClefEvent.clef, clef);
-			Transaction transaction = new Transaction("Clef="+clef, o1, o2);
-			track.performTransaction(transaction, history);
+			setTrackClef(track, clef);
 		}
+	}
+
+	public void setTrackClef(MidiTrack track, int clef) {
+		ClefEvent clefEvent = track.findFirstEvent(ClefEvent.class).get();
+		Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.clef, clef);
+		Operation o2 = new SetAttributeValueOperation<>(clefEvent, ClefEvent.clef, clef);
+		Transaction transaction = new Transaction("Clef="+clef, o1, o2);
+		track.performTransaction(transaction, history);
 	}
 
 	public void setTrackTempo(String id, int tempo) {
@@ -271,11 +284,32 @@ public class Arrangement extends AbstractModelElement {
 		}
 	}
 
+	public void setTrackInstrument(MidiTrack track, int instrument) {
+		track.performSetAttributeValueOperation(MidiTrack.instrument, instrument, history);
+	}
+
 	public void setTrackChannel(String id, int channel) {
 		Optional<MidiTrack> track  = getMidiTrack(id);
 		if (track.isPresent()) {
 			track.get().performSetAttributeValueOperation(MidiTrack.channel, channel, history);
 		}
+	}
+
+	public void setTrackChannel(MidiTrack track, int channel) {
+		track.performSetAttributeValueOperation(MidiTrack.channel, channel, history);
+	}
+
+	public Integer getFirstFreeChannel() {
+		Integer channel = null;
+		List<Integer> channels = new ArrayList<>(Arrays.asList(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15));
+		for (MidiTrack track : getActiveMidiTrackList()) {
+			channels.remove(Integer.valueOf(track.getChannel()));
+		}
+		if (channels.size() > 0) {
+			Collections.sort(channels);
+			channel = channels.get(0);
+		}
+		return channel;
 	}
 
 	public void setTrackProperties(String id, boolean mute, String name, String metric, int key, int clef, int tempo, int instrument, int channel) {
@@ -328,7 +362,8 @@ public class Arrangement extends AbstractModelElement {
 		return opList;
 	}
 
-	public void setBarProperties(String trackId, long barPosition, String metric, int key, int clef, int tempo, AmbitusFactory factory) {
+	public void setBarProperties(String trackId, long barPosition, String metric, int key, int clef, String bar, int tempo, AmbitusFactory factory) {
+		System.out.println("SET BAR PROP");
 		TimeSignature timeSignature = new SimpleTimeSignature(metric);
 		Optional<MidiTrack> trackOptional  = getMidiTrack(trackId);
 		if (trackOptional.isPresent()) {
@@ -337,18 +372,32 @@ public class Arrangement extends AbstractModelElement {
 			handleEventSettingInBar(track, position, TimeSignatureEvent.class, TimeSignatureEvent.TYPE, TimeSignature.class, TimeSignatureEvent.timeSignature, timeSignature, factory);
 			handleEventSettingInBar(track, position, KeyEvent.class, KeyEvent.TYPE, Integer.class, KeyEvent.key, key-7, factory);
 			handleEventSettingInBar(track, position, ClefEvent.class, ClefEvent.TYPE, Integer.class, ClefEvent.clef, clef, factory);
+			if (bar.equals(CwnBarEvent.STANDARD)) {
+			} else {
+				handleEventSettingInBar(track, position, BarEvent.class, BarEvent.TYPE, String.class, BarEvent.type, bar, factory);
+			}
 			handleEventSettingInBar(track, position, TempoEvent.class, TempoEvent.TYPE, Integer.class, TempoEvent.tempo, tempo, factory);
+			if (position==0) {
+				track.performTransientSetAttributeValueOperation(MidiTrack.timeSignature, timeSignature);
+				track.performTransientSetAttributeValueOperation(MidiTrack.key, key);
+				track.performTransientSetAttributeValueOperation(MidiTrack.clef, clef);
+			}
+		} else {
+			System.err.println("Track " + trackId + " not found!");
 		}
 	}
 
-	private <EVENT extends Event, TYPE> void handleEventSettingInBar(MidiTrack track, long position, Class<EVENT> eventClass, String eventType, Class<TYPE> typeClass, Attribute<TYPE> attribute, TYPE value, AmbitusFactory factory) {
+	private <EVENT extends Event, TYPE> void handleEventSettingInBar(MidiTrack track, long position, Class<EVENT> eventClass, String eventType,
+																	 Class<TYPE> typeClass, Attribute<TYPE> attribute, TYPE value, AmbitusFactory factory) {
 		Optional<EVENT> recentEventOptional = track.findEventBefore(position, eventClass);
+		boolean changeRequired = false;
 		if (!recentEventOptional.isPresent()) {
-			throw new RuntimeException("Previous Event unexpectedly does not exist!");
+			// throw new RuntimeException("Previous Event unexpectedly does not exist!");
+			changeRequired = true;
+		} else {
+			EVENT recentEvent = recentEventOptional.get();
+			changeRequired = (!recentEvent.getAttributeValue(attribute).toString().equals(value.toString()));
 		}
-		EVENT recentEvent = recentEventOptional.get();
-		boolean changeRequired = (!recentEvent.getAttributeValue(attribute).toString().equals(value.toString()));
-
 		// lookup event in bar:
 		Optional<EVENT> eventOptional = track.findFirstEventAtPosition(position, eventClass);
 		if (eventOptional.isPresent()) {
@@ -383,8 +432,83 @@ public class Arrangement extends AbstractModelElement {
 		}
 	}
 
+	public void setConfiguration(String title, String subtitle, String composer, int ppq, int level, int resolution, int tupletPres, int stretchFac,
+								 boolean dottedRests, boolean biDotted, boolean tuplet2, boolean tuplet3, boolean tuplet4, boolean tuplet5, boolean tuplet6) {
+		List<Operation> opList = new ArrayList<>();
+		if (!getAttributeValue(Arrangement.name, "").equals(title)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.name, title));
+		}
+		if (!getAttributeValue(Arrangement.subtitle, "").equals(subtitle)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.subtitle, subtitle));
+		}
+		if (!getAttributeValue(Arrangement.composer, "").equals(composer)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.composer, composer));
+		}
+		if (!getAttributeValue(Arrangement.pulsePerQuarter, DEFAULT_PPQ).equals(ppq)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.pulsePerQuarter, ppq));
+		}
+		if (!getAttributeValue(Arrangement.groupLevel, DEFAULT_GROUP_LEVEL).equals(level)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.groupLevel, level));
+		}
+		if (!getAttributeValue(Arrangement.resolution, DEFAULT_RESOLUTION_INDEX).equals(resolution)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.resolution, resolution));
+		}
+		if (!getAttributeValue(Arrangement.tupletPresentation, DEFAULT_TUPLET_PRESENTATION).equals(tupletPres)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.tupletPresentation, tupletPres));
+		}
+		if (!getAttributeValue(Arrangement.stretchFactor, DEFAULT_STRETCH_FACTOR_INDEX).equals(stretchFac)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.stretchFactor, stretchFac));
+		}
+		if (!getAttributeValue(Arrangement.flagAllowDottedRests, true).equals(dottedRests)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.flagAllowDottedRests, dottedRests));
+		}
+		if (!getAttributeValue(Arrangement.durationBiDotted, false).equals(biDotted)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationBiDotted, biDotted));
+		}
+		if (!getAttributeValue(Arrangement.durationTuplet2, false).equals(tuplet2)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationTuplet2, tuplet2));
+		}
+		if (!getAttributeValue(Arrangement.durationTuplet3, false).equals(tuplet3)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationTuplet3, tuplet3));
+		}
+		if (!getAttributeValue(Arrangement.durationTuplet4, false).equals(tuplet4)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationTuplet4, tuplet4));
+		}
+		if (!getAttributeValue(Arrangement.durationTuplet5, false).equals(tuplet5)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationTuplet5, tuplet5));
+		}
+		if (!getAttributeValue(Arrangement.durationTuplet6, false).equals(tuplet6)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationTuplet6, tuplet6));
+		}
+		// for (Operation op : opList) System.out.println(" = " + op.info());
+		Transaction transaction = new Transaction("Change Configuration", opList);
+		this.performTransaction(transaction, history);
+	}
+
 	public void addEvent(MidiTrack track, Event event) {
 		track.performAddChildOperation(event, history);
+	}
+
+	public void addTrack(ModelElementFactory factory) {
+		Integer channel = getFirstFreeChannel();
+		if (channel!=null) {
+			MidiTrack track = factory.createElement(MidiTrack.TYPE);
+			track.performTransientSetAttributeValueOperation(MidiTrack.name, MidiTrack.DEFAULT_NAME);
+			TimeSignatureEvent ts = factory.createElement(TimeSignatureEvent.TYPE);
+			ClefEvent clef = factory.createElement(ClefEvent.TYPE);
+			KeyEvent key = factory.createElement(KeyEvent.TYPE);
+			track.performTransientAddChildOperation(ts);
+			track.performTransientAddChildOperation(key);
+			track.performTransientAddChildOperation(clef);
+			if (channel==0) {
+				TempoEvent tempo = factory.createElement(TempoEvent.TYPE);
+				track.performTransientAddChildOperation(tempo);
+			}
+			track.performTransientSetAttributeValueOperation(MidiTrack.channel, channel);
+			this.performAddChildOperation(track, history);
+		} else {
+			System.err.println("No free channel available!");
+		}
 	}
 
 	public void init(String title, String subtitle, String composer) {
@@ -501,6 +625,19 @@ public class Arrangement extends AbstractModelElement {
 		}
 	}
 
+	public void deleteElements(List<Event> eventList) {
+		List<Operation> opList = new ArrayList<>();
+		for (CwnEvent cwnEvent: eventList) {
+			Event event = (Event) cwnEvent;
+			Operation operation = new RemoveChildOperation(event);
+			opList.add(operation);
+		}
+		if (opList.size()>0) {
+			Transaction transaction = new Transaction("Remove selection", opList);
+			this.performTransaction(transaction, history);
+		}
+	}
+
 //	public void setSelectionProperties(List<CwnEvent> eventList, int pitchChange, int positionChange, int durationChange, int dotChange,
 //									   int enhChange, int voiceChange) {
 //		List<Operation> opList = new ArrayList<>();
@@ -570,6 +707,17 @@ public class Arrangement extends AbstractModelElement {
 		return result;
 	}
 
+	public String getTrackBarMetric(int trackIndex, long barPosition) {
+		String result = "";
+		List<MidiTrack> trackList = getActiveMidiTrackList();
+		if (trackIndex < trackList.size()) {
+			MidiTrack track = trackList.get(trackIndex);
+			long position = PositionTools.firstBeat(track, barPosition);
+			result = track.getBarTimeSignature(position).toString();
+		}
+		return result;
+	}
+
 	public int getTrackBarKey(String trackId, long barPosition) {
 		int result = 0;
 		Optional<MidiTrack> trackOptional  = getMidiTrack(trackId);
@@ -581,11 +729,44 @@ public class Arrangement extends AbstractModelElement {
 		return result;
 	}
 
+	public int getTrackBarKey(int trackIndex, long barPosition) {
+		int result = 0;
+		List<MidiTrack> trackList = getActiveMidiTrackList();
+		if (trackIndex < trackList.size()) {
+			MidiTrack track = trackList.get(trackIndex);
+			long position = PositionTools.firstBeat(track, barPosition);
+			result = track.getBarKey(position);
+		}
+		return result;
+	}
+
+	public int getTrackBarBar(int trackIndex, long barPosition) {
+		int result = 0;
+		List<MidiTrack> trackList = getActiveMidiTrackList();
+		if (trackIndex < trackList.size()) {
+			MidiTrack track = trackList.get(trackIndex);
+			long position = PositionTools.firstBeat(track, barPosition);
+			result = track.getBarBar(position);
+		}
+		return result;
+	}
+
 	public int getTrackBarClef(String trackId, long barPosition) {
 		int result = 0;
 		Optional<MidiTrack> trackOptional  = getMidiTrack(trackId);
 		if (trackOptional.isPresent()) {
 			MidiTrack track = trackOptional.get();
+			long position = PositionTools.firstBeat(track, barPosition);
+			result = track.getBarClef(position);
+		}
+		return result;
+	}
+
+	public int getTrackBarClef(int trackIndex, long barPosition) {
+		int result = 0;
+		List<MidiTrack> trackList = getActiveMidiTrackList();
+		if (trackIndex < trackList.size()) {
+			MidiTrack track = trackList.get(trackIndex);
 			long position = PositionTools.firstBeat(track, barPosition);
 			result = track.getBarClef(position);
 		}
@@ -603,15 +784,34 @@ public class Arrangement extends AbstractModelElement {
 		return result;
 	}
 
+	public int getTrackBarTempo(int trackIndex, long barPosition) {
+		int result = 0;
+		List<MidiTrack> trackList = getActiveMidiTrackList();
+		if (trackIndex < trackList.size()) {
+			MidiTrack track = trackList.get(trackIndex);
+			long position = PositionTools.firstBeat(track, barPosition);
+			result = track.getBarTempo(position);
+		}
+		return result;
+	}
+
+	public int getTempo(long barPosition) {
+		int result = 0;
+		MidiTrack track = this.getActiveMidiTrackList().get(0);
+		long position = PositionTools.firstBeat(track, barPosition);
+		result = track.getBarTempo(position);
+		return result;
+	}
+
 	//
 //	public List<MidiTrack> getMidiTrackList() {
 //		return getChildren(MidiTrack.class).stream().map(e -> MidiTrack.class.cast(e)).collect(Collectors.toList());
 //	}
 //
-//	public Optional<MidiTrack> getFirstActiveMidiTrack() {
-//		return getChildren().stream().map(e -> MidiTrack.class.cast(e)).filter(tr -> tr.isActive()).findFirst();
-//	}
-//
+	public Optional<MidiTrack> getFirstActiveMidiTrack() {
+		return getChildren().stream().map(e -> MidiTrack.class.cast(e)).filter(tr -> tr.isActive()).findFirst();
+	}
+
 	public long findLastPosition() {
 		long lastPosition = 0;
 		for (MidiTrack track : getActiveMidiTrackList()) {
@@ -643,32 +843,37 @@ public class Arrangement extends AbstractModelElement {
 		history.redo();
 	}
 
-//
-//	public int getStretchFactor() {
-//		Integer stretchFactorIndex = getAttributeValue(stretchFactor);
-//		int factor = 1;
-//		if (stretchFactorIndex == null) {
-//			factor += 2 * DEFAULT_STRETCH_FACTOR_INDEX;
-//		} else {
-//			factor += 2 * stretchFactorIndex;
-//		}
-//		return factor;
-//	}
-//
-//	public int getResolutionInTicks(GenericContext context) {
-//		Integer resolutionIndex = getAttributeValue(resolution);
-//		if (resolutionIndex == null) {
-//			resolutionIndex = DEFAULT_RESOLUTION_INDEX;
-//		}
-//		// double metricDuration = this.getTimeSignature().getMetric().duration();
-//		// System.out.println("MD: " + metricDuration);
-//		return (int) (getPPQ() * 4 / (Math.pow(2, resolutionIndex)));
-//	}
-//
-//	public int getGridInTicks(GenericContext context) {
-//		int gridIndex = getAttributeValue(grid);
-//		return (int) (getPPQ() * 4 / (getTuplet(context) * Math.pow(2, gridIndex)));
-//	}
+	public double getExposeValue() {
+		return 0; // TODO!
+	}
+
+	public void performTransaction(Transaction transacton) {
+		performTransaction(transacton, history);
+	}
+
+	public int getStretchFactor() {
+		Integer stretchFactorIndex = getAttributeValue(stretchFactor);
+		int factor = 1;
+		if (stretchFactorIndex == null) {
+			factor += 2 * DEFAULT_STRETCH_FACTOR_INDEX;
+		} else {
+			factor += 2 * stretchFactorIndex;
+		}
+		return factor;
+	}
+
+	public int getResolutionInTicks() {
+		Integer resolutionIndex = getAttributeValue(resolution);
+		if (resolutionIndex == null) {
+			resolutionIndex = DEFAULT_RESOLUTION_INDEX;
+		}
+		return (int) (getPPQ() * 4 / (Math.pow(2, resolutionIndex)));
+	}
+
+	public int getGridInTicks() {
+		int gridIndex = getAttributeValue(grid);
+		return (int) (getPPQ() * 4 / (getTuplet() * Math.pow(2, gridIndex)));
+	}
 //
 //	public int getGroupLevel() {
 //		Integer attributeValue = getAttributeValue(groupLevel);
@@ -686,21 +891,25 @@ public class Arrangement extends AbstractModelElement {
 //		return attributeValue == 1;
 //	}
 //
-//	public void increaseBarOffset(GenericContext context, int value) {
-//		int offset = getBarOffset(context);
-//		offset += value;
-//		setTransientBarOffset(context, offset);
-//	}
-//
-//	public void decreaseBarOffset(GenericContext context, int value) {
-//		int offset = getBarOffset(context);
-//		offset = (offset - value < 0 ? 0 : offset - value);
-//		setTransientBarOffset(context, offset);
-//	}
-//
-//	public void setOffsetToFirstBar(GenericContext context) {
-//		setTransientBarOffset(context, 0);
-//	}
+	public void increaseBarOffset(int value) {
+		int offset = getAttributeValue(Arrangement.offset);
+		offset += value;
+		performTransientSetAttributeValueOperation(Arrangement.offset, offset);
+	}
+
+	public void decreaseBarOffset(int value) {
+		int offset = getAttributeValue(Arrangement.offset);
+		offset = (offset - value < 0 ? 0 : offset - value);
+		performTransientSetAttributeValueOperation(Arrangement.offset, offset);
+	}
+
+	public void setTransientBarOffset(int offset) {
+		performTransientSetAttributeValueOperation(Arrangement.offset, offset);
+	}
+
+	public void setOffsetToFirstBar() {
+		performTransientSetAttributeValueOperation(Arrangement.offset, 0);
+	}
 //
 //	public void setOffsetToBeginningOfSelectionOrFirstBar(GenericContext context) {
 //		int bar = 0;
@@ -718,27 +927,50 @@ public class Arrangement extends AbstractModelElement {
 //		setTransientBarOffset(context, bar);
 //	}
 //
-//	public void setOffsetToLastBar(GenericContext context) {
-//		List<MidiTrack> activeMidiTrackList = getActiveMidiTrackList();
-//		if (activeMidiTrackList.size() > 0) {
-//			long maxPosition = activeMidiTrackList.stream().filter(track -> track.getHandler().getChildren(NoteEvent.class).size() > 0).map(track -> track.findLastNote().get().getPosition()).mapToLong(l -> l).max()
-//					.getAsLong();
-//			int lastBar = PositionTools.getTrias(activeMidiTrackList.get(0), maxPosition).bar;
-//			setTransientBarOffset(context, lastBar);
-//		}
-//	}
-//
-//	public long getBarOffsetPosition(GenericContext context) {
-//		long position = 0;
-//		Optional<MidiTrack> optionalTrack = getFirstActiveMidiTrack();
-//		if (optionalTrack.isPresent()) {
-//			MidiTrack track = optionalTrack.get();
-//			int barOffset = getBarOffset(context);
-//			position = PositionTools.getPosition(track, new Trias(barOffset, 0, 0));
-//		}
-//		return position;
-//	}
-//
+	public void setOffsetToLastBar() {
+		List<MidiTrack> activeMidiTrackList = getActiveMidiTrackList();
+		if (activeMidiTrackList.size() > 0) {
+			long maxPosition = activeMidiTrackList.stream().filter(track -> track.getChildrenByClass(Event.class).size() > 0).map(track -> track.findLastNote().get().getPosition()).mapToLong(l -> l).max()
+					.getAsLong();
+			int lastBar = PositionTools.getTrias(activeMidiTrackList.get(0), maxPosition).bar;
+			performTransientSetAttributeValueOperation(Arrangement.offset, lastBar);
+		}
+	}
+
+	public long getLastPosition() {
+		long lastPosition = 0;
+		for (MidiTrack track : getActiveMidiTrackList()) {
+			List<Event> eventList = track.getChildrenByClass(Event.class);
+			if (!eventList.isEmpty()) {
+				Event lastEvent = eventList.get(eventList.size() - 1);
+				lastPosition = Math.max(lastPosition, lastEvent.getPosition());
+			}
+		}
+		return lastPosition;
+	}
+
+	public int getBarOffset() {
+		return getAttributeValue(Arrangement.offset);
+	}
+
+	public long getBarOffsetPosition() {
+		long position = 0;
+		Optional<MidiTrack> optionalTrack = getFirstActiveMidiTrack();
+		if (optionalTrack.isPresent()) {
+			MidiTrack track = optionalTrack.get();
+			int barOffset = getBarOffset();
+			position = PositionTools.getPosition(track, new Trias(barOffset, 0, 0));
+		}
+		return position;
+	}
+
+	public void addRange(NamedRange newRange) {
+		List<NamedRange> range = getAttributeValue(Arrangement.rangeList);
+		range.add(newRange);
+		performSetAttributeValueOperation(Arrangement.rangeList, range, history);
+		System.out.println("===> " + getAttributeValue(Arrangement.rangeList));
+	}
+
 //	public List<NamedRange> getRangeList() {
 //		List<NamedRange> list = getAttributeValue(rangeList);
 //		if (list == null) {
@@ -769,14 +1001,15 @@ public class Arrangement extends AbstractModelElement {
 //		return getIntegerValueFromContext(context, "exposeValue", DEFAULT_EXPOSE_VALUE);
 //	}
 //
-//	public double getTuplet(GenericContext context) {
-//		// Integer tupletIndex = getAttributeValue(defaultTuplet);
-//		// if (tupletIndex == null) {
-//		// tupletIndex = DEFAULT_TUPLET_INDEX;
-//		// }
-//		int tupletIndex = getIntegerValueFromContext(context, "tuplet", DEFAULT_TUPLET_INDEX);
-//		return DurationType.TUPLETS[tupletIndex].getFactor();
-//	}
+	public double getTuplet() {
+		// Integer tupletIndex = getAttributeValue(defaultTuplet);
+		// if (tupletIndex == null) {
+		// tupletIndex = DEFAULT_TUPLET_INDEX;
+		// }
+		int tupletIndex = 0; // TODO: getIntegerValueFromContext("tuplet", DEFAULT_TUPLET_INDEX);
+		return DurationType.TUPLETS[tupletIndex].getFactor();
+	}
+
 //
 //	public int getDots(GenericContext context) {
 //		// return getAttributeValue(defaultDots);
@@ -991,4 +1224,25 @@ public class Arrangement extends AbstractModelElement {
 //		return list;
 //		// return Arrays.asList(new DurationType[] { DurationType.REGULAR, DurationType.DOTTED, DurationType.BIDOTTED, DurationType.TRIPLET, DurationType.QUINTUPLET });
 //	}
+	public void cut() {
+		performCutToClipboardOperation(this.clipboard, this.getSelection().getSelection(), history);
+	}
+
+	public void copy(ModelElementFactory factory) {
+		performCopyToClipboardOperation(this.clipboard, this.getSelection().getSelection(), factory, history);
+	}
+
+	public void paste(ModelElementFactory factory) {
+		MidiTrack selectedMidiTrack = getSelectedMidiTrack();
+		if (selectedMidiTrack!=null) {
+			selectedMidiTrack.performPasteClipboardOperation(this.clipboard, factory, history);
+		}
+	}
+
+	public void paste(ModelElementFactory factory, Modifier<Event> modifier) {
+		MidiTrack selectedMidiTrack = getSelectedMidiTrack();
+		if (selectedMidiTrack!=null) {
+			selectedMidiTrack.performModifyPasteClipboardOperation(this.clipboard, factory, history, modifier);
+		}
+	}
 }

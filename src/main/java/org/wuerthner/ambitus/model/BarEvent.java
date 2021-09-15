@@ -36,14 +36,15 @@ public class BarEvent extends AbstractModelElement implements CwnBarEvent, Event
 	}
 	
 	@Override
-	public String getType() {
+	public String getTypeString() {
 		return getAttributeValue(type);
 	}
 
-	private int indexOf(String type) {
+	public int getTypeIndex() {
 		int index = -1;
+		String myType = getAttributeValue(type);
 		for (int i = 0; i < TYPES.length; i++) {
-			if (type.equals(TYPES[i])) {
+			if (myType.equals(TYPES[i])) {
 				index = i;
 				break;
 			}
