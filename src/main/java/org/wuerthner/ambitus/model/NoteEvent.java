@@ -25,13 +25,18 @@ public class NoteEvent extends AbstractModelElement implements CwnNoteEvent, Eve
 	public static final String TYPE = "NoteEvent";
 	public static final String[] SHIFT = new String[] { "bb", "b", "No", "#", "x" };
 	
-	public final static LongAttribute duration = new AttributeBuilder("duration").defaultValue(0L).buildLongAttribute();
+	public final static LongAttribute duration = new AttributeBuilder("duration")
+			.label("Duration")
+			.defaultValue(0L)
+			.buildLongAttribute();
 	public final static PitchAttribute pitch = new AmbitusAttributeBuilder("pitch")
 			.required()
+			.label("Pitch")
 			.defaultValue(0)
 			.buildPitchAttribute();
 	public final static IntegerAttribute velocity = new AttributeBuilder("velocity")
 			.required()
+			.label("Velocity")
 			.defaultValue(87)
 			.buildIntegerAttribute();
 	public final static SelectableIntegerAttribute shift = new AttributeBuilder("shift")
@@ -52,6 +57,7 @@ public class NoteEvent extends AbstractModelElement implements CwnNoteEvent, Eve
 			.buildBooleanAttribute();
 	public final static IntegerAttribute voice = new AttributeBuilder("voice")
 			.defaultValue(0)
+			.label("Voice")
 			.buildIntegerAttribute();
 	public final static ListAttribute<Accent> accentList = new AttributeBuilder("accents")
 			.defaultValue(new ArrayList<Accent>())

@@ -7,6 +7,7 @@ import org.wuerthner.sport.api.ModelElement;
 
 public interface Event extends CwnEvent, ModelElement {
 	public final static PositionAttribute position = new AmbitusAttributeBuilder("position")
+			.label("Position")
 			.required()
 			.defaultValue(0L)
 			.buildPositionAttribute();

@@ -18,7 +18,7 @@ import org.wuerthner.sport.core.ModelHistory;
 import org.wuerthner.sport.operation.*;
 
 
-public class Arrangement extends AbstractModelElement {
+public class Arrangement extends AbstractModelElement implements CwnContainer {
 	public final static String TYPE = "Arrangement";
 
 	public static final String DEFAULT_NAME = "Untitled";
@@ -149,6 +149,17 @@ public class Arrangement extends AbstractModelElement {
 	public List<MidiTrack> getActiveMidiTrackList() {
 		return getChildrenByClass(MidiTrack.class).stream().map(e -> MidiTrack.class.cast(e)).filter(tr -> tr.isActive()).collect(Collectors.toList());
 	}
+
+	@Override
+	public List<CwnTrack> getTrackList() {
+		return getChildrenByClass(CwnTrack.class);
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return getTrackList().isEmpty();
+	}
+
 	//
 	// Selection
 	//
@@ -625,17 +636,20 @@ public class Arrangement extends AbstractModelElement {
 		}
 	}
 
-	public void deleteElements(List<Event> eventList) {
+	public List<CwnTrack> deleteElements(List<Event> eventList) {
+		Set<CwnTrack> trackSet = new HashSet<>();
 		List<Operation> opList = new ArrayList<>();
 		for (CwnEvent cwnEvent: eventList) {
 			Event event = (Event) cwnEvent;
 			Operation operation = new RemoveChildOperation(event);
 			opList.add(operation);
+			trackSet.add((CwnTrack)event.getParent());
 		}
 		if (opList.size()>0) {
 			Transaction transaction = new Transaction("Remove selection", opList);
 			this.performTransaction(transaction, history);
 		}
+		return new ArrayList<>(trackSet);
 	}
 
 //	public void setSelectionProperties(List<CwnEvent> eventList, int pitchChange, int positionChange, int durationChange, int dotChange,
@@ -899,8 +913,8 @@ public class Arrangement extends AbstractModelElement {
 
 	public void decreaseBarOffset(int value) {
 		int offset = getAttributeValue(Arrangement.offset);
-		offset = (offset - value < 0 ? 0 : offset - value);
-		performTransientSetAttributeValueOperation(Arrangement.offset, offset);
+		int newOffset = (offset - value < 0 ? 0 : offset - value);
+		performTransientSetAttributeValueOperation(Arrangement.offset, newOffset);
 	}
 
 	public void setTransientBarOffset(int offset) {
@@ -1224,8 +1238,14 @@ public class Arrangement extends AbstractModelElement {
 //		return list;
 //		// return Arrays.asList(new DurationType[] { DurationType.REGULAR, DurationType.DOTTED, DurationType.BIDOTTED, DurationType.TRIPLET, DurationType.QUINTUPLET });
 //	}
-	public void cut() {
+	public List<CwnTrack> cut() {
+		Set<CwnTrack> trackSet = new HashSet<>();
+		for (CwnEvent cwnEvent: this.getSelection().getSelection()) {
+			Event event = (Event) cwnEvent;
+			trackSet.add((CwnTrack)event.getParent());
+		}
 		performCutToClipboardOperation(this.clipboard, this.getSelection().getSelection(), history);
+		return new ArrayList<>(trackSet);
 	}
 
 	public void copy(ModelElementFactory factory) {
@@ -1244,5 +1264,10 @@ public class Arrangement extends AbstractModelElement {
 		if (selectedMidiTrack!=null) {
 			selectedMidiTrack.performModifyPasteClipboardOperation(this.clipboard, factory, history, modifier);
 		}
+	}
+
+	public <T> void setEventAttribute(Event event, Attribute<T> attribute, T value) {
+		System.out.println("set " + attribute.getLabel() + " to " + value);
+		event.performSetAttributeValueOperation(attribute, value, history);
 	}
 }

@@ -14,6 +14,11 @@ public class AmbitusAttributeBuilder extends AttributeBuilder {
         return this;
     }
 
+    public AmbitusAttributeBuilder label(String label) {
+        super.label(label);
+        return this;
+    }
+
     public AmbitusAttributeBuilder defaultValue(Object defaultValue) {
         super.defaultValue(defaultValue);
         return this;
