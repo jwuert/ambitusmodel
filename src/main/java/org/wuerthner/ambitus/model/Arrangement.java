@@ -86,7 +86,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 			.defaultValue(false)
 			.buildBooleanAttribute();
 	public final static BooleanAttribute durationTuplet3 = new AttributeBuilder("durationTuplet3")
-			.defaultValue(false)
+			.defaultValue(true)
 			.buildBooleanAttribute();
 	public final static BooleanAttribute durationTuplet4 = new AttributeBuilder("durationTuplet4")
 			.defaultValue(false)
@@ -95,6 +95,9 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 			.defaultValue(false)
 			.buildBooleanAttribute();
 	public final static BooleanAttribute durationTuplet6 = new AttributeBuilder("durationTuplet6")
+			.defaultValue(false)
+			.buildBooleanAttribute();
+	public final static BooleanAttribute durationTuplet7 = new AttributeBuilder("durationTuplet7")
 			.defaultValue(false)
 			.buildBooleanAttribute();
 	public final static SelectableIntegerAttribute groupLevel = new AttributeBuilder("groupLevel")
@@ -237,10 +240,26 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	public void setTrackMetric(MidiTrack track, String metric) {
 		TimeSignatureEvent tsEvent = track.findFirstEvent(TimeSignatureEvent.class).get();
 		TimeSignature ts = new SimpleTimeSignature(metric);
-		Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.timeSignature, ts);
+		//Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.timeSignature, ts);
 		Operation o2 = new SetAttributeValueOperation<>(tsEvent, TimeSignatureEvent.timeSignature, ts);
-		Transaction transaction = new Transaction("TimeSignature="+metric, o1, o2);
+		Transaction transaction = new Transaction("TimeSignature="+metric, o2);
 		track.performTransaction(transaction, history);
+	}
+
+	public void setMetric(String metric) {
+		List<Operation> opList = new ArrayList<>();
+		for (MidiTrack track : this.getActiveMidiTrackList()) {
+			TimeSignatureEvent tsEvent = track.findFirstEvent(TimeSignatureEvent.class).get();
+			TimeSignature ts = new SimpleTimeSignature(metric);
+			// Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.timeSignature, ts);
+			Operation o2 = new SetAttributeValueOperation<>(tsEvent, TimeSignatureEvent.timeSignature, ts);
+			// opList.add(o1);
+			opList.add(o2);
+		}
+		if (!opList.isEmpty()) {
+			Transaction transaction = new Transaction("TimeSignature=" + metric, opList);
+			this.performTransaction(transaction, history);
+		}
 	}
 
 	public void setTrackKey(String id, int key) {
@@ -253,10 +272,25 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 
 	public void setTrackKey(MidiTrack track, int key) {
 		KeyEvent keyEvent = track.findFirstEvent(KeyEvent.class).get();
-		Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.key, key);
+		// Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.key, key);
 		Operation o2 = new SetAttributeValueOperation<>(keyEvent, KeyEvent.key, key-7);
-		Transaction transaction = new Transaction("Key="+key, o1, o2);
+		Transaction transaction = new Transaction("Key="+key, o2);
 		track.performTransaction(transaction, history);
+	}
+
+	public void setKey(int key) {
+		List<Operation> opList = new ArrayList<>();
+		for (MidiTrack track : this.getActiveMidiTrackList()) {
+			KeyEvent keyEvent = track.findFirstEvent(KeyEvent.class).get();
+			// Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.key, key);
+			Operation o2 = new SetAttributeValueOperation<>(keyEvent, KeyEvent.key, key-7);
+			// opList.add(o1);
+			opList.add(o2);
+		}
+		if (!opList.isEmpty()) {
+			Transaction transaction = new Transaction("Key=" + key, opList);
+			this.performTransaction(transaction, history);
+		}
 	}
 
 	public void setTrackClef(String id, int clef) {
@@ -269,21 +303,21 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 
 	public void setTrackClef(MidiTrack track, int clef) {
 		ClefEvent clefEvent = track.findFirstEvent(ClefEvent.class).get();
-		Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.clef, clef);
+		// Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.clef, clef);
 		Operation o2 = new SetAttributeValueOperation<>(clefEvent, ClefEvent.clef, clef);
-		Transaction transaction = new Transaction("Clef="+clef, o1, o2);
+		Transaction transaction = new Transaction("Clef="+clef, o2);
 		track.performTransaction(transaction, history);
 	}
 
-	public void setTrackTempo(String id, int tempo) {
-		Optional<MidiTrack> trackOptional  = getMidiTrack(id);
+	public void setTrackTempo(int tempo) {
+		Optional<MidiTrack> trackOptional  = getFirstActiveMidiTrack();
 		if (trackOptional.isPresent()) {
 			MidiTrack track = trackOptional.get();
 			TempoEvent tempoEvent = track.findFirstEvent(TempoEvent.class).get();
-			Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.tempo, tempo);
+			// Operation o1 = new SetAttributeValueOperation<>(track, MidiTrack.tempo, tempo);
 			Operation o2 = new SetAttributeValueOperation<>(tempoEvent, TempoEvent.tempo, tempo);
 			Operation o3 = new SetAttributeValueOperation<>(tempoEvent, TempoEvent.label, MidiTrack.getTempoLabel(tempo));
-			Transaction transaction = new Transaction("Tempo="+tempo, o1, o2, o3);
+			Transaction transaction = new Transaction("Tempo="+tempo, o2, o3);
 			track.performTransaction(transaction, history);
 		}
 	}
@@ -335,14 +369,14 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 			List<Operation> opList = new ArrayList<>();
 			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.mute, mute));
 			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.name, name));
-			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.timeSignature, ts));
+			//opList.add(new SetAttributeValueOperation<>(track, MidiTrack.timeSignature, ts));
 			Operation opTimeSignature = new SetAttributeValueOperation<>(tsEvent, TimeSignatureEvent.timeSignature, ts);
 			opList.add(opTimeSignature);
-			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.key, key));
+			//opList.add(new SetAttributeValueOperation<>(track, MidiTrack.key, key));
 			opList.add(new SetAttributeValueOperation<>(keyEvent, KeyEvent.key, key-7));
-			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.clef, clef));
+			//opList.add(new SetAttributeValueOperation<>(track, MidiTrack.clef, clef));
 			opList.add(new SetAttributeValueOperation<>(clefEvent, ClefEvent.clef, clef));
-			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.tempo, tempo));
+			//opList.add(new SetAttributeValueOperation<>(track, MidiTrack.tempo, tempo));
 			if (tempoEventOptional.isPresent()) {
 				opList.add(new SetAttributeValueOperation<>(tempoEventOptional.get(), TempoEvent.tempo, tempo));
 				opList.add(new SetAttributeValueOperation<>(tempoEventOptional.get(), TempoEvent.label, MidiTrack.getTempoLabel(tempo)));
@@ -374,32 +408,33 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	}
 
 	public void setBarProperties(String trackId, long barPosition, String metric, int key, int clef, String bar, int tempo, AmbitusFactory factory) {
-		System.out.println("SET BAR PROP");
 		TimeSignature timeSignature = new SimpleTimeSignature(metric);
 		Optional<MidiTrack> trackOptional  = getMidiTrack(trackId);
 		if (trackOptional.isPresent()) {
+			List<Operation> opList = new ArrayList<>();
 			MidiTrack track = trackOptional.get();
 			long position = PositionTools.firstBeat(track, barPosition);
-			handleEventSettingInBar(track, position, TimeSignatureEvent.class, TimeSignatureEvent.TYPE, TimeSignature.class, TimeSignatureEvent.timeSignature, timeSignature, factory);
-			handleEventSettingInBar(track, position, KeyEvent.class, KeyEvent.TYPE, Integer.class, KeyEvent.key, key-7, factory);
-			handleEventSettingInBar(track, position, ClefEvent.class, ClefEvent.TYPE, Integer.class, ClefEvent.clef, clef, factory);
+			opList.addAll(handleEventSettingInBar(track, position, TimeSignatureEvent.class, TimeSignatureEvent.TYPE, TimeSignature.class, TimeSignatureEvent.timeSignature, timeSignature, factory));
+			opList.addAll(handleEventSettingInBar(track, position, KeyEvent.class, KeyEvent.TYPE, Integer.class, KeyEvent.key, key-7, factory));
+			opList.addAll(handleEventSettingInBar(track, position, ClefEvent.class, ClefEvent.TYPE, Integer.class, ClefEvent.clef, clef, factory));
 			if (bar.equals(CwnBarEvent.STANDARD)) {
 			} else {
-				handleEventSettingInBar(track, position, BarEvent.class, BarEvent.TYPE, String.class, BarEvent.type, bar, factory);
+				opList.addAll(handleEventSettingInBar(track, position, BarEvent.class, BarEvent.TYPE, String.class, BarEvent.type, bar, factory));
 			}
-			handleEventSettingInBar(track, position, TempoEvent.class, TempoEvent.TYPE, Integer.class, TempoEvent.tempo, tempo, factory);
-			if (position==0) {
-				track.performTransientSetAttributeValueOperation(MidiTrack.timeSignature, timeSignature);
-				track.performTransientSetAttributeValueOperation(MidiTrack.key, key);
-				track.performTransientSetAttributeValueOperation(MidiTrack.clef, clef);
-			}
+			opList.addAll(handleEventSettingInBar(track, position, TempoEvent.class, TempoEvent.TYPE, Integer.class, TempoEvent.tempo, tempo, factory));
+//			if (position==0) {
+//				track.performTransientSetAttributeValueOperation(MidiTrack.timeSignature, timeSignature);
+//				track.performTransientSetAttributeValueOperation(MidiTrack.key, key);
+//				track.performTransientSetAttributeValueOperation(MidiTrack.clef, clef);
+//			}
 		} else {
 			System.err.println("Track " + trackId + " not found!");
 		}
 	}
 
-	private <EVENT extends Event, TYPE> void handleEventSettingInBar(MidiTrack track, long position, Class<EVENT> eventClass, String eventType,
+	private <EVENT extends Event, TYPE> List<Operation> handleEventSettingInBar(MidiTrack track, long position, Class<EVENT> eventClass, String eventType,
 																	 Class<TYPE> typeClass, Attribute<TYPE> attribute, TYPE value, AmbitusFactory factory) {
+		List<Operation> opList = new ArrayList<>();
 		Optional<EVENT> recentEventOptional = track.findEventBefore(position, eventClass);
 		boolean changeRequired = false;
 		if (!recentEventOptional.isPresent()) {
@@ -414,36 +449,31 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		if (eventOptional.isPresent()) {
 			if (changeRequired) {
 				Event event = eventOptional.get();
-				List<Operation> opList = new ArrayList<>();
 				opList.add(new SetAttributeValueOperation<>(event, attribute, value));
 				opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
 				if (eventType.equals(TempoEvent.TYPE)) {
 					opList.add(new SetAttributeValueOperation<>(event, TempoEvent.label, MidiTrack.getTempoLabel((int) value)));
 				}
-				Transaction transaction = new Transaction("Change " + attribute.getName(), opList);
-				track.performTransaction(transaction, history);
 			} else {
-				track.performRemoveChildOperation(eventOptional.get(), history);
+				opList.add(new RemoveChildOperation(eventOptional.get()));
 			}
 		} else {
 			if (changeRequired) {
 				EVENT event = factory.createElement(eventType);
-				List<Operation> opList = new ArrayList<>();
 				opList.add(new SetAttributeValueOperation<>(event, attribute, value));
 				opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
 				if (eventType.equals(TempoEvent.TYPE)) {
 					opList.add(new SetAttributeValueOperation<>(event, TempoEvent.label, MidiTrack.getTempoLabel((int) value)));
 				}
 				opList.add(new AddChildOperation(track, event));
-				Transaction transaction = new Transaction("Add " + attribute.getName(), opList);
-				track.performTransaction(transaction, history);
 			} else {
 				// nothing to do here!
 			}
 		}
+		return opList;
 	}
 
-	public void setConfiguration(String title, String subtitle, String composer, int ppq, int level, int resolution, int tupletPres, int stretchFac,
+	public void setConfiguration(String title, String subtitle, String composer, int ppq, int level, int resolution, int stretchFac,
 								 boolean dottedRests, boolean biDotted, boolean tuplet2, boolean tuplet3, boolean tuplet4, boolean tuplet5, boolean tuplet6) {
 		List<Operation> opList = new ArrayList<>();
 		if (!getAttributeValue(Arrangement.name, "").equals(title)) {
@@ -463,9 +493,6 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		}
 		if (!getAttributeValue(Arrangement.resolution, DEFAULT_RESOLUTION_INDEX).equals(resolution)) {
 			opList.add(new SetAttributeValueOperation<>(this, Arrangement.resolution, resolution));
-		}
-		if (!getAttributeValue(Arrangement.tupletPresentation, DEFAULT_TUPLET_PRESENTATION).equals(tupletPres)) {
-			opList.add(new SetAttributeValueOperation<>(this, Arrangement.tupletPresentation, tupletPres));
 		}
 		if (!getAttributeValue(Arrangement.stretchFactor, DEFAULT_STRETCH_FACTOR_INDEX).equals(stretchFac)) {
 			opList.add(new SetAttributeValueOperation<>(this, Arrangement.stretchFactor, stretchFac));
@@ -498,6 +525,10 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 
 	public void addEvent(MidiTrack track, Event event) {
 		track.performAddChildOperation(event, history);
+	}
+
+	public void setLyrics(NoteEvent noteEvent, String value) {
+		noteEvent.performSetAttributeValueOperation(NoteEvent.lyrics, value, history);
 	}
 
 	public void addTrack(ModelElementFactory factory) {
@@ -888,23 +919,11 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		int gridIndex = getAttributeValue(grid);
 		return (int) (getPPQ() * 4 / (getTuplet() * Math.pow(2, gridIndex)));
 	}
-//
-//	public int getGroupLevel() {
-//		Integer attributeValue = getAttributeValue(groupLevel);
-//		if (attributeValue == null) {
-//			attributeValue = DEFAULT_GROUP_LEVEL;
-//		}
-//		return attributeValue;
-//	}
-//
-//	public boolean getFullTupletPresentation() {
-//		Integer attributeValue = getAttributeValue(tupletPresentation);
-//		if (attributeValue == null) {
-//			attributeValue = DEFAULT_TUPLET_PRESENTATION;
-//		}
-//		return attributeValue == 1;
-//	}
-//
+
+	public void setGrid(int gridValue) {
+		this.performTransientSetAttributeValueOperation(grid, gridValue);
+	}
+
 	public void increaseBarOffset(int value) {
 		int offset = getAttributeValue(Arrangement.offset);
 		offset += value;
@@ -924,23 +943,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	public void setOffsetToFirstBar() {
 		performTransientSetAttributeValueOperation(Arrangement.offset, 0);
 	}
-//
-//	public void setOffsetToBeginningOfSelectionOrFirstBar(GenericContext context) {
-//		int bar = 0;
-//		if (context.getSelection().hasSelection()) {
-//			List<MidiTrack> activeMidiTrackList = getActiveMidiTrackList();
-//			GenericModelElement element = context.getSelection().getSelection().get(0);
-//			if (activeMidiTrackList.size() > 0) {
-//				if (element instanceof Event) {
-//					Event event = (Event) element;
-//					long position = event.getPosition();
-//					bar = PositionTools.getTrias(activeMidiTrackList.get(0), position).bar;
-//				}
-//			}
-//		}
-//		setTransientBarOffset(context, bar);
-//	}
-//
+
 	public void setOffsetToLastBar() {
 		List<MidiTrack> activeMidiTrackList = getActiveMidiTrackList();
 		if (activeMidiTrackList.size() > 0) {
@@ -985,36 +988,6 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		System.out.println("===> " + getAttributeValue(Arrangement.rangeList));
 	}
 
-//	public List<NamedRange> getRangeList() {
-//		List<NamedRange> list = getAttributeValue(rangeList);
-//		if (list == null) {
-//			list = DEFAULT_RANGE_LIST;
-//			setAttributeValueWithoutNotification(rangeList, list);
-//		}
-//		return list;
-//	}
-//
-//	private int getIntegerValueFromContext(GenericContext context, String name, int defaultValue) {
-//		int value = defaultValue;
-//		ValueElement<Integer> element = (ValueElement<Integer>) context.getSelection().getElement(name);
-//		if (element != null) {
-//			value = element.getValue();
-//		}
-//		return value;
-//	}
-//
-//	private void setIntegerValueToContext(GenericContext context, String name, int value) {
-//		context.getSelection().putElement(name, new ValueElement<Integer>(value));
-//	}
-//
-//	public int getTempo(GenericContext context) {
-//		return getIntegerValueFromContext(context, "tempo", DEFAULT_TEMPO);
-//	}
-//
-//	public int getExposeValue(GenericContext context) {
-//		return getIntegerValueFromContext(context, "exposeValue", DEFAULT_EXPOSE_VALUE);
-//	}
-//
 	public double getTuplet() {
 		// Integer tupletIndex = getAttributeValue(defaultTuplet);
 		// if (tupletIndex == null) {
@@ -1024,220 +997,6 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		return DurationType.TUPLETS[tupletIndex].getFactor();
 	}
 
-//
-//	public int getDots(GenericContext context) {
-//		// return getAttributeValue(defaultDots);
-//		return getIntegerValueFromContext(context, "dots", DEFAULT_DOTS_INDEX);
-//	}
-//
-//	public int getEnhShift(GenericContext context) {
-//		// return getAttributeValue(defaultEnhShift);
-//		return getIntegerValueFromContext(context, "enharmonicShift", DEFAULT_SHIFT);
-//	}
-//
-//	public int getVoice(GenericContext context) {
-//		// return getAttributeValue(defaultVoice);
-//		return getIntegerValueFromContext(context, "voice", DEFAULT_VOICE_INDEX);
-//	}
-//
-//	public int getBarOffset(GenericContext context) {
-//		// if (getAttributeValue(barOffset) == null) {
-//		// return 0;
-//		// } else {
-//		// return getAttributeValue(barOffset);
-//		// }
-//		return getIntegerValueFromContext(context, "barOffset", 0);
-//	}
-//
-//	public void setTransientBarOffset(GenericContext context, int barOffset) {
-//		// setAttributeValue(Arrangement.barOffset, barOffset, AttributeOperation.DUMMY_INTEGER_OPERATION);
-//		setIntegerValueToContext(context, "barOffset", barOffset);
-//	}
-//
-//	public boolean showGrid(GenericContext context) {
-//		return getIntegerValueFromContext(context, "showGrid", 0) == 1;
-//	}
-//
-//	public boolean showVelocity(GenericContext context) {
-//		return getIntegerValueFromContext(context, "showVelocity", 0) == 1;
-//	}
-//
-//	public void setShowGrid(GenericContext context, boolean showGrid) {
-//		setIntegerValueToContext(context, "showGrid", (showGrid ? 1 : 0));
-//	}
-//
-//	public void setShowVelocity(GenericContext context, boolean showVelocity) {
-//		setIntegerValueToContext(context, "showVelocity", (showVelocity ? 1 : 0));
-//	}
-//
-//	public int getDefaultFunctionDuration(GenericContext context) {
-//		int duration = 0;
-//		// Integer value = getAttributeValue(defaultFunctionSelector);
-//		int value = getIntegerValueFromContext(context, "defaultFunction", DEFAULT_SCORE_OBJECT_INDEX);
-//		if (value >= FunctionSelector.NOTE.lowerBound && value <= FunctionSelector.NOTE.upperBound) {
-//			// value=3 => duration=1/4; value=4 => duration=1/8
-//			int dots = getDots(context);
-//			duration = (int) (getPPQ() * 4.0 / (getTuplet(context) * Math.pow(2, (value - 1))));
-//			duration = (int) (duration * (1 + ((Math.pow(2, dots) - 1) / Math.pow(2, dots))));
-//		}
-//		return duration;
-//	}
-//
-//	public int getDefaultAccent(GenericContext context) {
-//		// Integer value = getAttributeValue(defaultFunctionSelector);
-//		int value = getIntegerValueFromContext(context, "defaultFunction", DEFAULT_SCORE_OBJECT_INDEX);
-//		int accentCode = 0;
-//		if (value >= FunctionSelector.ACCENT.lowerBound && value <= FunctionSelector.ACCENT.upperBound) {
-//			accentCode = value - FunctionSelector.ACCENT.lowerBound;
-//		}
-//		return accentCode;
-//	}
-//
-//	public int getDefaultSymbol(GenericContext context) {
-//		// Integer value = getAttributeValue(defaultFunctionSelector);
-//		int value = getIntegerValueFromContext(context, "defaultFunction", DEFAULT_SCORE_OBJECT_INDEX);
-//		int symbolCode = 0;
-//		if (value >= FunctionSelector.SYMBOL.lowerBound && value <= FunctionSelector.SYMBOL.upperBound) {
-//			symbolCode = value - FunctionSelector.SYMBOL.lowerBound;
-//		}
-//		return symbolCode;
-//	}
-//
-//	public int getSelectorCode(GenericContext context) {
-//		return getIntegerValueFromContext(context, "defaultFunction", DEFAULT_SCORE_OBJECT_INDEX);
-//	}
-//
-//	public FunctionSelector getFunctionSelector(GenericContext context) {
-//		// Integer currentSelectorValue = getAttributeValue(defaultFunctionSelector);
-//		int currentSelectorValue = getIntegerValueFromContext(context, "defaultFunction", DEFAULT_SCORE_OBJECT_INDEX);
-//		FunctionSelector currentSelector = FunctionSelector.DISPLAY;
-//		// if (currentSelectorValue != null) {
-//		for (int i = 0; i < FunctionSelector.functions.length; i++) {
-//			FunctionSelector functionSelector = FunctionSelector.functions[i];
-//			if (currentSelectorValue >= functionSelector.lowerBound && currentSelectorValue <= functionSelector.upperBound) {
-//				currentSelector = functionSelector;
-//				break;
-//			}
-//		}
-//		// }
-//		return currentSelector;
-//	}
-//
-//	@Override
-//	public int compareTo(GenericModelElement element) {
-//		return getName().compareTo(element.getName());
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "Arrangement " + getName();
-//	}
-//
-//	public boolean hasLyrics() {
-//		// Only check first track! (for performance reasons)
-//		boolean hasLyrics = false;
-//		Optional<MidiTrack> firstActiveMidiTrack = getFirstActiveMidiTrack();
-//		if (firstActiveMidiTrack.isPresent()) {
-//			hasLyrics = firstActiveMidiTrack.get().hasLyrics();
-//		}
-//		return hasLyrics;
-//	}
-//
-//	@Override
-//	public Optional<File> getFile() {
-//		String absolutePath = getAttributeValue(path);
-//		if (absolutePath == null || absolutePath.equals("")) {
-//			return Optional.empty();
-//		} else {
-//			return Optional.of(new File(absolutePath));
-//		}
-//	}
-//
-//	@Override
-//	public void setFile(GenericContext context, File file) {
-//		String absolutePath = file.getAbsolutePath();
-//		if (absolutePath != null) {
-//			performSetValueOperation(context, path, absolutePath);
-//		}
-//	}
-//
-//	public boolean getAutoBeamPrint() {
-//		Boolean value = getAttributeValue(autoBeamPrint);
-//		return value == null ? false : value;
-//	}
-//
-//	public boolean getFlagAllowDottedRests() {
-//		Boolean value = getAttributeValue(flagAllowDottedRests);
-//		return value == null ? false : value;
-//	}
-//
-//	public boolean getFlagSplitRests() {
-//		// Boolean value = getAttributeValue(flagSplitRests);
-//		// return value == null ? false : value;
-//		return true;
-//	}
-//
-//	public boolean getDurationBiDotted() {
-//		Boolean value = getAttributeValue(durationBiDotted);
-//		return value == null ? false : value;
-//	}
-//
-//	public boolean getDurationTuplet2() {
-//		Boolean value = getAttributeValue(durationTuplet2);
-//		return value == null ? false : value;
-//	}
-//
-//	public boolean getDurationTuplet3() {
-//		Boolean value = getAttributeValue(durationTuplet3);
-//		return value == null ? false : value;
-//	}
-//
-//	public boolean getDurationTuplet4() {
-//		Boolean value = getAttributeValue(durationTuplet4);
-//		return value == null ? false : value;
-//	}
-//
-//	public boolean getDurationTuplet5() {
-//		Boolean value = getAttributeValue(durationTuplet5);
-//		return value == null ? false : value;
-//	}
-//
-//	public boolean getDurationTuplet6() {
-//		Boolean value = getAttributeValue(durationTuplet6);
-//		return value == null ? false : value;
-//	}
-//
-//	public int getFlags() {
-//		return (getFlagAllowDottedRests() ? Score.ALLOW_DOTTED_RESTS : 0) + (getFlagSplitRests() ? Score.SPLIT_RESTS : 0);
-//	}
-//
-//	public List<DurationType> getDurations() {
-//		List<DurationType> list = new ArrayList<>();
-//		list.add(DurationType.REGULAR);
-//		if (getDurationBiDotted()) {
-//			list.add(DurationType.BIDOTTED);
-//		}
-//		if (true) {
-//			list.add(DurationType.DOTTED);
-//		}
-//		if (getDurationTuplet2()) {
-//			list.add(DurationType.DUPLET);
-//		}
-//		if (getDurationTuplet3()) {
-//			list.add(DurationType.TRIPLET);
-//		}
-//		if (getDurationTuplet4()) {
-//			list.add(DurationType.QUADRUPLET);
-//		}
-//		if (getDurationTuplet5()) {
-//			list.add(DurationType.QUINTUPLET);
-//		}
-//		if (getDurationTuplet6()) {
-//			list.add(DurationType.SEXTUPLET);
-//		}
-//		return list;
-//		// return Arrays.asList(new DurationType[] { DurationType.REGULAR, DurationType.DOTTED, DurationType.BIDOTTED, DurationType.TRIPLET, DurationType.QUINTUPLET });
-//	}
 	public List<CwnTrack> cut() {
 		Set<CwnTrack> trackSet = new HashSet<>();
 		for (CwnEvent cwnEvent: this.getSelection().getSelection()) {

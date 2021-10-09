@@ -74,20 +74,20 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 			.values(MIDI_INSTRUMENTS)
 			.defaultValue(DEFAULT_INSTRUMENT)
 			.buildSelectableIntegerAttribute();
-	public final static SelectableIntegerAttribute clef = new AttributeBuilder("clef")
-			.values(CLEFS)
-			.defaultValue(DEFAULT_CLEF)
-			.buildSelectableIntegerAttribute();
-	public final static IntegerAttribute tempo = new AttributeBuilder("tempo")
-			.defaultValue(TempoEvent.DEFAULT_TEMPO)
-			.buildIntegerAttribute();
-	public final static SelectableIntegerAttribute key = new AttributeBuilder("key")
-			.values(KEYS)
-			.defaultValue(DEFAULT_KEY)
-			.buildSelectableIntegerAttribute();
-	public final static TimeSignatureAttribute timeSignature = new AmbitusAttributeBuilder("timeSignature")
-			.defaultValue(DEFAULT_SIGNATURE)
-			.buildTimeSignatureAttribute();
+//	public final static SelectableIntegerAttribute clef = new AttributeBuilder("clef")
+//			.values(CLEFS)
+//			.defaultValue(DEFAULT_CLEF)
+//			.buildSelectableIntegerAttribute();
+//	public final static IntegerAttribute tempo = new AttributeBuilder("tempo")
+//			.defaultValue(TempoEvent.DEFAULT_TEMPO)
+//			.buildIntegerAttribute();
+//	public final static SelectableIntegerAttribute key = new AttributeBuilder("key")
+//			.values(KEYS)
+//			.defaultValue(DEFAULT_KEY)
+//			.buildSelectableIntegerAttribute();
+//	public final static TimeSignatureAttribute timeSignature = new AmbitusAttributeBuilder("timeSignature")
+//			.defaultValue(DEFAULT_SIGNATURE)
+//			.buildTimeSignatureAttribute();
 	public final static BooleanAttribute mute = new AttributeBuilder("mute")
 			.defaultValue(false)
 			.buildBooleanAttribute();
@@ -127,7 +127,7 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 
 	public MidiTrack() {
 		super(TYPE, Arrays.asList(BarEvent.TYPE, ClefEvent.TYPE, KeyEvent.TYPE, NoteEvent.TYPE, SymbolEvent.TYPE,TempoEvent.TYPE,TimeSignatureEvent.TYPE),
-				Arrays.asList(name, channel, volume, instrument, clef, tempo, key, timeSignature, mute));
+				Arrays.asList(name, channel, volume, instrument, mute));
 	}
 
 	public String getId() {
@@ -158,7 +158,12 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 	}
 	
 	public TimeSignature getTimeSignature() {
-		return getAttributeValue(timeSignature);
+		TimeSignatureEvent tsEvent = getChildrenByClass(TimeSignatureEvent.class)
+				.stream()
+				.filter(event -> event.getPosition()==0)
+				.findAny()
+				.get();
+		return tsEvent.getTimeSignature();
 	}
 	
 	public int getChannel() {
@@ -170,15 +175,31 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 	}
 	
 	public int getKey() {
-		return getAttributeValue(key);
+		KeyEvent keyEvent = getChildrenByClass(KeyEvent.class)
+				.stream()
+				.filter(event -> event.getPosition()==0)
+				.findAny()
+				.get();
+		return keyEvent.getKey();
 	}
 	
 	public int getClef() {
-		return getAttributeValue(clef);
+		ClefEvent clefEvent = getChildrenByClass(ClefEvent.class)
+				.stream()
+				.filter(event -> event.getPosition()==0)
+				.findAny()
+				.get();
+		return clefEvent.getClef();
 	}
 
 	public int getTempo() {
-		return getAttributeValue(tempo);
+		MidiTrack firstTrack = ((Arrangement) this.getParent()).getFirstActiveMidiTrack().get();
+		TempoEvent tempoEvent = firstTrack.getChildrenByClass(TempoEvent.class)
+				.stream()
+				.filter(event -> event.getPosition()==0)
+				.findAny()
+				.get();
+		return tempoEvent.getTempo();
 	}
 	
 	@Override

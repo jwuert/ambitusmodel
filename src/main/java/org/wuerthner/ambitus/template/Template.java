@@ -11,15 +11,15 @@ public interface Template {
     default void initTrack(MidiTrack track, Event... events) {
         for (Event event: events) {
             track.performTransientAddChildOperation(event);
-            if (event instanceof TimeSignatureEvent) {
-                track.performTransientSetAttributeValueOperation(MidiTrack.timeSignature, ((TimeSignatureEvent)event).getTimeSignature());
-            } else if (event instanceof KeyEvent) {
-                track.performTransientSetAttributeValueOperation(MidiTrack.key, ((KeyEvent)event).getKey()+7);
-            } else if (event instanceof ClefEvent) {
-                track.performTransientSetAttributeValueOperation(MidiTrack.clef, ((ClefEvent)event).getClef());
-            } else if (event instanceof TempoEvent) {
-                track.performTransientSetAttributeValueOperation(MidiTrack.tempo, ((TempoEvent)event).getTempo());
-            }
+//            if (event instanceof TimeSignatureEvent) {
+//                track.performTransientSetAttributeValueOperation(MidiTrack.timeSignature, ((TimeSignatureEvent)event).getTimeSignature());
+//            } else if (event instanceof KeyEvent) {
+//                track.performTransientSetAttributeValueOperation(MidiTrack.key, ((KeyEvent)event).getKey()+7);
+//            } else if (event instanceof ClefEvent) {
+//                track.performTransientSetAttributeValueOperation(MidiTrack.clef, ((ClefEvent)event).getClef());
+//            } else if (event instanceof TempoEvent) {
+//                track.performTransientSetAttributeValueOperation(MidiTrack.tempo, ((TempoEvent)event).getTempo());
+//            }
         }
     }
 

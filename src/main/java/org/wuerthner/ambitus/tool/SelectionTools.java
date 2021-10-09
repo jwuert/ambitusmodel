@@ -162,7 +162,7 @@ public class SelectionTools {
     /*
      * MOVE NOTE LEFT
      */
-    public void moveNoteLeft(Arrangement arrangement) {
+    public void moveNoteLeft(Arrangement arrangement, int ticks) {
         operateOnSelection(new OperationFactory<Long>() {
             public Optional<AttributeOperation<Long>> createOperation(Event element, int gridInTicks) {
                 NoteEvent note = (NoteEvent) element;
@@ -173,7 +173,7 @@ public class SelectionTools {
                 }
                 return Optional.empty();
             }
-        }, arrangement);
+        }, arrangement, ticks);
     }
 
     public void shrinkNote(Arrangement arrangement) {
@@ -193,7 +193,7 @@ public class SelectionTools {
     /*
      * MOVE NOTE RIGHT
      */
-    public void moveNoteRight(Arrangement arrangement) {
+    public void moveNoteRight(Arrangement arrangement, int ticks) {
         operateOnSelection(new OperationFactory<Long>() {
             public Optional<AttributeOperation<Long>> createOperation(Event element, int gridInTicks) {
                 NoteEvent note = (NoteEvent) element;
@@ -204,7 +204,7 @@ public class SelectionTools {
                 }
                 return Optional.empty();
             }
-        }, arrangement);
+        }, arrangement, ticks);
     }
 
     public void extendNote(Arrangement arrangement) {
@@ -492,20 +492,21 @@ public class SelectionTools {
     }
 
     private <T> void operateOnSelection(OperationFactory<T> operationFactory, Arrangement arrangement) {
-            int gridInTicks = arrangement.getGridInTicks();
-            List<AttributeOperation<T>> operationList = new ArrayList<>();
-            arrangement.getSelection().getSelection().forEach(element -> {
-                if (element instanceof NoteEvent) {
-                    Optional<AttributeOperation<T>> operation = operationFactory.createOperation(element, gridInTicks);
-                    if (operation.isPresent()) {
-                        operationList.add(operation.get());
-                    }
-                }
-            });
-            // TODO: move execution into handler to allow for persistence, etc
-            Transaction transaction = new Transaction(operationList.toArray(new Operation[] {}));
-        ((Arrangement)arrangement).performTransaction(transaction);
-
+        int gridInTicks = arrangement.getGridInTicks();
+        operateOnSelection(operationFactory, arrangement, gridInTicks);
     }
 
+    private <T> void operateOnSelection(OperationFactory<T> operationFactory, Arrangement arrangement, int gridInTicks) {
+        List<AttributeOperation<T>> operationList = new ArrayList<>();
+        arrangement.getSelection().getSelection().forEach(element -> {
+            if (element instanceof NoteEvent) {
+                Optional<AttributeOperation<T>> operation = operationFactory.createOperation(element, gridInTicks);
+                if (operation.isPresent()) {
+                    operationList.add(operation.get());
+                }
+            }
+        });
+        Transaction transaction = new Transaction(operationList.toArray(new Operation[] {}));
+        ((Arrangement)arrangement).performTransaction(transaction);
+    }
 }
