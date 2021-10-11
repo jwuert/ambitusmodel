@@ -111,7 +111,7 @@ public class SelectionTools {
             // selection.setSingleSelection(note);
             // });
         } else {
-            long position = 0;
+            long position = ((Arrangement)selectedTrack.getParent()).getBarOffsetPosition();;
             Event event = selectedTrack.findEventFromPosition(position, clasz);
             selection.setSingleSelection(event);
         }
@@ -236,6 +236,35 @@ public class SelectionTools {
                 return Optional.empty();
             }
         }, arrangement);
+    }
+
+    /*
+     * DOT
+     */
+    public void dot(Arrangement arrangement, int ticks) {
+        operateOnSelection(new OperationFactory<Long>() {
+            public Optional<AttributeOperation<Long>> createOperation(Event element, int gridInTicks) {
+                NoteEvent note = (NoteEvent) element;
+                long duration = note.getDuration();
+                if (duration>=gridInTicks) {
+                    for (int d=gridInTicks; d<Integer.MAX_VALUE; d=d*2) {
+                        if (d <= duration && duration < d*2) {
+                            double relDuration = duration *1.0 / d;
+                            double dots = Math.log(1.0/(2-relDuration))*1.0/Math.log(2);
+                            int dotsInt = (int)(dots+0.5);
+                            dotsInt++;
+                            if (dotsInt==4) {
+                                dotsInt = 0;
+                            }
+                            long newDuration = (long) (d*(Math.pow(2.0, dotsInt+1.0)-1.0)/Math.pow(2.0, dotsInt));
+                            AttributeOperation<Long> operation = new SetAttributeValueOperation<Long>(note, NoteEvent.duration, newDuration);
+                            return Optional.of(operation);
+                        }
+                    }
+                }
+                return Optional.empty();
+            }
+        }, arrangement, ticks);
     }
 
     /*

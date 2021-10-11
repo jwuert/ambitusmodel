@@ -26,23 +26,24 @@ import org.wuerthner.sport.core.AbstractModelElement;
 public class MidiTrack extends AbstractModelElement implements CwnTrack {
 	public final static String TYPE = "MidiTrack";
 	public final static String DEFAULT_NAME = "Untitled";
-	public final static Integer DEFAULT_VOLUME = 80;
+	public final static Integer DEFAULT_VOLUME = 9;
 	public final static Integer DEFAULT_CHANNEL = 0;
 	public final static Integer DEFAULT_CLEF = 0;
 	public final static Integer DEFAULT_KEY = 7;
 	public final static Integer DEFAULT_INSTRUMENT = 0;
 	public static final TimeSignature DEFAULT_SIGNATURE = new SimpleTimeSignature("4/4");
-	public final static String[] MIDI_INSTRUMENTS = new String[] { "Acoustic Grand Piano", "Bright Acoustic Piano", "Electric grand Piano", "Honky Tonk Piano", "Eiectric Piano 1", "Electric Piano 2", "Harpsichord",
-			"Clavinet", "Celesra", "Glockenspiel", "Music Box", "Vibraphone", "Marimba", "Xylophone", "Tubular bells", "Dulcimer", "Drawbar Organ", "Percussive Organ", "Rock Organ", "Church Organ", "Reed Organ",
-			"Accordion", "Harmonica", "Tango Accordion", "Nylon Accustic Guitar", "Steel Acoustic Guitar", "Jazz Electric Guitar", "Clean Electric Guitar", "Muted Electric Guitar", "Overdrive Guitar", "Distorted Guitar",
-			"Guitar Harmonics", "Acoustic Bass", "Electric Fingered Bass", "Electric Picked Bass", "Fretless Bass", "Slap Bass 1", "Slap Bass 2", "Syn Bass 1", "Syn Bass 2", "Violin", "Viola", "Cello", "Contrabass",
-			"Tremolo Strings", "Pizzicato Strings", "Orchestral Harp", "Timpani", "String Ensemble 1", "String Ensemble 2 (Slow)", "Syn Strings 1", "Syn Strings 2", "Choir Aahs", "Voice Oohs", "Syn Choir",
-			"Orchestral Hit", "Trumpet", "Trombone", "Tuba", "Muted Trumpet", "French Horn", "Brass Section", "Syn Brass 1", "Syn Brass 2", "Soprano Sax", "Alto Sax", "Tenor Sax", "Baritone Sax", "Oboe", "English Horn",
-			"Bassoon", "Clarinet", "Piccolo", "Flute", "Recorder", "Pan Flute", "Bottle Blow", "Shakuhachi", "Whistle", "Ocarina", "Syn Square Wave", "Syn Sawtooth Wave", "Syn Calliope", "Syn Chiff", "Syn Charang",
-			"Syn Voice", "Syn Fifths Sawtooth Wave", "Syn Brass & Lead", "New Age Syn Pad", "Warm Syn Pad", "Polysynth Syn Pad", "Choir Syn Pad", "Bowed Syn Pad", "Metal Syn Pad", "Halo Syn Pad", "Sweep Syn Pad",
-			"SFX Rain", "SFX Soundtrack", "SFX Crystal", "SFX Atmosphere", "SFX Brightness", "SFX Goblins", "SFX Echoes", "SFX Sci-fi", "Sitar", "Banjo", "Shamisen", "Koto", "Kalimba", "Bag Pipe", "Fiddle", "Shanai",
-			"Tinkle Bell", "Agogo", "Steel Drums", "Woodblock", "Taiko Drum", "Melodic Tom", "Syn Drum", "Reverse Cymbal", "Guitar Fret Noise", "Breath Noise", "Seashore", "Bird Tweet", "Telephone Ring", "Helicopter",
-			"Applause", "Gun Shot" };
+//	public static final String[] CHANNELS = new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16"};
+//	public final static String[] MIDI_INSTRUMENTS = new String[] { "Acoustic Grand Piano", "Bright Acoustic Piano", "Electric grand Piano", "Honky Tonk Piano", "Eiectric Piano 1", "Electric Piano 2", "Harpsichord",
+//			"Clavinet", "Celesra", "Glockenspiel", "Music Box", "Vibraphone", "Marimba", "Xylophone", "Tubular bells", "Dulcimer", "Drawbar Organ", "Percussive Organ", "Rock Organ", "Church Organ", "Reed Organ",
+//			"Accordion", "Harmonica", "Tango Accordion", "Nylon Accustic Guitar", "Steel Acoustic Guitar", "Jazz Electric Guitar", "Clean Electric Guitar", "Muted Electric Guitar", "Overdrive Guitar", "Distorted Guitar",
+//			"Guitar Harmonics", "Acoustic Bass", "Electric Fingered Bass", "Electric Picked Bass", "Fretless Bass", "Slap Bass 1", "Slap Bass 2", "Syn Bass 1", "Syn Bass 2", "Violin", "Viola", "Cello", "Contrabass",
+//			"Tremolo Strings", "Pizzicato Strings", "Orchestral Harp", "Timpani", "String Ensemble 1", "String Ensemble 2 (Slow)", "Syn Strings 1", "Syn Strings 2", "Choir Aahs", "Voice Oohs", "Syn Choir",
+//			"Orchestral Hit", "Trumpet", "Trombone", "Tuba", "Muted Trumpet", "French Horn", "Brass Section", "Syn Brass 1", "Syn Brass 2", "Soprano Sax", "Alto Sax", "Tenor Sax", "Baritone Sax", "Oboe", "English Horn",
+//			"Bassoon", "Clarinet", "Piccolo", "Flute", "Recorder", "Pan Flute", "Bottle Blow", "Shakuhachi", "Whistle", "Ocarina", "Syn Square Wave", "Syn Sawtooth Wave", "Syn Calliope", "Syn Chiff", "Syn Charang",
+//			"Syn Voice", "Syn Fifths Sawtooth Wave", "Syn Brass & Lead", "New Age Syn Pad", "Warm Syn Pad", "Polysynth Syn Pad", "Choir Syn Pad", "Bowed Syn Pad", "Metal Syn Pad", "Halo Syn Pad", "Sweep Syn Pad",
+//			"SFX Rain", "SFX Soundtrack", "SFX Crystal", "SFX Atmosphere", "SFX Brightness", "SFX Goblins", "SFX Echoes", "SFX Sci-fi", "Sitar", "Banjo", "Shamisen", "Koto", "Kalimba", "Bag Pipe", "Fiddle", "Shanai",
+//			"Tinkle Bell", "Agogo", "Steel Drums", "Woodblock", "Taiko Drum", "Melodic Tom", "Syn Drum", "Reverse Cymbal", "Guitar Fret Noise", "Breath Noise", "Seashore", "Bird Tweet", "Telephone Ring", "Helicopter",
+//			"Applause", "Gun Shot" };
 	public final static String[] CLEFS = new String[] { "Violin", "Bass", "Violin 8+", "Violin 15+", "Violin 8-", "Bass 8-", "Bass 15-", "Varbaritone", "Subbass", "Soprano", "Mezzosoprano", "Alto", "Tenor", "-" };
 	public final static String[] TEMPI = new String[] { "Largo", "Larghetto", "Adagio", "Andante", "Moderao", "Allegro", "Presto", "Prestissimo"};
 	public final static Map<String,List<Integer>> TEMPO_MAP = new HashMap<String, List<Integer>>() {{
@@ -169,7 +170,9 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 	public int getChannel() {
 		return getAttributeValue(channel);
 	}
-	
+
+	public int getVolume() { return getAttributeValue(volume); }
+
 	public boolean getMute() {
 		return getAttributeValue(mute);
 	}

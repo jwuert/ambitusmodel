@@ -357,45 +357,54 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		return channel;
 	}
 
-	public void setTrackProperties(String id, boolean mute, String name, String metric, int key, int clef, int tempo, int instrument, int channel) {
+	public void setTrackProperties(String id, boolean mute, int volume, String name, String metric, int key, int clef, int tempo, int instrument, int channel) {
 		Optional<MidiTrack> trackOptional  = getMidiTrack(id);
 		if (trackOptional.isPresent()) {
 			MidiTrack track = trackOptional.get();
-			TimeSignatureEvent tsEvent = track.findFirstEvent(TimeSignatureEvent.class).get();
-			KeyEvent keyEvent = track.findFirstEvent(KeyEvent.class).get();
+			MidiTrack firstTrack = (MidiTrack) getTrackList().get(0);
 			ClefEvent clefEvent = track.findFirstEvent(ClefEvent.class).get();
-			Optional<TempoEvent> tempoEventOptional = track.findFirstEvent(TempoEvent.class);
+			Optional<TempoEvent> tempoEventOptional = firstTrack.findFirstEvent(TempoEvent.class);
 			TimeSignature ts = new SimpleTimeSignature(metric);
 			List<Operation> opList = new ArrayList<>();
-			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.mute, mute));
-			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.name, name));
-			//opList.add(new SetAttributeValueOperation<>(track, MidiTrack.timeSignature, ts));
-			Operation opTimeSignature = new SetAttributeValueOperation<>(tsEvent, TimeSignatureEvent.timeSignature, ts);
-			opList.add(opTimeSignature);
-			//opList.add(new SetAttributeValueOperation<>(track, MidiTrack.key, key));
-			opList.add(new SetAttributeValueOperation<>(keyEvent, KeyEvent.key, key-7));
-			//opList.add(new SetAttributeValueOperation<>(track, MidiTrack.clef, clef));
-			opList.add(new SetAttributeValueOperation<>(clefEvent, ClefEvent.clef, clef));
-			//opList.add(new SetAttributeValueOperation<>(track, MidiTrack.tempo, tempo));
-			if (tempoEventOptional.isPresent()) {
-				opList.add(new SetAttributeValueOperation<>(tempoEventOptional.get(), TempoEvent.tempo, tempo));
-				opList.add(new SetAttributeValueOperation<>(tempoEventOptional.get(), TempoEvent.label, MidiTrack.getTempoLabel(tempo)));
+			if (track.getMute() != mute) { opList.add(new SetAttributeValueOperation<>(track, MidiTrack.mute, mute)); }
+			if (track.getVolume() != volume) { opList.add(new SetAttributeValueOperation<>(track, MidiTrack.volume, volume)); }
+			if (!track.getName().equals(name)) { opList.add(new SetAttributeValueOperation<>(track, MidiTrack.name, name)); }
+			boolean removeLaterEvents = false;
+			for (CwnTrack theTrack : getTrackList()) {
+				TimeSignatureEvent tsEvent = ((MidiTrack)theTrack).findFirstEvent(TimeSignatureEvent.class).get();
+				if (!tsEvent.getTimeSignature().toString().equals(ts.toString())) {
+					removeLaterEvents = true;
+					opList.add(new SetAttributeValueOperation<>(tsEvent, TimeSignatureEvent.timeSignature, ts));
+				}
+				KeyEvent keyEvent = ((MidiTrack)theTrack).findFirstEvent(KeyEvent.class).get();
+				if (keyEvent.getKey() != key-7) {
+					opList.add(new SetAttributeValueOperation<>(keyEvent, KeyEvent.key, key-7));
+				}
+//				Operation opTimeSignature = new SetAttributeValueOperation<>(tsEvent, TimeSignatureEvent.timeSignature, ts);
+//				opList.add(opTimeSignature);
+//				KeyEvent keyEvent = ((MidiTrack)theTrack).findFirstEvent(KeyEvent.class).get();
+//				opList.add(new SetAttributeValueOperation<>(keyEvent, KeyEvent.key, key-7));
+//				if (removeLaterEvents == null) {
+//					TimeSignature newValue = ((SetAttributeValueOperation<TimeSignature>) opTimeSignature).getNewValue();
+//					TimeSignature oldValue = ((SetAttributeValueOperation<TimeSignature>) opTimeSignature).getOldValue();
+//					removeLaterEvents = !newValue.toString().equals(oldValue.toString());
+//				}
 			}
-			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.instrument, instrument));
-			opList.add(new SetAttributeValueOperation<>(track, MidiTrack.channel, channel));
-			Transaction transaction = new Transaction("Change track properties", opList);
-			track.performTransaction(transaction, history);
-			TimeSignature newValue = ((SetAttributeValueOperation<TimeSignature>) opTimeSignature).getNewValue();
-			TimeSignature oldValue = ((SetAttributeValueOperation<TimeSignature>) opTimeSignature).getOldValue();
-			if (!newValue.toString().equals(oldValue.toString())) {
+			if (track.getClef() != clef) { opList.add(new SetAttributeValueOperation<>(clefEvent, ClefEvent.clef, clef)); }
+			if (tempoEventOptional.isPresent()) {
+				if (tempoEventOptional.get().getTempo() != tempo) { opList.add(new SetAttributeValueOperation<>(tempoEventOptional.get(), TempoEvent.tempo, tempo)); }
+				if (!tempoEventOptional.get().getLabel().equals(MidiTrack.getTempoLabel(tempo))) { opList.add(new SetAttributeValueOperation<>(tempoEventOptional.get(), TempoEvent.label, MidiTrack.getTempoLabel(tempo))); }
+			}
+			if (track.getInstrument() != instrument) { opList.add(new SetAttributeValueOperation<>(track, MidiTrack.instrument, instrument)); }
+			if (track.getChannel() != channel) { opList.add(new SetAttributeValueOperation<>(track, MidiTrack.channel, channel)); }
+			if (removeLaterEvents) {
 				// when time signature changes, all key/clef/ts changes are removed
-				opList = new ArrayList<>();
 				opList.addAll(getAllEventsButFirst(track, TimeSignatureEvent.class));
 				opList.addAll(getAllEventsButFirst(track, KeyEvent.class));
 				opList.addAll(getAllEventsButFirst(track, ClefEvent.class));
-				Transaction removeTransaction = new Transaction("Remove (" + opList.size() + ") events", opList);
-				track.performTransaction(removeTransaction, history);
 			}
+			Transaction transaction = new Transaction("Change track properties", opList);
+			track.performTransaction(transaction, history);
 		}
 	}
 
@@ -411,63 +420,68 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		TimeSignature timeSignature = new SimpleTimeSignature(metric);
 		Optional<MidiTrack> trackOptional  = getMidiTrack(trackId);
 		if (trackOptional.isPresent()) {
+			MidiTrack firstTrack = (MidiTrack) getTrackList().get(0);
 			List<Operation> opList = new ArrayList<>();
 			MidiTrack track = trackOptional.get();
 			long position = PositionTools.firstBeat(track, barPosition);
-			opList.addAll(handleEventSettingInBar(track, position, TimeSignatureEvent.class, TimeSignatureEvent.TYPE, TimeSignature.class, TimeSignatureEvent.timeSignature, timeSignature, factory));
-			opList.addAll(handleEventSettingInBar(track, position, KeyEvent.class, KeyEvent.TYPE, Integer.class, KeyEvent.key, key-7, factory));
-			opList.addAll(handleEventSettingInBar(track, position, ClefEvent.class, ClefEvent.TYPE, Integer.class, ClefEvent.clef, clef, factory));
+			opList.addAll(handleEventSettingInBar(Optional.empty(), position, TimeSignatureEvent.class, TimeSignatureEvent.TYPE, TimeSignature.class, TimeSignatureEvent.timeSignature, timeSignature, factory));
+			opList.addAll(handleEventSettingInBar(Optional.empty(), position, KeyEvent.class, KeyEvent.TYPE, Integer.class, KeyEvent.key, key-7, factory));
+			opList.addAll(handleEventSettingInBar(Optional.of(track), position, ClefEvent.class, ClefEvent.TYPE, Integer.class, ClefEvent.clef, clef, factory));
 			if (bar.equals(CwnBarEvent.STANDARD)) {
 			} else {
-				opList.addAll(handleEventSettingInBar(track, position, BarEvent.class, BarEvent.TYPE, String.class, BarEvent.type, bar, factory));
+				opList.addAll(handleEventSettingInBar(Optional.empty(), position, BarEvent.class, BarEvent.TYPE, String.class, BarEvent.type, bar, factory));
 			}
-			opList.addAll(handleEventSettingInBar(track, position, TempoEvent.class, TempoEvent.TYPE, Integer.class, TempoEvent.tempo, tempo, factory));
-//			if (position==0) {
-//				track.performTransientSetAttributeValueOperation(MidiTrack.timeSignature, timeSignature);
-//				track.performTransientSetAttributeValueOperation(MidiTrack.key, key);
-//				track.performTransientSetAttributeValueOperation(MidiTrack.clef, clef);
-//			}
+			opList.addAll(handleEventSettingInBar(Optional.of(firstTrack), position, TempoEvent.class, TempoEvent.TYPE, Integer.class, TempoEvent.tempo, tempo, factory));
+			Transaction transaction = new Transaction("Change bar properties", opList);
+			track.performTransaction(transaction, history);
 		} else {
 			System.err.println("Track " + trackId + " not found!");
 		}
 	}
 
-	private <EVENT extends Event, TYPE> List<Operation> handleEventSettingInBar(MidiTrack track, long position, Class<EVENT> eventClass, String eventType,
+	private <EVENT extends Event, TYPE> List<Operation> handleEventSettingInBar(Optional<MidiTrack> trackOptional, long position, Class<EVENT> eventClass, String eventType,
 																	 Class<TYPE> typeClass, Attribute<TYPE> attribute, TYPE value, AmbitusFactory factory) {
 		List<Operation> opList = new ArrayList<>();
-		Optional<EVENT> recentEventOptional = track.findEventBefore(position, eventClass);
-		boolean changeRequired = false;
-		if (!recentEventOptional.isPresent()) {
-			// throw new RuntimeException("Previous Event unexpectedly does not exist!");
-			changeRequired = true;
-		} else {
-			EVENT recentEvent = recentEventOptional.get();
-			changeRequired = (!recentEvent.getAttributeValue(attribute).toString().equals(value.toString()));
-		}
-		// lookup event in bar:
-		Optional<EVENT> eventOptional = track.findFirstEventAtPosition(position, eventClass);
-		if (eventOptional.isPresent()) {
-			if (changeRequired) {
-				Event event = eventOptional.get();
-				opList.add(new SetAttributeValueOperation<>(event, attribute, value));
-				opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
-				if (eventType.equals(TempoEvent.TYPE)) {
-					opList.add(new SetAttributeValueOperation<>(event, TempoEvent.label, MidiTrack.getTempoLabel((int) value)));
+		for (CwnTrack cwnTrack : getTrackList()) {
+			MidiTrack track = (MidiTrack) cwnTrack;
+			if (trackOptional.isEmpty() || trackOptional.get().equals(track)) {
+				Optional<EVENT> recentEventOptional = track.findEventBefore(position, eventClass);
+				boolean changeRequired = false;
+				if (!recentEventOptional.isPresent()) {
+					// throw new RuntimeException("Previous Event unexpectedly does not exist!");
+					changeRequired = true;
+				} else {
+					EVENT recentEvent = recentEventOptional.get();
+					changeRequired = (!recentEvent.getAttributeValue(attribute).toString().equals(value.toString()));
 				}
-			} else {
-				opList.add(new RemoveChildOperation(eventOptional.get()));
-			}
-		} else {
-			if (changeRequired) {
-				EVENT event = factory.createElement(eventType);
-				opList.add(new SetAttributeValueOperation<>(event, attribute, value));
-				opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
-				if (eventType.equals(TempoEvent.TYPE)) {
-					opList.add(new SetAttributeValueOperation<>(event, TempoEvent.label, MidiTrack.getTempoLabel((int) value)));
+				// lookup event in bar:
+				Optional<EVENT> eventOptional = track.findFirstEventAtPosition(position, eventClass);
+				if (eventOptional.isPresent()) {
+					// CHANGE EXISTING EVENT
+					if (changeRequired) {
+						Event event = eventOptional.get();
+						opList.add(new SetAttributeValueOperation<>(event, attribute, value));
+						opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
+						if (eventType.equals(TempoEvent.TYPE)) {
+							opList.add(new SetAttributeValueOperation<>(event, TempoEvent.label, MidiTrack.getTempoLabel((int) value)));
+						}
+					} else {
+						opList.add(new RemoveChildOperation(eventOptional.get()));
+					}
+				} else {
+					// INSERT NEW EVENT
+					if (changeRequired) {
+						EVENT event = factory.createElement(eventType);
+						opList.add(new SetAttributeValueOperation<>(event, attribute, value));
+						opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
+						if (eventType.equals(TempoEvent.TYPE)) {
+							opList.add(new SetAttributeValueOperation<>(event, TempoEvent.label, MidiTrack.getTempoLabel((int) value)));
+						}
+						opList.add(new AddChildOperation(track, event));
+					} else {
+						// nothing to do here!
+					}
 				}
-				opList.add(new AddChildOperation(track, event));
-			} else {
-				// nothing to do here!
 			}
 		}
 		return opList;
@@ -898,7 +912,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 
 	public int getStretchFactor() {
 		Integer stretchFactorIndex = getAttributeValue(stretchFactor);
-		int factor = 1;
+		int factor = 2;
 		if (stretchFactorIndex == null) {
 			factor += 2 * DEFAULT_STRETCH_FACTOR_INDEX;
 		} else {
