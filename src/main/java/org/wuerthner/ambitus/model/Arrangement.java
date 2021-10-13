@@ -9,6 +9,7 @@ import org.wuerthner.ambitus.tool.AbstractSelection;
 import org.wuerthner.ambitus.type.NamedRange;
 import org.wuerthner.cwn.api.*;
 import org.wuerthner.cwn.position.PositionTools;
+import org.wuerthner.cwn.score.Score;
 import org.wuerthner.cwn.timesignature.SimpleTimeSignature;
 import org.wuerthner.sport.api.*;
 import org.wuerthner.sport.attribute.*;
@@ -33,7 +34,6 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	// public static final String[] DEVICES_OUT = BaseRegistry.getInstance().getAttachment(Deviceclass).getOutputDevices();
 	public static final Long DEFAULT_POSITION = 0L;
 	public static final Integer DEFAULT_TEMPO = 100;
-	public static final Integer DEFAULT_EXPOSE_VALUE = 2;
 	public static final Integer DEFAULT_KEY = 7;
 	public static final Integer DEFAULT_TRANSPOSE = 0;
 	public static final TimeSignature DEFAULT_SIGNATURE = new SimpleTimeSignature("4/4");
@@ -902,10 +902,6 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		history.redo();
 	}
 
-	public double getExposeValue() {
-		return 0; // TODO!
-	}
-
 	public void performTransaction(Transaction transacton) {
 		performTransaction(transacton, history);
 	}
@@ -1040,7 +1036,55 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	}
 
 	public <T> void setEventAttribute(Event event, Attribute<T> attribute, T value) {
-		System.out.println("set " + attribute.getLabel() + " to " + value);
 		event.performSetAttributeValueOperation(attribute, value, history);
+	}
+
+	public boolean getFlagAllowDottedRests() {
+		Boolean value = getAttributeValue(flagAllowDottedRests);
+		return value == null ? false : value;
+	}
+
+	public boolean getFlagSplitRests() {
+		return true;
+	}
+
+	public int getFlags() {
+		return (getFlagAllowDottedRests() ? Score.ALLOW_DOTTED_RESTS : 0) + (getFlagSplitRests() ? Score.SPLIT_RESTS : 0);
+	}
+
+	public List<DurationType> getDurations() {
+		List<DurationType> list = new ArrayList<>();
+		list.add(DurationType.REGULAR);
+		if (getAttributeValue(Arrangement.durationBiDotted)) {
+			list.add(DurationType.BIDOTTED);
+		}
+		if (true) {
+			list.add(DurationType.DOTTED);
+		}
+		if (getAttributeValue(Arrangement.durationTuplet2)) {
+			list.add(DurationType.DUPLET);
+		}
+		if (getAttributeValue(Arrangement.durationTuplet3)) {
+			list.add(DurationType.TRIPLET);
+		}
+		if (getAttributeValue(Arrangement.durationTuplet4)) {
+			list.add(DurationType.QUADRUPLET);
+		}
+		if (getAttributeValue(Arrangement.durationTuplet5)) {
+			list.add(DurationType.QUINTUPLET);
+		}
+		if (getAttributeValue(Arrangement.durationTuplet6)) {
+			list.add(DurationType.SEXTUPLET);
+		}
+		return list;
+	}
+
+	public List<NamedRange> getRangeList() {
+		List<NamedRange> list = getAttributeValue(rangeList);
+		if (list == null) {
+			list = DEFAULT_RANGE_LIST;
+			performTransientSetAttributeValueOperation(rangeList, list);
+		}
+		return list;
 	}
 }

@@ -11,10 +11,12 @@ import org.wuerthner.ambitus.model.Arrangement;
 import org.wuerthner.ambitus.model.Event;
 import org.wuerthner.ambitus.model.MidiTrack;
 import org.wuerthner.ambitus.model.NoteEvent;
+import org.wuerthner.ambitus.type.NamedRange;
 import org.wuerthner.cwn.api.CwnEvent;
 import org.wuerthner.cwn.api.CwnSelection;
 import org.wuerthner.cwn.position.PositionTools;
 import org.wuerthner.sport.api.AttributeOperation;
+import org.wuerthner.sport.api.ModelElement;
 import org.wuerthner.sport.api.Operation;
 import org.wuerthner.sport.operation.SetAttributeValueOperation;
 import org.wuerthner.sport.operation.Transaction;
@@ -494,24 +496,21 @@ public class SelectionTools {
 //        return scoreRange;
 //    }
 
-//    public void selectRange(GenericContext context, NamedRange range) {
-//        context.getSelection().getActiveDocument().ifPresent(document -> {
-//            List<GenericModelElement> scoreRange = new ArrayList<>();
-//            List<MidiTrack> activeMidiTrackList = ((Arrangement) document).getActiveMidiTrackList();
-//            for (MidiTrack track : activeMidiTrackList) {
-//                List<NoteEvent> noteList = track.getList(NoteEvent.class);
-//                List<NoteEvent> collect = noteList.stream().filter(n -> n.getPosition() >= range.start && n.getPosition() <= range.end).collect(Collectors.toList());
-//                scoreRange.addAll(collect);
-//
-//            }
-//            context.getSelection().setSelectedModelElements(scoreRange);
-//            if (!scoreRange.isEmpty()) {
-//                long rangeStartPosition = scoreRange.stream().mapToLong(note -> ((NoteEvent) note).getPosition()).min().getAsLong();
-//                int bar = PositionTools.getTrias(activeMidiTrackList.get(0), rangeStartPosition).bar;
-//                ((Arrangement) document).setTransientBarOffset(context, bar);
-//            }
-//        });
-//    }
+    public void selectRange(Arrangement arrangement, NamedRange range) {
+        List<ModelElement> scoreRange = new ArrayList<>();
+        List<MidiTrack> activeMidiTrackList = arrangement.getActiveMidiTrackList();
+        for (MidiTrack track : activeMidiTrackList) {
+            List<NoteEvent> noteList = track.getList(NoteEvent.class);
+            List<NoteEvent> collect = noteList.stream().filter(n -> n.getPosition() >= range.start && n.getPosition() <= range.end).collect(Collectors.toList());
+            scoreRange.addAll(collect);
+        }
+        arrangement.getSelection().set(scoreRange);
+        if (!scoreRange.isEmpty()) {
+            long rangeStartPosition = scoreRange.stream().mapToLong(note -> ((NoteEvent) note).getPosition()).min().getAsLong();
+            int bar = PositionTools.getTrias(activeMidiTrackList.get(0), rangeStartPosition).bar;
+            arrangement.setTransientBarOffset(bar);
+        }
+    }
 
     //
     // OPERATION FACTORY INTERFACE

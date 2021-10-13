@@ -39,6 +39,15 @@ public abstract class AbstractSelection implements CwnSelection<Event> {
         this.type = type;
     }
 
+    public void set(List<ModelElement> list) {
+        this.selectedElements = list
+                .stream()
+                .filter(e -> e instanceof Event).map(e -> (Event) e)
+                .collect(Collectors.toList());
+        this.staffIndex = -1;
+        this.type = SelectionType.NOTE;
+    }
+
     public void set(Event event, int staffIndex, SelectionType type) {
         this.selectedElements = new ArrayList<>();
         this.staffIndex = staffIndex;
