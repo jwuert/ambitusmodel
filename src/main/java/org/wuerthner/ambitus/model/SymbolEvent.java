@@ -17,15 +17,17 @@ public class SymbolEvent extends AbstractModelElement implements CwnSymbolEvent,
 			.defaultValue("")
 			.buildStringAttribute();
 	public final static LongAttribute duration = new AttributeBuilder("duration")
+			.label("Duration")
 			.defaultValue(0L)
 			.buildLongAttribute();
 	public final static IntegerAttribute verticalOffset = new AttributeBuilder("verticalOffset")
+			.label("Offset")
 			.defaultValue(0)
 			.buildIntegerAttribute();
 	public final static IntegerAttribute parameter = new AttributeBuilder("parameter")
+			.label("Parameter")
 			.defaultValue(0)
 			.buildIntegerAttribute();
-	
 
 	public SymbolEvent() {
 		super(TYPE, Arrays.asList(), Arrays.asList(position, duration, name, verticalOffset, parameter));

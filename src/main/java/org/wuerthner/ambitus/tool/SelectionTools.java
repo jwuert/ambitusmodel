@@ -497,19 +497,20 @@ public class SelectionTools {
 //    }
 
     public void selectRange(Arrangement arrangement, NamedRange range) {
-        List<ModelElement> scoreRange = new ArrayList<>();
-        List<MidiTrack> activeMidiTrackList = arrangement.getActiveMidiTrackList();
-        for (MidiTrack track : activeMidiTrackList) {
-            List<NoteEvent> noteList = track.getList(NoteEvent.class);
-            List<NoteEvent> collect = noteList.stream().filter(n -> n.getPosition() >= range.start && n.getPosition() <= range.end).collect(Collectors.toList());
-            scoreRange.addAll(collect);
-        }
-        arrangement.getSelection().set(scoreRange);
-        if (!scoreRange.isEmpty()) {
-            long rangeStartPosition = scoreRange.stream().mapToLong(note -> ((NoteEvent) note).getPosition()).min().getAsLong();
-            int bar = PositionTools.getTrias(activeMidiTrackList.get(0), rangeStartPosition).bar;
-            arrangement.setTransientBarOffset(bar);
-        }
+//        List<ModelElement> scoreRange = new ArrayList<>();
+//        List<MidiTrack> activeMidiTrackList = arrangement.getActiveMidiTrackList();
+//        for (MidiTrack track : activeMidiTrackList) {
+//            List<NoteEvent> noteList = track.getList(NoteEvent.class);
+//            List<NoteEvent> collect = noteList.stream().filter(n -> n.getPosition() >= range.start && n.getPosition() <= range.end).collect(Collectors.toList());
+//            scoreRange.addAll(collect);
+//        }
+//        arrangement.getSelection().set(scoreRange);
+//        if (!scoreRange.isEmpty()) {
+//            long rangeStartPosition = scoreRange.stream().mapToLong(note -> ((NoteEvent) note).getPosition()).min().getAsLong();
+//            int bar = PositionTools.getTrias(activeMidiTrackList.get(0), rangeStartPosition).bar;
+//            arrangement.setTransientBarOffset(bar);
+//        }
+        arrangement.setTransientBarOffsetPosition(range.start);
     }
 
     //

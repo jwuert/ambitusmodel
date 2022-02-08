@@ -83,16 +83,6 @@ public abstract class AbstractSelection implements CwnSelection<Event> {
         return selectedElements.isEmpty();
     }
 
-//    @Override
-//    public boolean hasCursor() {
-//        return false; // TODO: MidiService.isRunning();
-//    }
-//
-//    @Override
-//    public long getCursorPosition() {
-//        return 0; // TODO: MidiService.getPosition();
-//    }
-
     @Override
     public boolean hasMouseDown() {
         return (mouseEndPosition > 0);

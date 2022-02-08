@@ -173,6 +173,11 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 
 	public int getVolume() { return getAttributeValue(volume); }
 
+	@Override
+	public List<? extends CwnEvent> getEvents() {
+		return (List<? extends CwnEvent>)(List<?>) getChildren();
+	}
+
 	public boolean getMute() {
 		return getAttributeValue(mute);
 	}
@@ -256,6 +261,18 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 			throw new RuntimeException("Track must contain a clef!");
 		}
 		return clefEvent;
+	}
+
+	@Override
+	public NoteEvent getHighestNote() {
+		return (NoteEvent) getChildren().stream().filter(ev -> ev instanceof NoteEvent)
+				.max((ev1, ev2) -> Integer.compare(((NoteEvent)ev1).getPitch(), ((NoteEvent)ev2).getPitch())).orElse(null);
+	}
+
+	@Override
+	public CwnNoteEvent getLowestNote() {
+		return (NoteEvent) getChildren().stream().filter(ev -> ev instanceof NoteEvent)
+				.min((ev1, ev2) -> Integer.compare(((NoteEvent)ev1).getPitch(), ((NoteEvent)ev2).getPitch())).orElse(null);
 	}
 
 	public CwnNoteEvent findNoteAtLocation(Location location) {
@@ -389,8 +406,28 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		return first;
 	}
 
+	public Optional<NoteEvent> findFirstNoteAtPosition(long position, int pitch) {
+		Optional<NoteEvent> first = getChildren()
+				.stream()
+				.filter(ev -> NoteEvent.class.isAssignableFrom(ev.getClass()) &&  ((NoteEvent)ev).getPosition() == position
+						&& ( ((NoteEvent) ev).getPitch() == pitch || pitch == -1 ))
+				.map(ev -> (NoteEvent) ev)
+				.findFirst();
+		return first;
+	}
+
 	public <T extends Event> T findFirstEventAtPositionOrNull(long position, Class<T> clasz) {
 		Optional<T> event = findFirstEventAtPosition(position, clasz);
+		return event.isPresent() ? event.get() : null;
+	}
+
+	public NoteEvent findFirstNoteAtPositionOrNull(long position, int pitch) {
+		Optional<NoteEvent> event = findFirstNoteAtPosition(position, pitch);
+		return event.isPresent() ? event.get() : null;
+	}
+
+	public NoteEvent findFirstNoteAtPositionOrNull(long position) {
+		Optional<NoteEvent> event = findFirstNoteAtPosition(position, -1);
 		return event.isPresent() ? event.get() : null;
 	}
 
@@ -424,7 +461,7 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		List<T> children = getChildrenByClass(clasz);
 		return (children.size() > 0 ? Optional.of(clasz.cast(children.get(0))) : Optional.empty());
 	}
-
+	
 	public TimeSignature getBarTimeSignature(long position) {
 		TimeSignature result;
 		Optional<TimeSignatureEvent> firstEventAtPosition = findFirstEventAtPosition(position, TimeSignatureEvent.class);
@@ -496,6 +533,11 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		}
 		return hasLyrics;
 	}
+
+	public Event get(int index) {
+		return (Event) getChildren().get(index);
+	}
+	
 
 	public boolean isActive() {
 		return true;

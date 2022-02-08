@@ -198,6 +198,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	public MidiTrack getSelectedMidiTrack() {
 		int selectedStaff = selection.getSelectedStaff();
 		int no = getNumberOfActiveMidiTracks();
+		System.out.println("selectedStaff: " + selectedStaff + ", no: " + no);
 		if (selectedStaff < 0 || selectedStaff >= no) {
 			return null;
 		}
@@ -565,6 +566,10 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		} else {
 			System.err.println("No free channel available!");
 		}
+	}
+
+	public void removeTrack(MidiTrack track) {
+		this.performRemoveChildOperation(track, history);
 	}
 
 	public void init(String title, String subtitle, String composer) {
@@ -991,6 +996,15 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		return position;
 	}
 
+	public void setTransientBarOffsetPosition(long position) {
+		Optional<MidiTrack> optionalTrack = getFirstActiveMidiTrack();
+		if (optionalTrack.isPresent()) {
+			MidiTrack track = optionalTrack.get();
+			Trias trias = PositionTools.getTrias(track, position);
+			performTransientSetAttributeValueOperation(Arrangement.offset, trias.bar);
+		}
+	}
+
 	public void addRange(NamedRange newRange) {
 		List<NamedRange> range = getAttributeValue(Arrangement.rangeList);
 		range.add(newRange);
@@ -1032,11 +1046,42 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		MidiTrack selectedMidiTrack = getSelectedMidiTrack();
 		if (selectedMidiTrack!=null) {
 			selectedMidiTrack.performModifyPasteClipboardOperation(this.clipboard, factory, history, modifier);
+		} else {
+			this.performModifyPasteClipboardToReferenceOperation(this.clipboard, factory, history, modifier);
 		}
 	}
 
 	public <T> void setEventAttribute(Event event, Attribute<T> attribute, T value) {
 		event.performSetAttributeValueOperation(attribute, value, history);
+	}
+
+	public void setNoteEventAttributes(NoteEvent event, long position, long duration, int pitch, int enharmonicShift, int velocity, int voice, String lyrics) {
+		List<Operation> opList = new ArrayList<>();
+		if (position != event.getPosition()) {
+			opList.add(new SetAttributeValueOperation<>(event, NoteEvent.position, position));
+		}
+		if (duration != event.getDuration()) {
+			opList.add(new SetAttributeValueOperation<>(event, NoteEvent.duration, duration));
+		}
+		if (pitch != event.getPitch()) {
+			opList.add(new SetAttributeValueOperation<>(event, NoteEvent.pitch, pitch));
+		}
+		if (enharmonicShift != event.getEnharmonicShift()) {
+			opList.add(new SetAttributeValueOperation<>(event, NoteEvent.shift, enharmonicShift));
+		}
+		if (velocity != event.getVelocity()) {
+			opList.add(new SetAttributeValueOperation<>(event, NoteEvent.velocity, velocity));
+		}
+		if (voice != event.getVoice()) {
+			opList.add(new SetAttributeValueOperation<>(event, NoteEvent.voice, voice));
+		}
+		if (!lyrics.equals(event.getLyrics())) {
+			opList.add(new SetAttributeValueOperation<>(event, NoteEvent.lyrics, lyrics));
+		}
+		if (!opList.isEmpty()) {
+			Transaction transaction = new Transaction("Set Attribute List", opList);
+			this.performTransaction(transaction, history);
+		}
 	}
 
 	public boolean getFlagAllowDottedRests() {
@@ -1086,5 +1131,12 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 			performTransientSetAttributeValueOperation(rangeList, list);
 		}
 		return list;
+	}
+
+	public void addAccent(NoteEvent noteEvent, int accentIndex) {
+		List<Accent> accentList = noteEvent.getAttributeValue(NoteEvent.accentList);
+		Accent accent = Accent.createAccent(accentIndex);
+		accentList.add(accent);
+		noteEvent.performSetAttributeValueOperation(NoteEvent.accentList, accentList, history);
 	}
 }

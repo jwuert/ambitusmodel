@@ -199,7 +199,7 @@ public class NoteEvent extends AbstractModelElement implements CwnNoteEvent, Eve
 		// for (Accent accent : accents) {
 		// ornaments = sep + accent.getId();
 		// }
-		return getPosition() + " [" + getDuration() + "/" + getVelocity() + "] " + getCPitch() + ornaments;
+		return getPosition() + " [" + getPitch() + ":" + getDuration() + "/" + getVelocity() + "] " + getCPitch() + ornaments;
 	}
 	
 	public int compareTo(ModelElement element) {
@@ -243,4 +243,7 @@ public class NoteEvent extends AbstractModelElement implements CwnNoteEvent, Eve
 	public String getMarks() {
 		return markList.stream().collect(Collectors.joining(", "));
 	}
+
+	@Override
+	public List<String> getMarkList() { return markList; }
 }
