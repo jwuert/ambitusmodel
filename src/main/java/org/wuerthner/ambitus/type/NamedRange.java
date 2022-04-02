@@ -13,7 +13,7 @@ public class NamedRange {
 
     public NamedRange(String range) {
         int indexColon = range.indexOf(":");
-        // int indexDash = range.indexOf("-", indexColon + 1);
+        int indexDash = range.indexOf("-", indexColon + 1);
         if (indexColon < 1) {
             throw new RuntimeException("wrong range format: " + range + ". Expected format: 'name: n-m'");
         }
@@ -21,7 +21,9 @@ public class NamedRange {
 //            throw new RuntimeException("wrong range format: " + range + ". Expected format: 'name: n-m'");
 //        }
         name = range.substring(0, indexColon).trim();
-        start = Long.valueOf(range.substring(indexColon+1).trim());
+
+
+        start = indexDash<0 ? Long.valueOf(range.substring(indexColon+1).trim()) : Long.valueOf(range.substring(indexColon + 1, indexDash).trim());;
         // start = Long.valueOf(range.substring(indexColon + 1, indexDash).trim());
         // end = Long.valueOf(range.substring(indexDash + 1).trim());
     }

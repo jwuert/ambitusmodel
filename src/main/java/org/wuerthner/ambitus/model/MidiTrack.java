@@ -92,6 +92,10 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 	public final static BooleanAttribute mute = new AttributeBuilder("mute")
 			.defaultValue(false)
 			.buildBooleanAttribute();
+
+	public final static BooleanAttribute piano = new AttributeBuilder("piano")
+			.defaultValue(false)
+			.buildBooleanAttribute();
 	
 	// private final Propagator<?, ?>[] propagators = new Propagator[] { new TrackKeyPropagator(this, key), new TrackTimeSignaturePropagator(this, timeSignature), new TrackClefPropagator(this, clef) };
 
@@ -128,7 +132,7 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 
 	public MidiTrack() {
 		super(TYPE, Arrays.asList(BarEvent.TYPE, ClefEvent.TYPE, KeyEvent.TYPE, NoteEvent.TYPE, SymbolEvent.TYPE,TempoEvent.TYPE,TimeSignatureEvent.TYPE),
-				Arrays.asList(name, channel, volume, instrument, mute));
+				Arrays.asList(name, channel, volume, instrument, mute, piano));
 	}
 
 	public String getId() {
@@ -273,6 +277,11 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 	public CwnNoteEvent getLowestNote() {
 		return (NoteEvent) getChildren().stream().filter(ev -> ev instanceof NoteEvent)
 				.min((ev1, ev2) -> Integer.compare(((NoteEvent)ev1).getPitch(), ((NoteEvent)ev2).getPitch())).orElse(null);
+	}
+
+	@Override
+	public boolean getPiano() {
+		return getAttributeValue(piano);
 	}
 
 	public CwnNoteEvent findNoteAtLocation(Location location) {

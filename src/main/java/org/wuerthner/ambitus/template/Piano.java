@@ -6,21 +6,21 @@ import org.wuerthner.sport.api.ModelElementFactory;
 
 public class Piano implements Template {
     public static final String NAME = "Piano";
-    public static final String RIGHT = "Right";
-    public static final String LEFT = "Left";
 
     @Override
     public Arrangement apply(int key, int tempo, TimeSignature timeSignature, ModelElementFactory factory) {
         Arrangement arrangement = factory.createElement(Arrangement.TYPE);
 
         MidiTrack rightHand = factory.createElement(MidiTrack.TYPE);
-        rightHand.performTransientSetAttributeValueOperation(MidiTrack.name, RIGHT);
+        rightHand.performTransientSetAttributeValueOperation(MidiTrack.name, NAME);
         rightHand.performTransientSetAttributeValueOperation(MidiTrack.channel, 0);
+        rightHand.performTransientSetAttributeValueOperation(MidiTrack.piano, true);
         init(arrangement, rightHand, 0, key, tempo, timeSignature, factory);
 
         MidiTrack leftHand = factory.createElement(MidiTrack.TYPE);
-        leftHand.performTransientSetAttributeValueOperation(MidiTrack.name, LEFT);
+        leftHand.performTransientSetAttributeValueOperation(MidiTrack.name, NAME+"2");
         leftHand.performTransientSetAttributeValueOperation(MidiTrack.channel, 1);
+        leftHand.performTransientSetAttributeValueOperation(MidiTrack.piano, true);
         init(arrangement, leftHand, 1, key, timeSignature, factory);
 
         return arrangement;

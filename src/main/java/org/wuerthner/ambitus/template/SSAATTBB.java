@@ -25,7 +25,7 @@ public class SSAATTBB implements Template {
         init(arrangement, sopran1, 0, key, tempo, timeSignature, factory);
 
         MidiTrack sopran2 = factory.createElement(MidiTrack.TYPE);
-        sopran2.performTransientSetAttributeValueOperation(MidiTrack.name, SOPRAN1);
+        sopran2.performTransientSetAttributeValueOperation(MidiTrack.name, SOPRAN2);
         sopran2.performTransientSetAttributeValueOperation(MidiTrack.channel, 1);
         init(arrangement, sopran2, 0, key, tempo, timeSignature, factory);
 

@@ -10,8 +10,7 @@ public class SATBPiano implements Template {
     public static final String ALT = "Alt";
     public static final String TENOR = "Tenor";
     public static final String BASS = "Bass";
-    public static final String RIGHT = "Right";
-    public static final String LEFT = "Left";
+    public static final String PIANO = "Piano";
 
     @Override
     public Arrangement apply(int key, int tempo, TimeSignature timeSignature, ModelElementFactory factory) {
@@ -38,13 +37,15 @@ public class SATBPiano implements Template {
         init(arrangement, bass, 1, key, timeSignature, factory);
 
         MidiTrack rightHand = factory.createElement(MidiTrack.TYPE);
-        rightHand.performTransientSetAttributeValueOperation(MidiTrack.name, RIGHT);
+        rightHand.performTransientSetAttributeValueOperation(MidiTrack.name, PIANO);
         rightHand.performTransientSetAttributeValueOperation(MidiTrack.channel, 4);
+        rightHand.performTransientSetAttributeValueOperation(MidiTrack.piano, true);
         init(arrangement, rightHand, 0, key, timeSignature, factory);
 
         MidiTrack leftHand = factory.createElement(MidiTrack.TYPE);
-        leftHand.performTransientSetAttributeValueOperation(MidiTrack.name, LEFT);
+        leftHand.performTransientSetAttributeValueOperation(MidiTrack.name, PIANO + "2");
         leftHand.performTransientSetAttributeValueOperation(MidiTrack.channel, 5);
+        leftHand.performTransientSetAttributeValueOperation(MidiTrack.piano, true);
         init(arrangement, leftHand, 1, key, timeSignature, factory);
 
         return arrangement;
