@@ -37,7 +37,7 @@ public class CleanUp {
             Transaction transaction = new Transaction("Cleanup", opList);
             arrangement.performTransaction(transaction);
         }
-        System.out.println("Clean Up: removed " + opList.size() + " events!");
+        //System.out.println("Clean Up: removed " + opList.size() + " events!");
     }
 
     private static void cleanTrack(List<Operation> opList, MidiTrack track) {

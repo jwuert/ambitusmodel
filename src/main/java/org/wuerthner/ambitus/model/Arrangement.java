@@ -11,6 +11,7 @@ import org.wuerthner.cwn.api.*;
 import org.wuerthner.cwn.position.PositionTools;
 import org.wuerthner.cwn.score.Score;
 import org.wuerthner.cwn.timesignature.SimpleTimeSignature;
+import org.wuerthner.cwn.util.Harmony;
 import org.wuerthner.sport.api.*;
 import org.wuerthner.sport.attribute.*;
 import org.wuerthner.sport.core.AbstractModelElement;
@@ -25,6 +26,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	public static final String DEFAULT_NAME = "Untitled";
 	public static final int DEFAULT_PPQ = 960;
 	public static final String[] KEYS = MidiTrack.KEYS;
+	public static final String[] GENUS = new String[]{"Undefined", "Minor", "Major", "Diminished"};
 	public static final String[] CLEFS = MidiTrack.CLEFS;
 	public static final String[] GRIDS = new String[] { "1", "1/2", "1/4", "1/8", "1/16", "1/32", "1/64" };
 	public static final String[] LEVELS = new String[] { "-", "1st level", "2nd level", "3rd level", "4th level", "5th level" };
@@ -135,7 +137,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	private final Clipboard clipboard = new ModelClipboard<Event>();
 
 	public Arrangement() {
-		super(TYPE, Arrays.asList(MidiTrack.TYPE), Arrays.asList(name, subtitle, composer, autoBeamPrint, pulsePerQuarter,
+		super(TYPE, Arrays.asList(MidiTrack.TYPE, InfoTrack.TYPE), Arrays.asList(name, subtitle, composer, autoBeamPrint, pulsePerQuarter,
 				key, timeSignature, stretchFactor, groupLevel, tupletPresentation, grid, resolution, rangeList, path,
 				flagAllowDottedRests, durationBiDotted, durationTuplet2, durationTuplet3, durationTuplet4, durationTuplet5, durationTuplet6,
 				offset));
@@ -198,7 +200,6 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	public MidiTrack getSelectedMidiTrack() {
 		int selectedStaff = selection.getSelectedStaff();
 		int no = getNumberOfActiveMidiTracks();
-		System.out.println("selectedStaff: " + selectedStaff + ", no: " + no);
 		if (selectedStaff < 0 || selectedStaff >= no) {
 			return null;
 		}
@@ -206,7 +207,21 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	}
 
 	public Optional<MidiTrack> getMidiTrack(String id) {
-		return getChildrenByClass(MidiTrack.class).stream().peek(System.out::println).filter(t -> t.getId().equals(id)).findAny();
+		return getChildrenByClass(MidiTrack.class).stream().filter(t -> t.getId().equals(id)).findAny(); // .peek(System.out::println)
+	}
+
+	public Optional<MidiTrack> getNextMidiTrack(String id) {
+		Optional<MidiTrack> result = Optional.empty();
+		List<MidiTrack> mTrackList = getChildrenByClass(MidiTrack.class);
+		String previousId = "";
+		for (MidiTrack mTrack : mTrackList) {
+			if (previousId.equals(id)) {
+				result = Optional.of(mTrack);
+				break;
+			}
+			previousId = mTrack.getId();
+		}
+		return result;
 	}
 
 	public void setTrackMute(String id, boolean mute) {
@@ -358,7 +373,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		return channel;
 	}
 
-	public void setTrackProperties(String id, boolean mute, int volume, String name, String metric, int key, int clef, int tempo, int instrument, int channel) {
+	public void setTrackProperties(String id, boolean mute, int volume, String name, String metric, int key, int genus, int clef, int tempo, int instrument, int channel, boolean piano) {
 		Optional<MidiTrack> trackOptional  = getMidiTrack(id);
 		if (trackOptional.isPresent()) {
 			MidiTrack track = trackOptional.get();
@@ -381,6 +396,9 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 				if (keyEvent.getKey() != key-7) {
 					opList.add(new SetAttributeValueOperation<>(keyEvent, KeyEvent.key, key-7));
 				}
+				if (keyEvent.getGenus() != genus) {
+					opList.add(new SetAttributeValueOperation<>(keyEvent, KeyEvent.genus, genus));
+				}
 //				Operation opTimeSignature = new SetAttributeValueOperation<>(tsEvent, TimeSignatureEvent.timeSignature, ts);
 //				opList.add(opTimeSignature);
 //				KeyEvent keyEvent = ((MidiTrack)theTrack).findFirstEvent(KeyEvent.class).get();
@@ -398,6 +416,17 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 			}
 			if (track.getInstrument() != instrument) { opList.add(new SetAttributeValueOperation<>(track, MidiTrack.instrument, instrument)); }
 			if (track.getChannel() != channel) { opList.add(new SetAttributeValueOperation<>(track, MidiTrack.channel, channel)); }
+			if (track.getPiano() != piano) {
+				opList.add(new SetAttributeValueOperation<>(track, MidiTrack.piano, piano));
+				Optional<MidiTrack> nextTrackOpt = this.getNextMidiTrack(id);
+				if (nextTrackOpt.isPresent()) {
+					MidiTrack nextTrack = nextTrackOpt.get();
+					if (nextTrack.getPiano() != piano) {
+						opList.add(new SetAttributeValueOperation<>(nextTrack, MidiTrack.piano, piano));
+					}
+				}
+			}
+
 			if (removeLaterEvents) {
 				// when time signature changes, all key/clef/ts changes are removed
 				opList.addAll(getAllEventsButFirst(track, TimeSignatureEvent.class));
@@ -417,7 +446,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		return opList;
 	}
 
-	public void setBarProperties(String trackId, long barPosition, String metric, int key, int clef, String bar, int tempo, AmbitusFactory factory) {
+	public void setBarProperties(String trackId, long barPosition, String metric, int key, int genus, int clef, String bar, int tempo, AmbitusFactory factory) {
 		TimeSignature timeSignature = new SimpleTimeSignature(metric);
 		Optional<MidiTrack> trackOptional  = getMidiTrack(trackId);
 		if (trackOptional.isPresent()) {
@@ -427,6 +456,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 			long position = PositionTools.firstBeat(track, barPosition);
 			opList.addAll(handleEventSettingInBar(Optional.empty(), position, TimeSignatureEvent.class, TimeSignatureEvent.TYPE, TimeSignature.class, TimeSignatureEvent.timeSignature, timeSignature, factory));
 			opList.addAll(handleEventSettingInBar(Optional.empty(), position, KeyEvent.class, KeyEvent.TYPE, Integer.class, KeyEvent.key, key-7, factory));
+			opList.addAll(handleEventSettingInBar(Optional.empty(), position, KeyEvent.class, KeyEvent.TYPE, Integer.class, KeyEvent.genus, genus, factory));
 			opList.addAll(handleEventSettingInBar(Optional.of(track), position, ClefEvent.class, ClefEvent.TYPE, Integer.class, ClefEvent.clef, clef, factory));
 			if (bar.equals(CwnBarEvent.STANDARD)) {
 			} else {
@@ -782,6 +812,13 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		return result;
 	}
 
+	public int getNumberOfBeats() {
+		if (getFirstActiveMidiTrack().isPresent()) {
+			return getFirstActiveMidiTrack().get().getTimeSignature().getDenominatorInt();
+		}
+		return 4;
+	}
+
 	public int getTrackBarKey(String trackId, long barPosition) {
 		int result = 0;
 		Optional<MidiTrack> trackOptional  = getMidiTrack(trackId);
@@ -800,6 +837,17 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 			MidiTrack track = trackList.get(trackIndex);
 			long position = PositionTools.firstBeat(track, barPosition);
 			result = track.getBarKey(position);
+		}
+		return result;
+	}
+
+	public int getTrackBarKeyGenus(int trackIndex, long barPosition) {
+		int result = 0;
+		List<MidiTrack> trackList = getActiveMidiTrackList();
+		if (trackIndex < trackList.size()) {
+			MidiTrack track = trackList.get(trackIndex);
+			long position = PositionTools.firstBeat(track, barPosition);
+			result = track.getBarKeyGenus(position);
 		}
 		return result;
 	}
@@ -876,15 +924,8 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		return getChildren().stream().map(e -> MidiTrack.class.cast(e)).filter(tr -> tr.isActive()).findFirst();
 	}
 
-	public long findLastPosition() {
-		long lastPosition = 0;
-		for (MidiTrack track : getActiveMidiTrackList()) {
-			Optional<NoteEvent> lastNote = track.findLastNote();
-			if (lastNote.isPresent()) {
-				lastPosition = Math.max(lastPosition, lastNote.get().getEnd());
-			}
-		}
-		return lastPosition;
+	public Optional<InfoTrack> getInfoTrack() {
+		return getChildren().stream().filter(t -> InfoTrack.class.isAssignableFrom(t.getClass())).map(e -> InfoTrack.class.cast(e)).findFirst();
 	}
 
 	public int getPPQ() {
@@ -969,6 +1010,17 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		}
 	}
 
+	public long findLastPosition() {
+		long lastPosition = 0;
+		for (MidiTrack track : getActiveMidiTrackList()) {
+			Optional<NoteEvent> lastNote = track.findLastNote();
+			if (lastNote.isPresent()) {
+				lastPosition = Math.max(lastPosition, lastNote.get().getEnd());
+			}
+		}
+		return lastPosition;
+	}
+
 	public long getLastPosition() {
 		long lastPosition = 0;
 		for (MidiTrack track : getActiveMidiTrackList()) {
@@ -980,6 +1032,14 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		}
 		return lastPosition;
 	}
+
+//	public List<NoteEvent> getNoteEventsAt(long position) {
+//		List<NoteEvent> list = new ArrayList<>();
+//		for (MidiTrack track : getActiveMidiTrackList()) {
+//			track.get
+//		}
+//		return list;
+//	}
 
 	public int getBarOffset() {
 		return getAttributeValue(Arrangement.offset);
@@ -1009,7 +1069,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		List<NamedRange> range = getAttributeValue(Arrangement.rangeList);
 		range.add(newRange);
 		performSetAttributeValueOperation(Arrangement.rangeList, range, history);
-		System.out.println("===> " + getAttributeValue(Arrangement.rangeList));
+		//System.out.println("===> " + getAttributeValue(Arrangement.rangeList));
 	}
 
 	public double getTuplet() {
@@ -1138,5 +1198,47 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		Accent accent = Accent.createAccent(accentIndex);
 		accentList.add(accent);
 		noteEvent.performSetAttributeValueOperation(NoteEvent.accentList, accentList, history);
+	}
+
+	public void addOrRemoveInfoEvent(long position, String info, String mode, AmbitusFactory factory) {
+		Harmony.Fix type = mode==null ?	Harmony.Fix.NONE :
+				mode.equals(Harmony.Fix.CHORD.name()) ? Harmony.Fix.CHORD :
+						mode.equals(Harmony.Fix.HARMONY.name()) ? Harmony.Fix.HARMONY :
+								Harmony.Fix.ALL;
+		if (getFirstActiveMidiTrack().isPresent()) {
+			List<Operation> opList = new ArrayList<>();
+			InfoTrack infoTrack = null;
+			if (getInfoTrack().isPresent()) {
+				infoTrack = getInfoTrack().get();
+			} else {
+				infoTrack = factory.createElement(InfoTrack.TYPE);
+				TimeSignature timeSignature = getFirstActiveMidiTrack().get().getTimeSignature();
+				ModelElement tsEvent = factory.createElement(TimeSignatureEvent.TYPE);
+				tsEvent.performTransientSetAttributeValueOperation(TimeSignatureEvent.timeSignature, timeSignature);
+				opList.add(new AddChildOperation(infoTrack, tsEvent));
+				opList.add(new AddChildOperation(this, infoTrack));
+			}
+			Optional<InfoEvent> infoEventOptional = infoTrack.findEventAtPosition(position, InfoEvent.class);
+			if (infoEventOptional.isPresent()) {
+				if (info != null && !info.trim().equals("")) {
+					opList.add(new SetAttributeValueOperation<>(infoEventOptional.get(), InfoEvent.info, info));
+					opList.add(new SetAttributeValueOperation<>(infoEventOptional.get(), InfoEvent.type, type.name()));
+				} else {
+					opList.add(new RemoveChildOperation(infoEventOptional.get()));
+				}
+			} else {
+				if (info != null && !info.trim().equals("")) {
+					InfoEvent infoEvent = factory.createElement(InfoEvent.TYPE);
+					infoEvent.setAttributeValue(InfoEvent.position, position);
+					infoEvent.setAttributeValue(InfoEvent.info, info);
+					infoEvent.setAttributeValue(InfoEvent.type, type.name());
+					opList.add(new AddChildOperation(infoTrack, infoEvent));
+				}
+			}
+			if (!opList.isEmpty()) {
+				Transaction transaction = new Transaction("add or remove chord", opList);
+				this.performTransaction(transaction, history);
+			}
+		}
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.wuerthner.cwn.api.CwnKeyEvent;
+import org.wuerthner.cwn.score.Score;
 import org.wuerthner.sport.attribute.AttributeBuilder;
 import org.wuerthner.sport.attribute.IntegerAttribute;
 import org.wuerthner.sport.core.AbstractModelElement;
@@ -14,10 +15,13 @@ public class KeyEvent extends AbstractModelElement implements CwnKeyEvent, Event
 			.required()
 			.defaultValue(0)
 			.buildSelectableIntegerAttribute();
-	
+	public final static IntegerAttribute genus = new AttributeBuilder("genus")
+			.required()
+			.defaultValue(Score.Genus.MAJOR.code)
+			.buildIntegerAttribute();
 	
 	public KeyEvent() {
-		super(TYPE, Arrays.asList(), Arrays.asList(position, key));
+		super(TYPE, Arrays.asList(), Arrays.asList(position, key, genus));
 	}
 
 	public String getId() {
@@ -38,9 +42,12 @@ public class KeyEvent extends AbstractModelElement implements CwnKeyEvent, Event
 	public int getKey() {
 		return getAttributeValue(key);
 	}
-	
+
+	@Override
+	public int getGenus() { return getAttributeValue(genus); }
+
 	@Override
 	public String toString() {
-		return "KeyEvent={position: " + position + ", key: " + key + "}";
+		return "KeyEvent={position: " + position + ", key: " + key + ", genus: " + genus + "}";
 	}
 }

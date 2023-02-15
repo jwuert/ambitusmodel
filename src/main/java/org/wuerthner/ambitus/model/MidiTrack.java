@@ -59,7 +59,7 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		put(">Prestissimo", Arrays.asList(209, 255));
 	}};
 
-	public static final String[] KEYS = new String[] { "Ces", "Ges", "Des", "As", "Es", "B", "F", "C", "G", "D", "A", "E", "H", "Fis", "Cis" };
+	public static final String[] KEYS = new String[] { "Ces (h)", "Ges (fis)", "Des (cis)", "As", "Es", "B", "F", "C", "G", "D", "A", "E", "H", "Fis", "Cis" };
 
 	public final static StringAttribute name = new AttributeBuilder("name")
 			.defaultValue(DEFAULT_NAME)
@@ -96,7 +96,7 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 	public final static BooleanAttribute piano = new AttributeBuilder("piano")
 			.defaultValue(false)
 			.buildBooleanAttribute();
-	
+
 	// private final Propagator<?, ?>[] propagators = new Propagator[] { new TrackKeyPropagator(this, key), new TrackTimeSignaturePropagator(this, timeSignature), new TrackClefPropagator(this, clef) };
 
 	public final static Comparator eventComparator = new Comparator<ModelElement>() {
@@ -284,12 +284,17 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		return getAttributeValue(piano);
 	}
 
+	@Override
+	public boolean isInfoTrack() {
+		return false;
+	}
+
 	public CwnNoteEvent findNoteAtLocation(Location location) {
 		CwnNoteEvent noteEvent = StreamSupport.stream(getChildrenByType(NoteEvent.TYPE).spliterator(), false).map(element -> CwnNoteEvent.class.cast(element))
 				.filter(event -> event.getPosition() == location.position && Math.abs(event.getPitch() - location.pitch) <= 1).map(event -> CwnNoteEvent.class.cast(event)).reduce((a, b) -> b).orElse(null);
 		return noteEvent;
 	}
-	
+
 //	public List<Long> findIdRangeBetween(Location location1, Location location2) {
 //		return StreamSupport.stream(getChildrenByType(NoteEvent.TYPE).spliterator(), false).map(element -> CwnNoteEvent.class.cast(element))
 //				.filter(event -> event.getPosition() >= location1.position && event.getPosition() <= location2.position).map(event -> ((NoteEvent) event).getId()).collect(Collectors.toList());
@@ -406,6 +411,16 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		return note;
 	}
 
+	@Override
+	public <T extends CwnEvent> Optional<T> findEventAtPosition(long position, Class<T> clasz) {
+		Optional<T> first = getChildren()
+				.stream()
+				.filter(ev -> clasz.isAssignableFrom(ev.getClass()) &&  ((T)ev).getPosition() == position)
+				.map(ev -> (T)ev)
+				.findFirst();
+		return first;
+	}
+
 	public <T extends Event> Optional<T> findFirstEventAtPosition(long position, Class<T> clasz) {
 		Optional<T> first = getChildren()
 				.stream()
@@ -489,6 +504,17 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 			result = firstEventAtPosition.get().getKey();
 		} else {
 			result = findEventBefore(position, KeyEvent.class).get().getKey();
+		}
+		return result;
+	}
+
+	public int getBarKeyGenus(long position) {
+		int result = 0;
+		Optional<KeyEvent> firstEventAtPosition = findFirstEventAtPosition(position, KeyEvent.class);
+		if (firstEventAtPosition.isPresent()) {
+			result = firstEventAtPosition.get().getGenus();
+		} else {
+			result = findEventBefore(position, KeyEvent.class).get().getGenus();
 		}
 		return result;
 	}
