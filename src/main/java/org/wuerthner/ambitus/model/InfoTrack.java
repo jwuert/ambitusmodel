@@ -135,6 +135,13 @@ public class InfoTrack extends AbstractModelElement implements CwnTrack {
                 .findFirst();
         return first;
     }
+
+    @Override
+    public <T extends CwnEvent> Optional<T> findFirstEvent(Class<T> clasz) {
+        List<T> children = getChildrenByClass(clasz);
+        return (children.size() > 0 ? Optional.of(clasz.cast(children.get(0))) : Optional.empty());
+    }
+
     @Override
     public Comparator<ModelElement> getComparator() {
         return eventComparator;

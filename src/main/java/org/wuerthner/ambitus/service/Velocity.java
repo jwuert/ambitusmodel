@@ -17,22 +17,22 @@ import java.util.stream.Collectors;
 public class Velocity {
     private static final List<Integer> pitchList = Arrays.stream(Score.freqTab).boxed().collect(Collectors.toList());
 
-    public static void run(Arrangement arrangement, int velocity, Scope scope) {
+    public static void run(Arrangement arrangement, int velocityStart, int velocityEnd, Scope scope) {
         List<Operation> opList = new ArrayList<>();
         switch (scope) {
             case ARRANGEMENT:
                 for (MidiTrack track : arrangement.getActiveMidiTrackList()) {
-                    velocityTrack(opList, track, velocity);
+                    velocityTrack(opList, track, velocityStart, velocityEnd);
                 }
                 break;
             case TRACK:
-                velocityTrack(opList, arrangement.getSelectedMidiTrack(), velocity);
+                velocityTrack(opList, arrangement.getSelectedMidiTrack(), velocityStart, velocityEnd);
                 break;
             case SELECTION:
                 velocityList(opList, arrangement.getSelection().getSelection()
                                 .stream().filter(e -> e instanceof NoteEvent).map( e -> (NoteEvent) e)
                                 .collect(Collectors.toList()),
-                                velocity);
+                                velocityStart, velocityEnd);
                 break;
             default:
                 throw new RuntimeException("Scope '" + scope.name() + "' undefined!");
@@ -43,14 +43,23 @@ public class Velocity {
         }
     }
 
-    private static void velocityTrack(List<Operation> opList, MidiTrack track, int velocity) {
-        velocityList(opList, track.getChildrenByClass(NoteEvent.class), velocity);
+    private static void velocityTrack(List<Operation> opList, MidiTrack track, int velocityStart, int velocityEnd) {
+        velocityList(opList, track.getChildrenByClass(NoteEvent.class), velocityStart, velocityEnd);
     }
 
-    private static void velocityList(List<Operation> opList, List<NoteEvent> list, int velocity) {
-        for (Event event : list) {
-            if (event instanceof NoteEvent) {
-                opList.add(new SetAttributeValueOperation(event, NoteEvent.velocity, velocity));
+    private static void velocityList(List<Operation> opList, List<NoteEvent> list, int velocityStart, int velocityEnd) {
+        if (!list.isEmpty()) {
+            long start = list.get(0).getPosition();
+            long end = list.get(list.size()-1).getPosition();
+            double ratio = (velocityEnd-velocityStart)*1.0/(end-start);
+            System.out.println("ra: " + ratio);
+            for (Event event : list) {
+                if (event instanceof NoteEvent) {
+                    long pos = event.getPosition();
+                    int velocity = (int) (velocityStart + ratio*1.0*(pos-start));
+                    System.out.println("vel: " + velocity);
+                    opList.add(new SetAttributeValueOperation(event, NoteEvent.velocity, velocity));
+                }
             }
         }
     }

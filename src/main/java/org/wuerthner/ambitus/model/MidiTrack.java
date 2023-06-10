@@ -106,10 +106,13 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 			if (element1 instanceof Event && element2 instanceof Event) {
 				comp = Long.compare(((Event) element1).getPosition(), ((Event) element2).getPosition());
 				if (comp==0) {
+					System.out.println(element1.getType() + " ~ " + element2.getType());
 					if (element1 instanceof NoteEvent && element2 instanceof NoteEvent) {
 						comp = Integer.compare(((NoteEvent) element1).getPitch(), ((NoteEvent) element2).getPitch());
 					} else if (element1 instanceof NoteEvent) {
 						comp = 1; // notes come after other event types
+					} else if (element2 instanceof NoteEvent) {
+						comp = -1; // notes come after other event types
 					}
 				}
 			}
@@ -480,8 +483,9 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		List<T> children = getChildrenByClass(clasz);
 		return (children.size() > 0 ? Optional.of(clasz.cast(children.get(children.size() - 1))) : Optional.empty());
 	}
-	
-	public <T extends Event> Optional<T> findFirstEvent(Class<T> clasz) {
+
+	@Override
+	public <T extends CwnEvent> Optional<T> findFirstEvent(Class<T> clasz) {
 		List<T> children = getChildrenByClass(clasz);
 		return (children.size() > 0 ? Optional.of(clasz.cast(children.get(0))) : Optional.empty());
 	}
@@ -519,17 +523,10 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		return result;
 	}
 
-	public int getBarBar(long position) {
-		int result = 0;
-		Optional<BarEvent> firstEventAtPosition = findFirstEventAtPosition(position, BarEvent.class);
-		if (firstEventAtPosition.isPresent()) {
-			result = firstEventAtPosition.get().getTypeIndex();
-		} else {
-			Optional<BarEvent> event = findEventBefore(position, BarEvent.class);
-			if (event.isPresent())
-				result = event.get().getTypeIndex();
-		}
-		return result;
+	public Optional<BarEvent> getBarEvent(long position) {
+		Optional<BarEvent> barAtPosition = findFirstEventAtPosition(position, BarEvent.class);
+		//	result = Optional.of(firstEventAtPosition.get().getTypeIndex());
+		return barAtPosition;
 	}
 
 	public int getBarClef(long position) {
