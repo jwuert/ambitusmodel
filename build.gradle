@@ -5,7 +5,7 @@ plugins {
     id 'maven-publish'
 }
 
-group 'org.wuerthner.ambitusmodel'
+group 'org.wuerthner.ambitus'
 version '2.0.0-SNAPSHOT'
 
 repositories {
