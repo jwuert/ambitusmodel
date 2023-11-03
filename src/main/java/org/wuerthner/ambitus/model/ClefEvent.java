@@ -4,16 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.wuerthner.cwn.api.CwnClefEvent;
-import org.wuerthner.sport.attribute.AttributeBuilder;
 import org.wuerthner.sport.attribute.IntegerAttribute;
 import org.wuerthner.sport.core.AbstractModelElement;
 
 public class ClefEvent extends AbstractModelElement implements CwnClefEvent, Event {
 	public final static String TYPE = "ClefEvent";
-	public final static IntegerAttribute clef = new AttributeBuilder("clef")
+	public final static IntegerAttribute clef = new IntegerAttribute("clef")
 			.required()
-			.defaultValue(0)
-			.buildSelectableIntegerAttribute();
+			.defaultValue(0);
 	
 	public ClefEvent() {
 		super(TYPE, Arrays.asList(), Arrays.asList(position, clef));

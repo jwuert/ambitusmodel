@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.wuerthner.cwn.api.CwnBarEvent;
-import org.wuerthner.sport.attribute.AttributeBuilder;
 import org.wuerthner.sport.attribute.StringAttribute;
 import org.wuerthner.sport.core.AbstractModelElement;
 
 public class BarEvent extends AbstractModelElement implements CwnBarEvent, Event {
 	public final static String TYPE = "BarEvent";
-	public final static StringAttribute type = new AttributeBuilder("type")
-			.defaultValue("")
-			.buildStringAttribute();
+	public final static StringAttribute type = new StringAttribute("type")
+			.defaultValue("");
 	public BarEvent() {
 		super(TYPE, Arrays.asList(), Arrays.asList(position, type));
 	}

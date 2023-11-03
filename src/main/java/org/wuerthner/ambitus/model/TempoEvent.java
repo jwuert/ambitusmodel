@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.wuerthner.cwn.api.CwnTempoEvent;
-import org.wuerthner.sport.attribute.AttributeBuilder;
 import org.wuerthner.sport.attribute.IntegerAttribute;
 import org.wuerthner.sport.attribute.StringAttribute;
 import org.wuerthner.sport.core.AbstractModelElement;
@@ -13,12 +12,12 @@ public class TempoEvent extends AbstractModelElement implements CwnTempoEvent, E
 	public final static String TYPE = "TempoEvent";
 	public final static int DEFAULT_TEMPO = 120;
 	public final static String DEFAULT_LABEL = "Allegro";
-	public final static IntegerAttribute tempo = new AttributeBuilder("tempo")
-			.defaultValue(DEFAULT_TEMPO)
-			.buildIntegerAttribute();
-	public final static StringAttribute label = new AttributeBuilder("label")
-			.defaultValue(DEFAULT_LABEL)
-			.buildStringAttribute();
+
+	public final static IntegerAttribute tempo = new IntegerAttribute("tempo")
+			.defaultValue(DEFAULT_TEMPO);
+
+	public final static StringAttribute label = new StringAttribute("label")
+			.defaultValue(DEFAULT_LABEL);
 	
 	public TempoEvent() {
 		super(TYPE, Arrays.asList(), Arrays.asList(position, tempo, label));

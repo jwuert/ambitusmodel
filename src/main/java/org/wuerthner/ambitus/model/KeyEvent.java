@@ -5,20 +5,18 @@ import java.util.Arrays;
 
 import org.wuerthner.cwn.api.CwnKeyEvent;
 import org.wuerthner.cwn.score.Score;
-import org.wuerthner.sport.attribute.AttributeBuilder;
 import org.wuerthner.sport.attribute.IntegerAttribute;
 import org.wuerthner.sport.core.AbstractModelElement;
 
 public class KeyEvent extends AbstractModelElement implements CwnKeyEvent, Event {
 	public final static String TYPE = "KeyEvent";
-	public final static IntegerAttribute key = new AttributeBuilder("key")
+	public final static IntegerAttribute key = new IntegerAttribute("key")
 			.required()
-			.defaultValue(0)
-			.buildSelectableIntegerAttribute();
-	public final static IntegerAttribute genus = new AttributeBuilder("genus")
+			.defaultValue(0);
+
+	public final static IntegerAttribute genus = new IntegerAttribute("genus")
 			.required()
-			.defaultValue(Score.Genus.MAJOR.code)
-			.buildIntegerAttribute();
+			.defaultValue(Score.Genus.MAJOR.code);
 	
 	public KeyEvent() {
 		super(TYPE, Arrays.asList(), Arrays.asList(position, key, genus));

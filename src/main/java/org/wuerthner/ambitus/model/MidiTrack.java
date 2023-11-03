@@ -61,20 +61,16 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 
 	public static final String[] KEYS = new String[] { "Ces (h)", "Ges (fis)", "Des (cis)", "As", "Es", "B", "F", "C", "G", "D", "A", "E", "H", "Fis", "Cis" };
 
-	public final static StringAttribute name = new AttributeBuilder("name")
+	public final static StringAttribute name = new StringAttribute("name")
 			.defaultValue(DEFAULT_NAME)
-			.required()
-			.buildStringAttribute();
-	public final static IntegerAttribute channel = new AttributeBuilder("channel")
-			.defaultValue(DEFAULT_CHANNEL)
-			.buildIntegerAttribute();
-	public final static IntegerAttribute volume = new AttributeBuilder("volume")
-			.defaultValue(DEFAULT_VOLUME)
-			.buildIntegerAttribute();
-	public final static SelectableIntegerAttribute instrument = new AttributeBuilder("instrument")
+			.required();
+	public final static IntegerAttribute channel = new IntegerAttribute("channel")
+			.defaultValue(DEFAULT_CHANNEL);
+	public final static IntegerAttribute volume = new IntegerAttribute("volume")
+			.defaultValue(DEFAULT_VOLUME);
+	public final static SelectableIntegerAttribute instrument = new SelectableIntegerAttribute("instrument")
 			.values(MIDI_INSTRUMENTS)
-			.defaultValue(DEFAULT_INSTRUMENT)
-			.buildSelectableIntegerAttribute();
+			.defaultValue(DEFAULT_INSTRUMENT);
 //	public final static SelectableIntegerAttribute clef = new AttributeBuilder("clef")
 //			.values(CLEFS)
 //			.defaultValue(DEFAULT_CLEF)
@@ -89,13 +85,11 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 //	public final static TimeSignatureAttribute timeSignature = new AmbitusAttributeBuilder("timeSignature")
 //			.defaultValue(DEFAULT_SIGNATURE)
 //			.buildTimeSignatureAttribute();
-	public final static BooleanAttribute mute = new AttributeBuilder("mute")
-			.defaultValue(false)
-			.buildBooleanAttribute();
+	public final static BooleanAttribute mute = new BooleanAttribute("mute")
+			.defaultValue(false);
 
-	public final static BooleanAttribute piano = new AttributeBuilder("piano")
-			.defaultValue(false)
-			.buildBooleanAttribute();
+	public final static BooleanAttribute piano = new BooleanAttribute("piano")
+			.defaultValue(false);
 
 	// private final Propagator<?, ?>[] propagators = new Propagator[] { new TrackKeyPropagator(this, key), new TrackTimeSignaturePropagator(this, timeSignature), new TrackClefPropagator(this, clef) };
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.wuerthner.cwn.api.CwnSymbolEvent;
-import org.wuerthner.sport.attribute.AttributeBuilder;
 import org.wuerthner.sport.attribute.IntegerAttribute;
 import org.wuerthner.sport.attribute.LongAttribute;
 import org.wuerthner.sport.attribute.StringAttribute;
@@ -13,21 +12,17 @@ import org.wuerthner.sport.core.AbstractModelElement;
 public class SymbolEvent extends AbstractModelElement implements CwnSymbolEvent, Event {
 	public final static String TYPE = "SymbolEvent";
 
-	public final static StringAttribute name = new AttributeBuilder("name")
-			.defaultValue("")
-			.buildStringAttribute();
-	public final static LongAttribute duration = new AttributeBuilder("duration")
+	public final static StringAttribute name = new StringAttribute("name")
+			.defaultValue("");
+	public final static LongAttribute duration = new LongAttribute("duration")
 			.label("Duration")
-			.defaultValue(0L)
-			.buildLongAttribute();
-	public final static IntegerAttribute verticalOffset = new AttributeBuilder("verticalOffset")
+			.defaultValue(0L);
+	public final static IntegerAttribute verticalOffset = new IntegerAttribute("verticalOffset")
 			.label("Offset")
-			.defaultValue(0)
-			.buildIntegerAttribute();
-	public final static IntegerAttribute parameter = new AttributeBuilder("parameter")
+			.defaultValue(0);
+	public final static IntegerAttribute parameter = new IntegerAttribute("parameter")
 			.label("Parameter")
-			.defaultValue(0)
-			.buildIntegerAttribute();
+			.defaultValue(0);
 
 	public SymbolEvent() {
 		super(TYPE, Arrays.asList(), Arrays.asList(position, duration, name, verticalOffset, parameter));

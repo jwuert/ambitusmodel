@@ -5,14 +5,15 @@ import org.wuerthner.cwn.api.CwnTrack;
 import org.wuerthner.cwn.api.TimeSignature;
 import org.wuerthner.cwn.position.PositionTools;
 import org.wuerthner.sport.api.Check;
+import org.wuerthner.sport.api.attributetype.Text;
 import org.wuerthner.sport.attribute.AbstractAttribute;
+import org.wuerthner.sport.attribute.LongAttribute;
 
 import java.util.List;
 
-public class PositionAttribute extends AbstractAttribute<Long> {
-    public PositionAttribute(String name, String label, Long defaultValue, boolean readonly, boolean required, boolean hidden,
-                                  String description, List<Check> dependencies, List<Check> validators) {
-        super(name, label, Long.class, defaultValue, readonly, required, hidden, description, dependencies, validators);
+public class PositionAttribute extends AbstractAttribute<Long, PositionAttribute, Text> implements Text {
+    public PositionAttribute(String name) {
+        super(name, Long.class, Text.class);
     }
 
     @Override

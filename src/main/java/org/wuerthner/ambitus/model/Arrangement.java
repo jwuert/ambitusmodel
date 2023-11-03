@@ -53,85 +53,62 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	public static final List<NamedRange> DEFAULT_RANGE_LIST = new ArrayList<>();
 	public static AbstractSelection selection = null;
 	
-	public final static StringAttribute name = new AttributeBuilder("name")
+	public final static StringAttribute name = new StringAttribute("name")
 			.defaultValue(DEFAULT_NAME)
-			.required()
-			.buildStringAttribute();
-	public final static StringAttribute composer = new AttributeBuilder("composer")
-			.defaultValue("")
-			.buildStringAttribute();
-	public final static StringAttribute subtitle = new AttributeBuilder("subtitle")
-			.defaultValue("")
-			.buildStringAttribute();
-	public final static BooleanAttribute autoBeamPrint = new AttributeBuilder("autoBeamPrint")
-			.defaultValue(true)
-			.buildBooleanAttribute();
-	public final static IntegerAttribute pulsePerQuarter = new AttributeBuilder("ppqn")
+			.required();
+	public final static StringAttribute composer = new StringAttribute("composer")
+			.defaultValue("");
+	public final static StringAttribute subtitle = new StringAttribute("subtitle")
+			.defaultValue("");
+	public final static BooleanAttribute autoBeamPrint = new BooleanAttribute("autoBeamPrint")
+			.defaultValue(true);
+	public final static IntegerAttribute pulsePerQuarter = new IntegerAttribute("ppqn")
 			.defaultValue(DEFAULT_PPQ)
-			.required()
-			.buildIntegerAttribute();
-	public final static SelectableIntegerAttribute key = new AttributeBuilder("key")
+			.required();
+	public final static SelectableIntegerAttribute key = new SelectableIntegerAttribute("key")
 			.values(KEYS)
-			.defaultValue(DEFAULT_KEY)
-			.buildSelectableIntegerAttribute();
-	public final static TimeSignatureAttribute timeSignature = new AmbitusAttributeBuilder("timeSignature")
-			.defaultValue(DEFAULT_SIGNATURE)
-			.buildTimeSignatureAttribute();
-	public final static BooleanAttribute flagAllowDottedRests = new AttributeBuilder("flagAllowDottedRests")
-			.defaultValue(true)
-			.buildBooleanAttribute();
+			.defaultValue(DEFAULT_KEY);
+	public final static TimeSignatureAttribute timeSignature = new TimeSignatureAttribute("timeSignature")
+			.defaultValue(DEFAULT_SIGNATURE);
+	public final static BooleanAttribute flagAllowDottedRests = new BooleanAttribute("flagAllowDottedRests")
+			.defaultValue(true);
 	// public final static BooleanAttribute flagSplitRests = new BooleanAttribute(new AttributeInit<>("flagSplitRests", true, false));
-	public final static BooleanAttribute durationBiDotted = new AttributeBuilder("durationBiDotted")
-			.defaultValue(false)
-			.buildBooleanAttribute();
-	public final static BooleanAttribute durationTuplet2 = new AttributeBuilder("durationTuplet2")
-			.defaultValue(false)
-			.buildBooleanAttribute();
-	public final static BooleanAttribute durationTuplet3 = new AttributeBuilder("durationTuplet3")
-			.defaultValue(true)
-			.buildBooleanAttribute();
-	public final static BooleanAttribute durationTuplet4 = new AttributeBuilder("durationTuplet4")
-			.defaultValue(false)
-			.buildBooleanAttribute();
-	public final static BooleanAttribute durationTuplet5 = new AttributeBuilder("durationTuplet5")
-			.defaultValue(false)
-			.buildBooleanAttribute();
-	public final static BooleanAttribute durationTuplet6 = new AttributeBuilder("durationTuplet6")
-			.defaultValue(false)
-			.buildBooleanAttribute();
-	public final static BooleanAttribute durationTuplet7 = new AttributeBuilder("durationTuplet7")
-			.defaultValue(false)
-			.buildBooleanAttribute();
-	public final static SelectableIntegerAttribute groupLevel = new AttributeBuilder("groupLevel")
+	public final static BooleanAttribute durationBiDotted = new BooleanAttribute("durationBiDotted")
+			.defaultValue(false);
+	public final static BooleanAttribute durationTuplet2 = new BooleanAttribute("durationTuplet2")
+			.defaultValue(false);
+	public final static BooleanAttribute durationTuplet3 = new BooleanAttribute("durationTuplet3")
+			.defaultValue(true);
+	public final static BooleanAttribute durationTuplet4 = new BooleanAttribute("durationTuplet4")
+			.defaultValue(false);
+	public final static BooleanAttribute durationTuplet5 = new BooleanAttribute("durationTuplet5")
+			.defaultValue(false);
+	public final static BooleanAttribute durationTuplet6 = new BooleanAttribute("durationTuplet6")
+			.defaultValue(false);
+	public final static BooleanAttribute durationTuplet7 = new BooleanAttribute("durationTuplet7")
+			.defaultValue(false);
+	public final static SelectableIntegerAttribute groupLevel = new SelectableIntegerAttribute("groupLevel")
 			.defaultValue(DEFAULT_GROUP_LEVEL)
-			.values(LEVELS)
-			.buildSelectableIntegerAttribute();
-	public final static SelectableIntegerAttribute tupletPresentation = new AttributeBuilder("tupletPresentation")
+			.values(LEVELS);
+	public final static SelectableIntegerAttribute tupletPresentation = new SelectableIntegerAttribute("tupletPresentation")
 			.defaultValue(DEFAULT_TUPLET_PRESENTATION)
-			.values(TUPLET_PRESENTATION)
-			.buildSelectableIntegerAttribute();
-	public final static SelectableIntegerAttribute stretchFactor = new AttributeBuilder("stretchFactor")
+			.values(TUPLET_PRESENTATION);
+	public final static SelectableIntegerAttribute stretchFactor = new SelectableIntegerAttribute("stretchFactor")
 			.defaultValue(DEFAULT_STRETCH_FACTOR_INDEX)
-			.values(STRETCH_FACTORS)
-			.buildSelectableIntegerAttribute();
-	public final static SelectableIntegerAttribute grid = new AttributeBuilder("grid")
+			.values(STRETCH_FACTORS);
+	public final static SelectableIntegerAttribute grid = new SelectableIntegerAttribute("grid")
 			.defaultValue(DEFAULT_GRID_INDEX)
-			.values(GRIDS)
-			.buildSelectableIntegerAttribute();
-	public final static SelectableIntegerAttribute resolution = new AttributeBuilder("resolution")
+			.values(GRIDS);
+	public final static SelectableIntegerAttribute resolution = new SelectableIntegerAttribute("resolution")
 			.defaultValue(DEFAULT_RESOLUTION_INDEX)
-			.values(GRIDS)
-			.buildSelectableIntegerAttribute();
-	public final static ListAttribute<NamedRange> rangeList = new AttributeBuilder("ranges")
-			.defaultValue(DEFAULT_RANGE_LIST)
-			.buildListAttribute(NamedRange.class);
-	public final static StringAttribute path = new AttributeBuilder("path")
-			.defaultValue(null)
-			.buildStringAttribute();
+			.values(GRIDS);
+	public final static StaticListAttribute<NamedRange> rangeList = new StaticListAttribute<>("ranges", NamedRange.class)
+			.defaultValue(DEFAULT_RANGE_LIST);
+	public final static StringAttribute path = new StringAttribute("path")
+			.defaultValue(null);
 
-	public final static IntegerAttribute offset = new AttributeBuilder("offset")
-			.defaultValue(DEFAULT_BAR_OFFSET)
-			.buildIntegerAttribute();
+	public final static IntegerAttribute offset = new IntegerAttribute("offset")
+			.defaultValue(DEFAULT_BAR_OFFSET);
 
 	private final ModelHistory history = new ModelHistory();
 	private final Clipboard clipboard = new ModelClipboard<Event>();

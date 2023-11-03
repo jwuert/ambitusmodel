@@ -25,43 +25,33 @@ public class NoteEvent extends AbstractModelElement implements CwnNoteEvent, Eve
 	public static final String TYPE = "NoteEvent";
 	public static final String[] SHIFT = new String[] { "bb", "b", "No", "#", "x" };
 	
-	public final static LongAttribute duration = new AttributeBuilder("duration")
+	public final static LongAttribute duration = new LongAttribute("duration")
 			.label("Duration")
-			.defaultValue(0L)
-			.buildLongAttribute();
-	public final static PitchAttribute pitch = new AmbitusAttributeBuilder("pitch")
+			.defaultValue(0L);
+	public final static PitchAttribute pitch = new PitchAttribute("pitch")
 			.required()
 			.label("Pitch")
-			.defaultValue(0)
-			.buildPitchAttribute();
-	public final static IntegerAttribute velocity = new AttributeBuilder("velocity")
+			.defaultValue(0);
+	public final static IntegerAttribute velocity = new IntegerAttribute("velocity")
 			.required()
 			.label("Velocity")
-			.defaultValue(87)
-			.buildIntegerAttribute();
-	public final static SelectableIntegerAttribute shift = new AttributeBuilder("shift")
+			.defaultValue(87);
+	public final static SelectableIntegerAttribute shift = new SelectableIntegerAttribute("shift")
 			.values(SHIFT)
+			.defaultValue(0);
+	public final static IntegerAttribute tuplet = new IntegerAttribute("tuplet")
+			.defaultValue(0);
+	public final static StringAttribute lyrics = new StringAttribute("lyrics")
+			.defaultValue("");
+	public final static IntegerAttribute stemDirection = new IntegerAttribute("stemDirection")
+			.defaultValue(0);
+	public final static BooleanAttribute isUngrouped = new BooleanAttribute("isUngrouped")
+			.defaultValue(false);
+	public final static IntegerAttribute voice = new IntegerAttribute("voice")
 			.defaultValue(0)
-			.buildSelectableIntegerAttribute();
-	public final static IntegerAttribute tuplet = new AttributeBuilder("tuplet")
-			.defaultValue(0)
-			.buildIntegerAttribute();
-	public final static StringAttribute lyrics = new AttributeBuilder("lyrics")
-			.defaultValue("")
-			.buildStringAttribute();
-	public final static IntegerAttribute stemDirection = new AttributeBuilder("stemDirection")
-			.defaultValue(0)
-			.buildIntegerAttribute();
-	public final static BooleanAttribute isUngrouped = new AttributeBuilder("isUngrouped")
-			.defaultValue(false)
-			.buildBooleanAttribute();
-	public final static IntegerAttribute voice = new AttributeBuilder("voice")
-			.defaultValue(0)
-			.label("Voice")
-			.buildIntegerAttribute();
-	public final static ListAttribute<Accent> accentList = new AttributeBuilder("accents")
-			.defaultValue(new ArrayList<Accent>())
-			.buildListAttribute(Accent.class);
+			.label("Voice");
+	public final static StaticListAttribute<Accent> accentList = new StaticListAttribute<Accent>("accents",Accent.class)
+			.defaultValue(new ArrayList<Accent>());
 	
 	private final List<String> markList = new ArrayList<>();
 	

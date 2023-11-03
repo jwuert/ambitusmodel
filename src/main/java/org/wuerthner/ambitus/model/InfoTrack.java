@@ -4,7 +4,6 @@ import org.wuerthner.cwn.api.*;
 import org.wuerthner.cwn.api.exception.TimeSignatureException;
 import org.wuerthner.cwn.position.PositionTools;
 import org.wuerthner.sport.api.ModelElement;
-import org.wuerthner.sport.attribute.AttributeBuilder;
 import org.wuerthner.sport.attribute.StringAttribute;
 import org.wuerthner.sport.core.AbstractModelElement;
 
@@ -17,10 +16,9 @@ import java.util.stream.StreamSupport;
 
 public class InfoTrack extends AbstractModelElement implements CwnTrack {
     public final static String TYPE = "InfoTrack";
-    public final static StringAttribute name = new AttributeBuilder("name")
+    public final static StringAttribute name = new StringAttribute("name")
             .defaultValue("info")
-            .required()
-            .buildStringAttribute();
+            .required();
 
     public final static Comparator eventComparator = new Comparator<ModelElement>() {
         @Override

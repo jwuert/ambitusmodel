@@ -3,7 +3,6 @@ package org.wuerthner.ambitus.model;
 import org.wuerthner.cwn.api.CwnEvent;
 import org.wuerthner.cwn.api.CwnInfoEvent;
 import org.wuerthner.cwn.api.CwnKeyEvent;
-import org.wuerthner.sport.attribute.AttributeBuilder;
 import org.wuerthner.sport.attribute.StringAttribute;
 import org.wuerthner.sport.core.AbstractModelElement;
 
@@ -13,12 +12,11 @@ import java.util.List;
 public class InfoEvent extends AbstractModelElement implements CwnInfoEvent, Event {
     public final static String TYPE = "InfoEvent";
 
-    public final static StringAttribute info = new AttributeBuilder("info")
-            .defaultValue("")
-            .buildStringAttribute();
-    public final static StringAttribute type = new AttributeBuilder("type")
-            .defaultValue("")
-            .buildStringAttribute();
+    public final static StringAttribute info = new StringAttribute("info")
+            .defaultValue("");
+
+    public final static StringAttribute type = new StringAttribute("type")
+            .defaultValue("");
 
     public InfoEvent() {
         super(TYPE, Arrays.asList(), Arrays.asList(position, info, type));

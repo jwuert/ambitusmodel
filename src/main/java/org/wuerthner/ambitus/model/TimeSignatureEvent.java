@@ -13,10 +13,9 @@ import org.wuerthner.sport.core.AbstractModelElement;
 
 public class TimeSignatureEvent extends AbstractModelElement implements CwnTimeSignatureEvent, Event {
 	public final static String TYPE = "TimeSignatureEvent";
-	public final static TimeSignatureAttribute timeSignature = new AmbitusAttributeBuilder("timeSignature")
+	public final static TimeSignatureAttribute timeSignature = new TimeSignatureAttribute("timeSignature")
 			.required()
-			.defaultValue(new SimpleTimeSignature("4/4"))
-			.buildTimeSignatureAttribute();
+			.defaultValue(new SimpleTimeSignature("4/4"));
 
 	public TimeSignatureEvent() {
 		super(TYPE, Arrays.asList(), Arrays.asList(position, timeSignature));
