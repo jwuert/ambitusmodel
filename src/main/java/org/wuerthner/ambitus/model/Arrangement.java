@@ -3,7 +3,6 @@ package org.wuerthner.ambitus.model;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.wuerthner.ambitus.attribute.AmbitusAttributeBuilder;
 import org.wuerthner.ambitus.attribute.TimeSignatureAttribute;
 import org.wuerthner.ambitus.tool.AbstractSelection;
 import org.wuerthner.ambitus.type.NamedRange;
@@ -26,14 +25,12 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	public static final String DEFAULT_NAME = "Untitled";
 	public static final int DEFAULT_PPQ = 960;
 	public static final String[] KEYS = MidiTrack.KEYS;
-	public static final String[] GENUS = new String[]{"Undefined", "Minor", "Major", "Diminished"};
+	public static final String [] GENUS = new String[]{"Undefined", "Minor", "Major", "Diminished"};
 	public static final String[] CLEFS = MidiTrack.CLEFS;
 	public static final String[] GRIDS = new String[] { "1", "1/2", "1/4", "1/8", "1/16", "1/32", "1/64" };
 	public static final String[] LEVELS = new String[] { "-", "1st level", "2nd level", "3rd level", "4th level", "5th level" };
 	public static final String[] TUPLET_PRESENTATION = new String[] { "Short", "Full" };
 	public static final String[] STRETCH_FACTORS = new String[] { "Narrow", "Normal", "Wide" };
-	// public static final String[] DEVICES_IN = BaseRegistry.getInstance().getAttachment(Deviceclass).getInputDevices();
-	// public static final String[] DEVICES_OUT = BaseRegistry.getInstance().getAttachment(Deviceclass).getOutputDevices();
 	public static final Long DEFAULT_POSITION = 0L;
 	public static final Integer DEFAULT_TEMPO = 100;
 	public static final Integer DEFAULT_KEY = 7;
@@ -111,7 +108,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 			.defaultValue(DEFAULT_BAR_OFFSET);
 
 	private final ModelHistory history = new ModelHistory();
-	private final Clipboard clipboard = new ModelClipboard<Event>();
+	private final Clipboard<Event> clipboard = new ModelClipboard<>();
 
 	public Arrangement() {
 		super(TYPE, Arrays.asList(MidiTrack.TYPE, InfoTrack.TYPE), Arrays.asList(name, subtitle, composer, autoBeamPrint, pulsePerQuarter,
@@ -129,7 +126,8 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	}
 
 	public List<MidiTrack> getActiveMidiTrackList() {
-		return getChildrenByClass(MidiTrack.class).stream().map(e -> MidiTrack.class.cast(e)).filter(tr -> tr.isActive()).collect(Collectors.toList());
+		// return getChildrenByClass(MidiTrack.class).stream().map(e -> MidiTrack.class.cast(e)).filter(tr -> tr.isActive()).collect(Collectors.toList());
+		return getChildrenByClass(MidiTrack.class).stream().map(MidiTrack.class::cast).filter(MidiTrack::isActive).collect(Collectors.toList());
 	}
 
 	@Override
@@ -150,10 +148,10 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	}
 
 	public void setSelection(AbstractSelection selection) {
-		this.selection = selection;
+		Arrangement.selection = selection;
 	}
 
-	public Clipboard getClipboard() { return clipboard; }
+	public Clipboard<Event> getClipboard() { return clipboard; }
 
 	public boolean hasUndo() {
 		return history.hasUndo();
@@ -569,6 +567,12 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	}
 
 	public void addEvent(MidiTrack track, Event event) {
+		track.performAddChildOperation(event, history);
+	}
+
+	public void addEventWithCaution(MidiTrack track, NoteEvent event) {
+		long position = track.findNextFreeSpace(event.getPosition(), event.getDuration(), event.getVoice());
+		event.setAttributeValue(NoteEvent.position, position);
 		track.performAddChildOperation(event, history);
 	}
 

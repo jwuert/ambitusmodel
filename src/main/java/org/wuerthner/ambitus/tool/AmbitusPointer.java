@@ -9,6 +9,8 @@ public class AmbitusPointer implements CwnPointer {
     private int pitch = 0;
     private Region region;
     private int staffIndex;
+    private int deltaY;
+    private int relativeY;
 
     @Override
     public Region getRegion() {
@@ -43,6 +45,26 @@ public class AmbitusPointer implements CwnPointer {
     @Override
     public int getStaffIndex() {
         return staffIndex;
+    }
+
+    @Override
+    public void setRelativeY(int y) {
+        this.relativeY = y;
+    }
+
+    @Override
+    public int getRelativeY() {
+        return relativeY;
+    }
+
+    @Override
+    public void setDeltaY(int deltaY) {
+        this.deltaY = deltaY;
+    }
+
+    @Override
+    public int getDeltaY() {
+        return deltaY;
     }
 
     @Override

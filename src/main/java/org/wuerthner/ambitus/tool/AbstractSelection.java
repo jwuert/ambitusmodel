@@ -15,6 +15,7 @@ public abstract class AbstractSelection implements CwnSelection<Event> {
     private List<Event> selectedElements = new ArrayList<>();
     private int staffIndex;
     private SelectionType type;
+    private SelectionSubType subType;
     private long mouseStartPosition;
     private long mouseEndPosition;
     private int mouseStaff;
@@ -24,19 +25,21 @@ public abstract class AbstractSelection implements CwnSelection<Event> {
         this.staffIndex = staffIndex;
     }
 
-    public void set(int staffIndex, SelectionType type) {
+    public void set(int staffIndex, SelectionType type, SelectionSubType subType) {
         this.selectedElements = new ArrayList<>();
         this.staffIndex = staffIndex;
         this.type = type;
+        this.subType = subType;
     }
 
-    public void set(List<ModelElement> list, int staffIndex, SelectionType type) {
+    public void set(List<ModelElement> list, int staffIndex, SelectionType type, SelectionSubType subType) {
         this.selectedElements = list
                 .stream()
                 .filter(e -> e instanceof Event).map(e -> (Event) e)
                 .collect(Collectors.toList());
         this.staffIndex = staffIndex;
         this.type = type;
+        this.subType = subType;
     }
 
     public void set(List<ModelElement> list) {
@@ -48,11 +51,12 @@ public abstract class AbstractSelection implements CwnSelection<Event> {
         this.type = SelectionType.NOTE;
     }
 
-    public void set(Event event, int staffIndex, SelectionType type) {
+    public void set(Event event, int staffIndex, SelectionType type, SelectionSubType subType) {
         this.selectedElements = new ArrayList<>();
         this.staffIndex = staffIndex;
         selectedElements.add(event);
         this.type = type;
+        this.subType = subType;
     }
 
     public void clear() {
@@ -120,6 +124,11 @@ public abstract class AbstractSelection implements CwnSelection<Event> {
     }
 
     @Override
+    public CwnSelection.SelectionSubType getSelectionSubType() {
+        return subType;
+    }
+
+    @Override
     public CwnPointer getPointer() {
         return pointer;
     }
@@ -151,6 +160,7 @@ public abstract class AbstractSelection implements CwnSelection<Event> {
             pointer.setPosition(location.position);
             pointer.setPitch(location.pitch);
             pointer.setStaffIndex(location.staffIndex);
+            pointer.setDeltaY(location.yRelative);
             if (location.barConfig) {
                 pointer.setRegion(CwnPointer.Region.CONFIG);
             } else if (location.position<0) {

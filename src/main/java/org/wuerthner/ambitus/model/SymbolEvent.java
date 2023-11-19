@@ -2,6 +2,7 @@ package org.wuerthner.ambitus.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.wuerthner.cwn.api.CwnSymbolEvent;
 import org.wuerthner.sport.attribute.IntegerAttribute;
@@ -23,9 +24,12 @@ public class SymbolEvent extends AbstractModelElement implements CwnSymbolEvent,
 	public final static IntegerAttribute parameter = new IntegerAttribute("parameter")
 			.label("Parameter")
 			.defaultValue(0);
+	public final static IntegerAttribute voice = new IntegerAttribute("voice")
+			.defaultValue(0)
+			.label("Voice");
 
 	public SymbolEvent() {
-		super(TYPE, Arrays.asList(), Arrays.asList(position, duration, name, verticalOffset, parameter));
+		super(TYPE, Arrays.asList(), Arrays.asList(position, duration, name, verticalOffset, parameter, voice));
 	}
 
 	public String getId() {
@@ -55,6 +59,11 @@ public class SymbolEvent extends AbstractModelElement implements CwnSymbolEvent,
 	@Override
 	public int getParameter() {
 		return getAttributeValue(parameter);
+	}
+
+	@Override
+	public int getVoice() {
+		return getAttributeValue(voice);
 	}
 	
 	private int indexOf(String symbol) {
@@ -90,7 +99,7 @@ public class SymbolEvent extends AbstractModelElement implements CwnSymbolEvent,
 	
 	@Override
 	public boolean isOctave() {
-		return (getSymbolName().equals(SYMBOL_8VA) || getSymbolName().equals(SYMBOL_15VA));
+		return (getSymbolName().equals("o"+SYMBOL_8VA) || getSymbolName().equals("o"+SYMBOL_15VA));
 	}
 	
 	@Override
@@ -101,4 +110,25 @@ public class SymbolEvent extends AbstractModelElement implements CwnSymbolEvent,
 	public String toString() {
 		return "Symbol{name=" + getSymbolName() + ", position=" + getPosition() + ", duration=" + getDuration() + ", verticalOffset=" + getVerticalOffset() + ", parameter=" + getParameter() + "}";
 	}
+
+	public static boolean aboveStaff(String name) {
+		return name.equals("o"+SYMBOL_8VA) || name.equals("o"+SYMBOL_15VA) || name.equals(SYMBOL_CASE1) || name.equals(SYMBOL_CASE2)
+				|| name.equals(SYMBOL_LABEL1)|| name.equals(SYMBOL_LABEL2)|| name.equals(SYMBOL_LABEL3);
+	}
+	public static boolean belowStaffRange(String name) {
+		return dynamic.contains(name);
+	}
+
+	public static boolean belowStaffPoint(String name) {
+		return pointLike.contains(name);
+	}
+
+	public static boolean withinStaff(String name) {
+		return name.equals(SYMBOL_BOWDOWN) || name.equals(SYMBOL_BOWUP);
+	}
+
+	public static List<String> dynamic = Arrays.asList(SYMBOL_CRESCENDO, SYMBOL_DECRESCENDO);
+
+	public static List<String> pointLike = Arrays.asList(SYMBOL_F, SYMBOL_FF, SYMBOL_FFF,
+			SYMBOL_FP, SYMBOL_MF, SYMBOL_P, SYMBOL_MP, SYMBOL_PP, SYMBOL_PPP, SYMBOL_SF, SYMBOL_SFF, SYMBOL_SFZ, SYMBOL_PEDAL1, SYMBOL_PEDAL2);
 }

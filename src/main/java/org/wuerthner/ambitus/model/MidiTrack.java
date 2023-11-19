@@ -427,11 +427,13 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		return first;
 	}
 
-	public Optional<NoteEvent> findFirstNoteAtPosition(long position, int pitch) {
+	public Optional<NoteEvent> findFirstNoteAtPosition(long position, int pitch, int voice) {
 		Optional<NoteEvent> first = getChildren()
 				.stream()
 				.filter(ev -> NoteEvent.class.isAssignableFrom(ev.getClass()) &&  ((NoteEvent)ev).getPosition() == position
-						&& ( ((NoteEvent) ev).getPitch() == pitch || pitch == -1 ))
+						&& ( ((NoteEvent) ev).getPitch() == pitch || pitch == -1 )
+						&& ( ((NoteEvent) ev).getVoice() == voice || voice == -1 )
+				)
 				.map(ev -> (NoteEvent) ev)
 				.findFirst();
 		return first;
@@ -442,13 +444,23 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 		return event.isPresent() ? event.get() : null;
 	}
 
+	public NoteEvent findFirstNoteAtPositionInVoiceOrNull(long position, int voice) {
+		Optional<NoteEvent> event = findFirstNoteAtPosition(position, -1, voice);
+		return event.isPresent() ? event.get() : null;
+	}
+
+	public NoteEvent findFirstNoteAtPositionOrNull(long position, int pitch, int voice) {
+		Optional<NoteEvent> event = findFirstNoteAtPosition(position, pitch, -1);
+		return event.isPresent() ? event.get() : null;
+	}
+
 	public NoteEvent findFirstNoteAtPositionOrNull(long position, int pitch) {
-		Optional<NoteEvent> event = findFirstNoteAtPosition(position, pitch);
+		Optional<NoteEvent> event = findFirstNoteAtPosition(position, pitch, -1);
 		return event.isPresent() ? event.get() : null;
 	}
 
 	public NoteEvent findFirstNoteAtPositionOrNull(long position) {
-		Optional<NoteEvent> event = findFirstNoteAtPosition(position, -1);
+		Optional<NoteEvent> event = findFirstNoteAtPosition(position, -1, -1);
 		return event.isPresent() ? event.get() : null;
 	}
 
@@ -577,5 +589,27 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 	@Override
 	public Comparator<ModelElement> getComparator() {
 		return eventComparator;
+	}
+
+	public long findNextFreeSpace(long position, long duration, int voice) {
+		long candidatePosition = 0;
+		for (ModelElement element : getChildren()) {
+			if (element instanceof NoteEvent && ((NoteEvent) element).getVoice() == voice) {
+				NoteEvent noteEvent = (NoteEvent) element;
+				if (noteEvent.getPosition()==position && noteEvent.getDuration()==duration) {
+					return position;
+				}
+				if (candidatePosition >= position && candidatePosition+duration <= noteEvent.getPosition()) {
+					return candidatePosition;
+				}
+				candidatePosition = (candidatePosition < position && position <= noteEvent.getPosition()) ?
+						position :
+						noteEvent.getEnd();
+			}
+		}
+		if (candidatePosition >= position) {
+			return candidatePosition;
+		}
+		return position;
 	}
 }
