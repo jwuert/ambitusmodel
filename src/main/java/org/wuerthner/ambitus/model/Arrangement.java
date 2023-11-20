@@ -1159,7 +1159,30 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 			opList.add(new SetAttributeValueOperation<>(event, NoteEvent.lyrics, lyrics));
 		}
 		if (!opList.isEmpty()) {
-			Transaction transaction = new Transaction("Set Attribute List", opList);
+			Transaction transaction = new Transaction("Set Note Attribute List", opList);
+			this.performTransaction(transaction, history);
+		}
+	}
+
+	public void setSymbolEventAttributes(SymbolEvent event, long position, long duration, int vOffset, int parameter, int voice) {
+		List<Operation> opList = new ArrayList<>();
+		if (position != event.getPosition()) {
+			opList.add(new SetAttributeValueOperation<>(event, SymbolEvent.position, position));
+		}
+		if (duration != event.getDuration()) {
+			opList.add(new SetAttributeValueOperation<>(event, SymbolEvent.duration, duration));
+		}
+		if (vOffset != event.getVerticalOffset()) {
+			opList.add(new SetAttributeValueOperation<>(event, SymbolEvent.verticalOffset, vOffset));
+		}
+		if (parameter != event.getParameter()) {
+			opList.add(new SetAttributeValueOperation<>(event, SymbolEvent.parameter, parameter));
+		}
+		if (voice != event.getVoice()) {
+			opList.add(new SetAttributeValueOperation<>(event, SymbolEvent.voice, voice));
+		}
+		if (!opList.isEmpty()) {
+			Transaction transaction = new Transaction("Set Symbol Attribute List", opList);
 			this.performTransaction(transaction, history);
 		}
 	}
