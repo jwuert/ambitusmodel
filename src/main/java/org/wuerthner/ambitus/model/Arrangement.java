@@ -440,10 +440,10 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 			List<Operation> opList = new ArrayList<>();
 			MidiTrack track = trackOptional.get();
 			long position = PositionTools.firstBeat(track, barPosition);
-			opList.addAll(handleEventSettingInBar(Optional.empty(), position, TimeSignatureEvent.class, TimeSignatureEvent.TYPE, TimeSignature.class, TimeSignatureEvent.timeSignature, timeSignature, factory));
-			opList.addAll(handleEventSettingInBar(Optional.empty(), position, KeyEvent.class, KeyEvent.TYPE, Integer.class, KeyEvent.key, key-7, factory));
-			opList.addAll(handleEventSettingInBar(Optional.empty(), position, KeyEvent.class, KeyEvent.TYPE, Integer.class, KeyEvent.genus, genus, factory));
-			opList.addAll(handleEventSettingInBar(Optional.of(track), position, ClefEvent.class, ClefEvent.TYPE, Integer.class, ClefEvent.clef, clef, factory));
+			opList.addAll(handleEventSettingInBar(Optional.empty(), position, TimeSignatureEvent.class, TimeSignatureEvent.TYPE, TimeSignature.class, TimeSignatureEvent.timeSignature, timeSignature, -1, factory));
+			opList.addAll(handleEventSettingInBar(Optional.empty(), position, KeyEvent.class, KeyEvent.TYPE, Integer.class, KeyEvent.key, (key-7), genus, factory));
+			// opList.addAll(handleEventSettingInBar(Optional.empty(), position, KeyEvent.class, KeyEvent.TYPE, Integer.class, KeyEvent.genus, genus, key, factory));
+			opList.addAll(handleEventSettingInBar(Optional.of(track), position, ClefEvent.class, ClefEvent.TYPE, Integer.class, ClefEvent.clef, clef, -1, factory));
 			Optional<BarEvent> barEvent = track.getBarEvent(position);
 			if (bar.equals(CwnBarEvent.STANDARD)) {
 				if (barEvent.isPresent()) {	opList.add(new RemoveChildOperation(barEvent.get())); }
@@ -460,7 +460,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 					opList.add(new AddChildOperation(track, event));
 				}
 			}
-			opList.addAll(handleEventSettingInBar(Optional.of(firstTrack), position, TempoEvent.class, TempoEvent.TYPE, Integer.class, TempoEvent.tempo, tempo, factory));
+			opList.addAll(handleEventSettingInBar(Optional.of(firstTrack), position, TempoEvent.class, TempoEvent.TYPE, Integer.class, TempoEvent.tempo, tempo, -1, factory));
 			Transaction transaction = new Transaction("Change bar properties", opList);
 			track.performTransaction(transaction, history);
 		} else {
@@ -469,7 +469,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	}
 
 	private <EVENT extends Event, TYPE> List<Operation> handleEventSettingInBar(Optional<MidiTrack> trackOptional, long position, Class<EVENT> eventClass, String eventType,
-																	 Class<TYPE> typeClass, Attribute<TYPE> attribute, TYPE value, AmbitusFactory factory) {
+																	 Class<TYPE> typeClass, Attribute<TYPE> attribute, TYPE value, int supplementalValue, AmbitusFactory factory) {
 		List<Operation> opList = new ArrayList<>();
 		for (CwnTrack cwnTrack : getTrackList()) {
 			MidiTrack track = (MidiTrack) cwnTrack;
@@ -481,7 +481,11 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 					changeRequired = true;
 				} else {
 					EVENT recentEvent = recentEventOptional.get();
-					changeRequired = (!recentEvent.getAttributeValue(attribute).toString().equals(value.toString()));
+					if (attribute==KeyEvent.key) {
+						changeRequired = !(recentEvent.getAttributeValue(attribute) == value && recentEvent.getAttributeValue(KeyEvent.genus) == supplementalValue);
+					} else {
+						changeRequired = (!recentEvent.getAttributeValue(attribute).toString().equals(value.toString()));
+					}
 				}
 				// lookup event in bar:
 				Optional<EVENT> eventOptional = track.findFirstEventAtPosition(position, eventClass);
@@ -490,8 +494,10 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 					if (changeRequired) {
 						Event event = eventOptional.get();
 						opList.add(new SetAttributeValueOperation<>(event, attribute, value));
-						opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
-						if (eventType.equals(TempoEvent.TYPE)) {
+						//opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
+						if (attribute==KeyEvent.key) {
+							opList.add(new SetAttributeValueOperation<>(event, KeyEvent.genus, supplementalValue));
+						} else if (attribute.equals(TempoEvent.tempo)) {
 							opList.add(new SetAttributeValueOperation<>(event, TempoEvent.label, MidiTrack.getTempoLabel((int) value)));
 						}
 					} else {
@@ -503,7 +509,9 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 						EVENT event = factory.createElement(eventType);
 						opList.add(new SetAttributeValueOperation<>(event, attribute, value));
 						opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
-						if (eventType.equals(TempoEvent.TYPE)) {
+						if (attribute==KeyEvent.key) {
+							opList.add(new SetAttributeValueOperation<>(event, KeyEvent.genus, supplementalValue));
+						} else if (attribute.equals(TempoEvent.tempo)) {
 							opList.add(new SetAttributeValueOperation<>(event, TempoEvent.label, MidiTrack.getTempoLabel((int) value)));
 						}
 						opList.add(new AddChildOperation(track, event));
@@ -561,7 +569,6 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		if (!getAttributeValue(Arrangement.durationTuplet6, false).equals(tuplet6)) {
 			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationTuplet6, tuplet6));
 		}
-		// for (Operation op : opList) System.out.println(" = " + op.info());
 		Transaction transaction = new Transaction("Change Configuration", opList);
 		this.performTransaction(transaction, history);
 	}
