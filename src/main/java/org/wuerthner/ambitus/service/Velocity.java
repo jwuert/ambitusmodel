@@ -52,12 +52,10 @@ public class Velocity {
             long start = list.get(0).getPosition();
             long end = list.get(list.size()-1).getPosition();
             double ratio = (velocityEnd-velocityStart)*1.0/(end-start);
-            System.out.println("ra: " + ratio);
             for (Event event : list) {
                 if (event instanceof NoteEvent) {
                     long pos = event.getPosition();
                     int velocity = (int) (velocityStart + ratio*1.0*(pos-start));
-                    System.out.println("vel: " + velocity);
                     opList.add(new SetAttributeValueOperation(event, NoteEvent.velocity, velocity));
                 }
             }

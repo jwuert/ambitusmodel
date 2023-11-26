@@ -54,15 +54,12 @@ public class AutoShift {
                 boolean evenPitch = pitchList.contains(pitch);
 
                 int enharmonicShift = ((NoteEvent) event).getEnharmonicShift();
-                //System.out.println("-> " + pitch + " (" + ((NoteEvent) event).getCPitch() + "), even:" + evenPitch + ", enh: " + enharmonicShift);
                 if (!evenPitch) {
                     if (enharmonicShift != newEnhShift) {
-                        // System.out.println("set enh = " + newEnhShift + " for " + pitch + " (" + ((NoteEvent) event).getCPitch() + ")");
                         opList.add(new SetAttributeValueOperation(event, NoteEvent.shift, newEnhShift));
                     }
                 } else {
                     if (enharmonicShift != 0) {
-                        // System.out.println("set enh = " + 0 + " for " + pitch + " (" + ((NoteEvent) event).getCPitch() + ")");
                         opList.add(new SetAttributeValueOperation(event, NoteEvent.shift, 0));
                     }
                 }

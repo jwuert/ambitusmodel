@@ -100,7 +100,6 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 			if (element1 instanceof Event && element2 instanceof Event) {
 				comp = Long.compare(((Event) element1).getPosition(), ((Event) element2).getPosition());
 				if (comp==0) {
-					System.out.println(element1.getType() + " ~ " + element2.getType());
 					if (element1 instanceof NoteEvent && element2 instanceof NoteEvent) {
 						comp = Integer.compare(((NoteEvent) element1).getPitch(), ((NoteEvent) element2).getPitch());
 					} else if (element1 instanceof NoteEvent) {
