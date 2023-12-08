@@ -69,20 +69,10 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 			.defaultValue(DEFAULT_SIGNATURE);
 	public final static BooleanAttribute flagAllowDottedRests = new BooleanAttribute("flagAllowDottedRests")
 			.defaultValue(true);
+	public final static BooleanAttribute flagMergeRestsInEmptyBars = new BooleanAttribute("flagMergeRestsInEmptyBars")
+			.defaultValue(true);
 	// public final static BooleanAttribute flagSplitRests = new BooleanAttribute(new AttributeInit<>("flagSplitRests", true, false));
 	public final static BooleanAttribute durationBiDotted = new BooleanAttribute("durationBiDotted")
-			.defaultValue(false);
-	public final static BooleanAttribute durationTuplet2 = new BooleanAttribute("durationTuplet2")
-			.defaultValue(false);
-	public final static BooleanAttribute durationTuplet3 = new BooleanAttribute("durationTuplet3")
-			.defaultValue(true);
-	public final static BooleanAttribute durationTuplet4 = new BooleanAttribute("durationTuplet4")
-			.defaultValue(false);
-	public final static BooleanAttribute durationTuplet5 = new BooleanAttribute("durationTuplet5")
-			.defaultValue(false);
-	public final static BooleanAttribute durationTuplet6 = new BooleanAttribute("durationTuplet6")
-			.defaultValue(false);
-	public final static BooleanAttribute durationTuplet7 = new BooleanAttribute("durationTuplet7")
 			.defaultValue(false);
 	public final static SelectableIntegerAttribute groupLevel = new SelectableIntegerAttribute("groupLevel")
 			.defaultValue(DEFAULT_GROUP_LEVEL)
@@ -113,7 +103,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	public Arrangement() {
 		super(TYPE, Arrays.asList(MidiTrack.TYPE, InfoTrack.TYPE), Arrays.asList(name, subtitle, composer, autoBeamPrint, pulsePerQuarter,
 				key, timeSignature, stretchFactor, groupLevel, tupletPresentation, grid, resolution, rangeList, path,
-				flagAllowDottedRests, durationBiDotted, durationTuplet2, durationTuplet3, durationTuplet4, durationTuplet5, durationTuplet6,
+				flagAllowDottedRests, flagMergeRestsInEmptyBars, durationBiDotted,
 				offset));
 	}
 
@@ -472,51 +462,53 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 																	 Class<TYPE> typeClass, Attribute<TYPE> attribute, TYPE value, int supplementalValue, AmbitusFactory factory) {
 		List<Operation> opList = new ArrayList<>();
 		for (CwnTrack cwnTrack : getTrackList()) {
-			MidiTrack track = (MidiTrack) cwnTrack;
-			if (trackOptional.isEmpty() || trackOptional.get().equals(track)) {
-				Optional<EVENT> recentEventOptional = track.findEventBefore(position, eventClass);
-				boolean changeRequired = false;
-				if (!recentEventOptional.isPresent()) {
-					// throw new RuntimeException("Previous Event unexpectedly does not exist!");
-					changeRequired = true;
-				} else {
-					EVENT recentEvent = recentEventOptional.get();
-					if (attribute==KeyEvent.key) {
-						changeRequired = !(recentEvent.getAttributeValue(attribute) == value && recentEvent.getAttributeValue(KeyEvent.genus) == supplementalValue);
+			if (cwnTrack instanceof MidiTrack) {
+				MidiTrack track = (MidiTrack) cwnTrack;
+				if (trackOptional.isEmpty() || trackOptional.get().equals(track)) {
+					Optional<EVENT> recentEventOptional = track.findEventBefore(position, eventClass);
+					boolean changeRequired = false;
+					if (!recentEventOptional.isPresent()) {
+						// throw new RuntimeException("Previous Event unexpectedly does not exist!");
+						changeRequired = true;
 					} else {
-						changeRequired = (!recentEvent.getAttributeValue(attribute).toString().equals(value.toString()));
+						EVENT recentEvent = recentEventOptional.get();
+						if (attribute == KeyEvent.key) {
+							changeRequired = !(recentEvent.getAttributeValue(attribute) == value && recentEvent.getAttributeValue(KeyEvent.genus) == supplementalValue);
+						} else {
+							changeRequired = (!recentEvent.getAttributeValue(attribute).toString().equals(value.toString()));
+						}
 					}
-				}
-				// lookup event in bar:
-				Optional<EVENT> eventOptional = track.findFirstEventAtPosition(position, eventClass);
-				if (eventOptional.isPresent()) {
-					// CHANGE EXISTING EVENT
-					if (changeRequired) {
-						Event event = eventOptional.get();
-						opList.add(new SetAttributeValueOperation<>(event, attribute, value));
-						//opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
-						if (attribute==KeyEvent.key) {
-							opList.add(new SetAttributeValueOperation<>(event, KeyEvent.genus, supplementalValue));
-						} else if (attribute.equals(TempoEvent.tempo)) {
-							opList.add(new SetAttributeValueOperation<>(event, TempoEvent.label, MidiTrack.getTempoLabel((int) value)));
+					// lookup event in bar:
+					Optional<EVENT> eventOptional = track.findFirstEventAtPosition(position, eventClass);
+					if (eventOptional.isPresent()) {
+						// CHANGE EXISTING EVENT
+						if (changeRequired) {
+							Event event = eventOptional.get();
+							opList.add(new SetAttributeValueOperation<>(event, attribute, value));
+							//opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
+							if (attribute == KeyEvent.key) {
+								opList.add(new SetAttributeValueOperation<>(event, KeyEvent.genus, supplementalValue));
+							} else if (attribute.equals(TempoEvent.tempo)) {
+								opList.add(new SetAttributeValueOperation<>(event, TempoEvent.label, MidiTrack.getTempoLabel((int) value)));
+							}
+						} else {
+							opList.add(new RemoveChildOperation(eventOptional.get()));
 						}
 					} else {
-						opList.add(new RemoveChildOperation(eventOptional.get()));
-					}
-				} else {
-					// INSERT NEW EVENT
-					if (changeRequired) {
-						EVENT event = factory.createElement(eventType);
-						opList.add(new SetAttributeValueOperation<>(event, attribute, value));
-						opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
-						if (attribute==KeyEvent.key) {
-							opList.add(new SetAttributeValueOperation<>(event, KeyEvent.genus, supplementalValue));
-						} else if (attribute.equals(TempoEvent.tempo)) {
-							opList.add(new SetAttributeValueOperation<>(event, TempoEvent.label, MidiTrack.getTempoLabel((int) value)));
+						// INSERT NEW EVENT
+						if (changeRequired) {
+							EVENT event = factory.createElement(eventType);
+							opList.add(new SetAttributeValueOperation<>(event, attribute, value));
+							opList.add(new SetAttributeValueOperation<>(event, Event.position, position));
+							if (attribute == KeyEvent.key) {
+								opList.add(new SetAttributeValueOperation<>(event, KeyEvent.genus, supplementalValue));
+							} else if (attribute.equals(TempoEvent.tempo)) {
+								opList.add(new SetAttributeValueOperation<>(event, TempoEvent.label, MidiTrack.getTempoLabel((int) value)));
+							}
+							opList.add(new AddChildOperation(track, event));
+						} else {
+							// nothing to do here!
 						}
-						opList.add(new AddChildOperation(track, event));
-					} else {
-						// nothing to do here!
 					}
 				}
 			}
@@ -525,7 +517,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 	}
 
 	public void setConfiguration(String title, String subtitle, String composer, int ppq, int level, int resolution, int stretchFac,
-								 boolean dottedRests, boolean biDotted, boolean tuplet2, boolean tuplet3, boolean tuplet4, boolean tuplet5, boolean tuplet6) {
+								 boolean dottedRests, boolean mergeRests, boolean biDotted) {
 		List<Operation> opList = new ArrayList<>();
 		if (!getAttributeValue(Arrangement.name, "").equals(title)) {
 			opList.add(new SetAttributeValueOperation<>(this, Arrangement.name, title));
@@ -551,26 +543,22 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		if (!getAttributeValue(Arrangement.flagAllowDottedRests, true).equals(dottedRests)) {
 			opList.add(new SetAttributeValueOperation<>(this, Arrangement.flagAllowDottedRests, dottedRests));
 		}
+		if (!getAttributeValue(Arrangement.flagMergeRestsInEmptyBars, true).equals(mergeRests)) {
+			opList.add(new SetAttributeValueOperation<>(this, Arrangement.flagMergeRestsInEmptyBars, mergeRests));
+		}
 		if (!getAttributeValue(Arrangement.durationBiDotted, false).equals(biDotted)) {
 			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationBiDotted, biDotted));
 		}
-		if (!getAttributeValue(Arrangement.durationTuplet2, false).equals(tuplet2)) {
-			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationTuplet2, tuplet2));
-		}
-		if (!getAttributeValue(Arrangement.durationTuplet3, false).equals(tuplet3)) {
-			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationTuplet3, tuplet3));
-		}
-		if (!getAttributeValue(Arrangement.durationTuplet4, false).equals(tuplet4)) {
-			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationTuplet4, tuplet4));
-		}
-		if (!getAttributeValue(Arrangement.durationTuplet5, false).equals(tuplet5)) {
-			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationTuplet5, tuplet5));
-		}
-		if (!getAttributeValue(Arrangement.durationTuplet6, false).equals(tuplet6)) {
-			opList.add(new SetAttributeValueOperation<>(this, Arrangement.durationTuplet6, tuplet6));
-		}
 		Transaction transaction = new Transaction("Change Configuration", opList);
 		this.performTransaction(transaction, history);
+	}
+
+	public void setGroupLevel(int level) {
+		this.performSetAttributeValueOperation(Arrangement.groupLevel, level, history);
+	}
+
+	public int getGroupLevel() {
+		return getAttributeValue(Arrangement.groupLevel);
 	}
 
 	public void addEvent(MidiTrack track, Event event) {
@@ -1203,36 +1191,47 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		return true;
 	}
 
-	public int getFlags() {
-		return (getFlagAllowDottedRests() ? Score.ALLOW_DOTTED_RESTS : 0) + (getFlagSplitRests() ? Score.SPLIT_RESTS : 0);
+	public boolean getFlagMergeRestsInEmptyBars() {
+		Boolean value = getAttributeValue(flagMergeRestsInEmptyBars);
+		return value == null ? false : value;
 	}
 
-	public List<DurationType> getDurations() {
-		List<DurationType> list = new ArrayList<>();
-		list.add(DurationType.REGULAR);
-		if (getAttributeValue(Arrangement.durationBiDotted)) {
-			list.add(DurationType.BIDOTTED);
-		}
-		if (true) {
-			list.add(DurationType.DOTTED);
-		}
-		if (getAttributeValue(Arrangement.durationTuplet2)) {
-			list.add(DurationType.DUPLET);
-		}
-		if (getAttributeValue(Arrangement.durationTuplet3)) {
-			list.add(DurationType.TRIPLET);
-		}
-		if (getAttributeValue(Arrangement.durationTuplet4)) {
-			list.add(DurationType.QUADRUPLET);
-		}
-		if (getAttributeValue(Arrangement.durationTuplet5)) {
-			list.add(DurationType.QUINTUPLET);
-		}
-		if (getAttributeValue(Arrangement.durationTuplet6)) {
-			list.add(DurationType.SEXTUPLET);
-		}
-		return list;
+	public int getFlags() {
+		return (getFlagAllowDottedRests() ? Score.ALLOW_DOTTED_RESTS : 0)
+				+ (getFlagSplitRests() ? Score.SPLIT_RESTS : 0)
+				+ (getFlagMergeRestsInEmptyBars() ? Score.MERGE_RESTS_IN_EMPTY_BARS : 0);
 	}
+
+	public void setFlags(int flags) {
+		setAttributeValue(Arrangement.flagAllowDottedRests, (flags & Score.ALLOW_DOTTED_RESTS)>0);
+		setAttributeValue(Arrangement.flagMergeRestsInEmptyBars, (flags & Score.MERGE_RESTS_IN_EMPTY_BARS)>0);
+	}
+
+//	public List<DurationType> getDurations() {
+//		List<DurationType> list = new ArrayList<>();
+//		list.add(DurationType.REGULAR);
+//		if (getAttributeValue(Arrangement.durationBiDotted)) {
+//			list.add(DurationType.BIDOTTED);
+//		}
+//		if (true) {
+//			list.add(DurationType.DOTTED);
+//		}
+////		if (getAttributeValue(Arrangement.durationTuplet2)) {
+////			list.add(DurationType.DUPLET);
+////		}
+////		list.add(DurationType.TRIPLET);
+////		list.add(DurationType.QUINTUPLET);
+////		if (getAttributeValue(Arrangement.durationTuplet4)) {
+////			list.add(DurationType.QUADRUPLET);
+////		}
+////		if (getAttributeValue(Arrangement.durationTuplet5)) {
+////			list.add(DurationType.QUINTUPLET);
+////		}
+////		if (getAttributeValue(Arrangement.durationTuplet6)) {
+////			list.add(DurationType.SEXTUPLET);
+////		}
+//		return list;
+//	}
 
 	public List<NamedRange> getRangeList() {
 		List<NamedRange> list = getAttributeValue(rangeList);

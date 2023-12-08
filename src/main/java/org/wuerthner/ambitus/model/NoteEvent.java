@@ -39,8 +39,8 @@ public class NoteEvent extends AbstractModelElement implements CwnNoteEvent, Eve
 	public final static SelectableIntegerAttribute shift = new SelectableIntegerAttribute("shift")
 			.values(SHIFT)
 			.defaultValue(0);
-	public final static IntegerAttribute tuplet = new IntegerAttribute("tuplet")
-			.defaultValue(0);
+//	public final static IntegerAttribute tuplet = new IntegerAttribute("tuplet")
+//			.defaultValue(0);
 	public final static StringAttribute lyrics = new StringAttribute("lyrics")
 			.defaultValue("");
 	public final static IntegerAttribute stemDirection = new IntegerAttribute("stemDirection")
@@ -58,7 +58,7 @@ public class NoteEvent extends AbstractModelElement implements CwnNoteEvent, Eve
 	// private final Propagator<?, ?>[] propagators = new Propagator[] { new LyricsPropagator(this, lyrics) };
 	
 	public NoteEvent() {
-		super(TYPE, Arrays.asList(), Arrays.asList(position, duration, pitch, velocity, shift, tuplet, lyrics, stemDirection, isUngrouped, voice, accentList));
+		super(TYPE, Arrays.asList(), Arrays.asList(position, duration, pitch, velocity, shift, lyrics, stemDirection, isUngrouped, voice, accentList));
 	}
 
 	public String getId() {
@@ -123,9 +123,9 @@ public class NoteEvent extends AbstractModelElement implements CwnNoteEvent, Eve
 		return getAttributeValue(shift);
 	}
 	
-	public final int getTuplet() {
-		return getAttributeValue(tuplet);
-	}
+//	public final int getTuplet() {
+//		return getAttributeValue(tuplet);
+//	}
 	
 	public final int getEnharmonicShift() {
 		return getAttributeValue(shift);
