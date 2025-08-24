@@ -43,7 +43,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-			url = uri("https://maven.pkg.github.com/jwuert/ambitus")
+			url = uri("https://maven.pkg.github.com/jwuert/ambitusmodel")
 			
 			credentials {
 				username = System.getenv("GITHUB_ACTOR")  
