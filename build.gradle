@@ -36,18 +36,13 @@ tasks.named('check') {
 publishing {
     repositories {
         maven {
-            name = 'nexus'
-            def urlLocalSnapshot = 'http://localhost:8082/repository/maven-snapshots/'
-            def urlLocalReleases = 'http://localhost:8082/repository/maven-releases/'
-            def urlDSReleases = 'http://diskstation2:8081/repository/maven-releases/'
-            def urlDSSnapshots = 'http://diskstation2:8081/repository/maven-snapshots/'
-            url = version.endsWith('SNAPSHOT') ? urlDSSnapshots : urlDSReleases;
-
-            allowInsecureProtocol = true;
-            credentials {
-                username = project.repoUser
-                password = project.repoPassword
-            }
+            name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/jwuert/sport")
+			
+			credentials {
+				username = System.getenv("GITHUB_ACTOR")  
+				password = System.getenv("GITHUB_TOKEN")
+			}
         }
     }
     publications {
