@@ -12,7 +12,7 @@ jobs:
       contents: read
     env:
       GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GH_PACKA_GES_TOKEN }}
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
