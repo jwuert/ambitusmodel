@@ -10,14 +10,20 @@ version '2.0.0-SNAPSHOT'
 
 repositories {
     mavenLocal()
-    maven {
-        url 'http://diskstation2:8081/repository/maven-releases/'
-        allowInsecureProtocol = true
-    }
-    maven {
-        url 'http://diskstation2:8081/repository/maven-snapshots/'
-        allowInsecureProtocol = true
-    }
+	maven {
+        url = uri("https://maven.pkg.github.com/jwuert/score")
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+	}
+	maven {
+        url = uri("https://maven.pkg.github.com/jwuert/sport")
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+	}
     mavenCentral()
     maven {
         url "https://plugins.gradle.org/m2/"
@@ -36,18 +42,13 @@ tasks.named('check') {
 publishing {
     repositories {
         maven {
-            name = 'nexus'
-            def urlLocalSnapshot = 'http://localhost:8082/repository/maven-snapshots/'
-            def urlLocalReleases = 'http://localhost:8082/repository/maven-releases/'
-            def urlDSReleases = 'http://diskstation2:8081/repository/maven-releases/'
-            def urlDSSnapshots = 'http://diskstation2:8081/repository/maven-snapshots/'
-            url = version.endsWith('SNAPSHOT') ? urlDSSnapshots : urlDSReleases;
-
-            allowInsecureProtocol = true;
-            credentials {
-                username = project.repoUser
-                password = project.repoPassword
-            }
+            name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/jwuert/ambitusmodel")
+			
+			credentials {
+				username = System.getenv("GITHUB_ACTOR")  
+				password = System.getenv("GITHUB_TOKEN")
+			}
         }
     }
     publications {
@@ -62,8 +63,18 @@ test {
 }
 
 dependencies {
-    implementation 'org.wuerthner.sport:sport:2.0.0-SNAPSHOT'
-    implementation 'org.wuerthner.score:score:1.3.0-SNAPSHOT'
+    implementation("org.wuerthner.sport:sport:2.0.0-SNAPSHOT") {
+        changing = true
+    }
+	implementation("org.wuerthner.score:score:1.3.0-SNAPSHOT") {
+        changing = true
+    }
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+
