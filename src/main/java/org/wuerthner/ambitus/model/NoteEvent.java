@@ -84,7 +84,8 @@ public class NoteEvent extends AbstractModelElement implements CwnNoteEvent, Eve
 	 * Returns the duration of the note in ticks
 	 **/
 	public final long getDuration() {
-		return getAttributeValue(duration);
+		Long value = getAttributeValue(duration);
+		return value==null ? 0 : value;
 	}
 	
 	/**

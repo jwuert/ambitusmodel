@@ -13,7 +13,7 @@ import java.util.List;
 
 public class InsertSpace {
     public static void run(Arrangement arrangement, int numberOfBeats, Scope scope) {
-        if (numberOfBeats>0) {
+        //if (numberOfBeats>0) {
             List<Operation> opList = new ArrayList<>();
             int deltaTicks = arrangement.getPPQ() * numberOfBeats;
             switch (scope) {
@@ -35,7 +35,7 @@ public class InsertSpace {
                 Transaction transaction = new Transaction("Transpose", opList);
                 arrangement.performTransaction(transaction);
             }
-        }
+        //}
     }
 
     private static void insertSpaceTrack(List<Operation> opList, MidiTrack track, int deltaTicks) {
