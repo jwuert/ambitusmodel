@@ -8,6 +8,17 @@ plugins {
 group 'org.wuerthner.ambitus'
 version '2.0.0-SNAPSHOT'
 
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': 'AmbitusModel',
+            'Implementation-Version': version,
+            'Implementation-Vendor': 'Jan Wuerthner',
+            'License': 'GNU GPL v3'
+        )
+    }
+}
+
 repositories {
     mavenLocal()
 	maven {
