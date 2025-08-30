@@ -3,6 +3,7 @@ package org.wuerthner.ambitus.model;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.wuerthner.ambitus.attribute.PositionAttribute;
 import org.wuerthner.ambitus.attribute.TimeSignatureAttribute;
 import org.wuerthner.ambitus.tool.AbstractSelection;
 import org.wuerthner.ambitus.type.NamedRange;
@@ -93,9 +94,10 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 			.defaultValue(DEFAULT_RANGE_LIST);
 	public final static StringAttribute path = new StringAttribute("path")
 			.defaultValue(null);
-
 	public final static IntegerAttribute offset = new IntegerAttribute("offset")
 			.defaultValue(DEFAULT_BAR_OFFSET);
+	public final static PositionAttribute caret = new PositionAttribute("caret")
+			.defaultValue(DEFAULT_POSITION);
 
 	private final ModelHistory history = new ModelHistory();
 	private final Clipboard<Event> clipboard = new ModelClipboard<>();
@@ -104,7 +106,7 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		super(TYPE, Arrays.asList(MidiTrack.TYPE, InfoTrack.TYPE), Arrays.asList(name, subtitle, composer, autoBeamPrint, pulsePerQuarter,
 				key, timeSignature, stretchFactor, groupLevel, tupletPresentation, grid, resolution, rangeList, path,
 				flagAllowDottedRests, flagMergeRestsInEmptyBars, durationBiDotted,
-				offset));
+				offset, caret));
 	}
 
 	public String getId() {
@@ -731,64 +733,6 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		return new ArrayList<>(trackSet);
 	}
 
-//	public void setSelectionProperties(List<CwnEvent> eventList, int pitchChange, int positionChange, int durationChange, int dotChange,
-//									   int enhChange, int voiceChange) {
-//		List<Operation> opList = new ArrayList<>();
-//		for (CwnEvent event: eventList) {
-//			if (event instanceof NoteEvent) {
-//				NoteEvent noteEvent = (NoteEvent) event;
-//				if (pitchChange!=0) {
-//					// PITCH
-//					Integer pitch = noteEvent.getAttributeValue(NoteEvent.pitch);
-//					Operation op = new SetAttributeValueOperation<>(noteEvent, NoteEvent.pitch, pitch + pitchChange);
-//					opList.add(op);
-//				}
-//				if (durationChange!=0 || dotChange>0) {
-//					// DURATION
-//					Long duration = noteEvent.getAttributeValue(NoteEvent.duration);
-//					int durationDiff = 0;
-//					if (durationChange!=0) {
-//						int unit = (int) (getAttributeValue(pulsePerQuarter) * 4.0 / Math.pow(2, getAttributeValue(Arrangement.resolution)));
-//						durationDiff = unit * durationChange;
-//					}
-//					float dotFactor = 1.0f;
-//					if (dotChange > 0) {
-//						// dotChange = 1: (1 + ((2^1 -1) / 2^1 )) = 1.5
-//						// dotChange = 2: (1 + ((2^2 -1) / 2^2 )) = 1.75
-//						// dotChange = 3: (1 + ((3^1 -1) / 3^1 )) = 1.875
-//						dotFactor = (float) (1 + ((Math.pow(2, dotChange) - 1) / Math.pow(2, dotChange)));
-//					}
-//					Operation op = new SetAttributeValueOperation<>(noteEvent, NoteEvent.duration, (long) ((duration + durationDiff) * dotFactor));
-//					opList.add(op);
-//				}
-//				if (enhChange > -3) {
-//					// ENHARMONIC SHIFT
-//					Integer enh = noteEvent.getAttributeValue(NoteEvent.shift);
-//					enh = Math.min(2, Math.max(-2, enh + enhChange));
-//					Operation op = new SetAttributeValueOperation<>(noteEvent, NoteEvent.shift, enh);
-//					opList.add(op);
-//				}
-//				if (voiceChange>=0) {
-//					// VOICE
-//					Integer voice = voiceChange;
-//					Operation op = new SetAttributeValueOperation<>(noteEvent, NoteEvent.voice, voice);
-//					opList.add(op);
-//				}
-//			}
-//			if (event instanceof Event) {
-//				Event theEvent = (Event) event;
-//				if (positionChange!=0) {
-//					// POSITION
-//					Long position = theEvent.getAttributeValue(Event.position);
-//					Operation op = new SetAttributeValueOperation<>(theEvent, NoteEvent.position, position + positionChange);
-//					opList.add(op);
-//				}
-//			}
-//		}
-//		Transaction transaction = new Transaction("Change Selection", opList);
-//		this.performTransaction(transaction, history);
-//	}
-
 	public String getTrackBarMetric(String trackId, long barPosition) {
 		String result = "";
 		Optional<MidiTrack> trackOptional  = getMidiTrack(trackId);
@@ -996,6 +940,13 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		performTransientSetAttributeValueOperation(Arrangement.offset, offset);
 	}
 
+	public void setTransientCaret(long position) {
+		performTransientSetAttributeValueOperation(caret, position);
+	}
+
+	public Long getCaret() {
+		return getAttributeValue(caret);
+	}
 	public void setOffsetToFirstBar() {
 		performTransientSetAttributeValueOperation(Arrangement.offset, 0);
 	}
@@ -1206,32 +1157,6 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		setAttributeValue(Arrangement.flagAllowDottedRests, (flags & Score.ALLOW_DOTTED_RESTS)>0);
 		setAttributeValue(Arrangement.flagMergeRestsInEmptyBars, (flags & Score.MERGE_RESTS_IN_EMPTY_BARS)>0);
 	}
-
-//	public List<DurationType> getDurations() {
-//		List<DurationType> list = new ArrayList<>();
-//		list.add(DurationType.REGULAR);
-//		if (getAttributeValue(Arrangement.durationBiDotted)) {
-//			list.add(DurationType.BIDOTTED);
-//		}
-//		if (true) {
-//			list.add(DurationType.DOTTED);
-//		}
-////		if (getAttributeValue(Arrangement.durationTuplet2)) {
-////			list.add(DurationType.DUPLET);
-////		}
-////		list.add(DurationType.TRIPLET);
-////		list.add(DurationType.QUINTUPLET);
-////		if (getAttributeValue(Arrangement.durationTuplet4)) {
-////			list.add(DurationType.QUADRUPLET);
-////		}
-////		if (getAttributeValue(Arrangement.durationTuplet5)) {
-////			list.add(DurationType.QUINTUPLET);
-////		}
-////		if (getAttributeValue(Arrangement.durationTuplet6)) {
-////			list.add(DurationType.SEXTUPLET);
-////		}
-//		return list;
-//	}
 
 	public List<NamedRange> getRangeList() {
 		List<NamedRange> list = getAttributeValue(rangeList);
