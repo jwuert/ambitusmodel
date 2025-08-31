@@ -74,10 +74,10 @@ test {
 }
 
 dependencies {
-    implementation("org.wuerthner.sport:sport:2.0.0-SNAPSHOT") {
+    implementation("org.wuerthner.sport:sport:2.0.0") {
         changing = true
     }
-	implementation("org.wuerthner.score:score:1.3.0-SNAPSHOT") {
+	implementation("org.wuerthner.score:score:1.3.0") {
         changing = true
     }
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
