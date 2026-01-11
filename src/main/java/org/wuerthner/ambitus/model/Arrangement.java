@@ -208,11 +208,15 @@ public class Arrangement extends AbstractModelElement implements CwnContainer {
 		}
 	}
 
-	public void setTrackName(MidiTrack track, String name) {
-		track.performSetAttributeValueOperation(MidiTrack.name, name, history);
-	}
+    public void setTrackName(MidiTrack track, String name) {
+        track.performSetAttributeValueOperation(MidiTrack.name, name, history);
+    }
 
-	public void setTrackMetric(String id, String metric) {
+    public void setTrackName(InfoTrack track, String name) {
+        track.performSetAttributeValueOperation(InfoTrack.name, name, history);
+    }
+
+    public void setTrackMetric(String id, String metric) {
 		Optional<MidiTrack> trackOptional  = getMidiTrack(id);
 		if (trackOptional.isPresent()) {
 			MidiTrack track = trackOptional.get();

@@ -61,6 +61,9 @@ public class InfoTrack extends AbstractModelElement implements CwnTrack {
     public boolean getMute() { return true; }
 
     @Override
+    public boolean getVisible() { return false; }
+
+    @Override
     public int getChannel() { return 0; }
 
     @Override

@@ -85,8 +85,11 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 //	public final static TimeSignatureAttribute timeSignature = new AmbitusAttributeBuilder("timeSignature")
 //			.defaultValue(DEFAULT_SIGNATURE)
 //			.buildTimeSignatureAttribute();
-	public final static BooleanAttribute mute = new BooleanAttribute("mute")
-			.defaultValue(false);
+    public final static BooleanAttribute mute = new BooleanAttribute("mute")
+            .defaultValue(false);
+
+    public final static BooleanAttribute visible = new BooleanAttribute("visible")
+            .defaultValue(true);
 
 	public final static BooleanAttribute piano = new BooleanAttribute("piano")
 			.defaultValue(false);
@@ -128,11 +131,13 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 
 	public MidiTrack() {
 		super(TYPE, Arrays.asList(BarEvent.TYPE, ClefEvent.TYPE, KeyEvent.TYPE, NoteEvent.TYPE, SymbolEvent.TYPE,TempoEvent.TYPE,TimeSignatureEvent.TYPE),
-				Arrays.asList(name, channel, volume, instrument, mute, piano));
+				Arrays.asList(name, channel, volume, instrument, mute, visible, piano));
 	}
 
 	public String getId() {
-		return getAttributeValue(channel) + " : " + getAttributeValue(name);
+        String channelStr = ""+(getAttributeValue(channel)+1);
+        if (channelStr.length()==1) { channelStr = "0" + channelStr; }
+		return channelStr + " : " + getAttributeValue(name);
 	}
 
 	@Override
@@ -181,6 +186,8 @@ public class MidiTrack extends AbstractModelElement implements CwnTrack {
 	public boolean getMute() {
 		return getAttributeValue(mute);
 	}
+
+    public boolean getVisible() { return getAttributeValue(visible); }
 	
 	public int getKey() {
 		KeyEvent keyEvent = getChildrenByClass(KeyEvent.class)
