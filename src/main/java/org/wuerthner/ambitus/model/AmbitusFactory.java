@@ -2,9 +2,12 @@ package org.wuerthner.ambitus.model;
 
 import org.wuerthner.sport.api.ModelElement;
 import org.wuerthner.sport.api.ModelElementFactory;
+import org.wuerthner.sport.api.UserProvider;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AmbitusFactory implements ModelElementFactory {
 	public final static List<ModelElement> elementList = Arrays.asList(new ModelElement[] {
@@ -32,7 +35,7 @@ public class AmbitusFactory implements ModelElementFactory {
 	}
 	
 	@Override
-	public List<ModelElement> createElementList() {
+	public List<ModelElement> createElementList(UserProvider userProvider) {
 		return elementList;
 	}
 	
@@ -40,5 +43,7 @@ public class AmbitusFactory implements ModelElementFactory {
 	public String getRootElementType() {
 		return Arrangement.TYPE;
 	}
-	
+
+    @Override
+    public Map<String,String> getUserMap() { return new HashMap<>(); }
 }
